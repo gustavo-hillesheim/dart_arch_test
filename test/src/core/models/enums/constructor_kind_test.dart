@@ -12,7 +12,7 @@ void main() {
       isConstConstructor: true,
       isRegularMethod: false,
     );
-    expect(constructorTypeFromMirror(mirror), ConstructorKind.CONST);
+    expect(constructorKindFromMirror(mirror), ConstructorKind.CONST);
   });
   test('should return ConstructorKind.FACTORY', () {
     final mirror = FakeMethodMirror(
@@ -21,7 +21,7 @@ void main() {
       isFactoryConstructor: true,
       isRegularMethod: false,
     );
-    expect(constructorTypeFromMirror(mirror), ConstructorKind.FACTORY);
+    expect(constructorKindFromMirror(mirror), ConstructorKind.FACTORY);
   });
   test('should return ConstructorKind.GENERATIVE', () {
     final mirror = FakeMethodMirror(
@@ -30,7 +30,7 @@ void main() {
       isGenerativeConstructor: true,
       isRegularMethod: false,
     );
-    expect(constructorTypeFromMirror(mirror), ConstructorKind.GENERATIVE);
+    expect(constructorKindFromMirror(mirror), ConstructorKind.GENERATIVE);
   });
   test('should return ConstructorKind.REDIRECTING', () {
     final mirror = FakeMethodMirror(
@@ -39,7 +39,7 @@ void main() {
       isRedirectingConstructor: true,
       isRegularMethod: false,
     );
-    expect(constructorTypeFromMirror(mirror), ConstructorKind.REDIRECTING);
+    expect(constructorKindFromMirror(mirror), ConstructorKind.REDIRECTING);
   });
   test('should throw error on unknown ConstructorKind', () {
     final mirror = FakeMethodMirror(
@@ -47,10 +47,10 @@ void main() {
       isRegularMethod: false,
       isConstructor: true,
     );
-    expect(() => constructorTypeFromMirror(mirror), throwsA(isA<Exception>()));
+    expect(() => constructorKindFromMirror(mirror), throwsA(isA<Exception>()));
   });
   test('should throw error on non-constructor MethodMirror', () {
     final mirror = FakeMethodMirror('');
-    expect(() => constructorTypeFromMirror(mirror), throwsA(isA<Exception>()));
+    expect(() => constructorKindFromMirror(mirror), throwsA(isA<Exception>()));
   });
 }

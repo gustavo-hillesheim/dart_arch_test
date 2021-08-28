@@ -12,9 +12,10 @@ class DartLibrary extends Equatable {
   DartLibrary({
     required this.name,
     required this.package,
-    required this.classes,
-    required this.methods,
-  });
+    List<DartClass>? classes,
+    List<DartMethod>? methods,
+  })  : classes = classes ?? [],
+        methods = methods ?? [];
 
   @override
   List<Object?> get props => [package, name, classes, methods];

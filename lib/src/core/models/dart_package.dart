@@ -5,5 +5,6 @@ class DartPackage {
   final String name;
   final List<DartLibrary> libraries;
 
-  DartPackage({required this.name, required this.libraries});
+  DartPackage({required this.name, List<DartLibrary>? libraries})
+      : libraries = libraries ?? [];
 }

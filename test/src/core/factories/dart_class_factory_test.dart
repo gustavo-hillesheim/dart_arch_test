@@ -76,7 +76,7 @@ void main() {
           DartMethod(
             name: 'FakeClass',
             kind: MethodKind.CONSTRUCTOR,
-            constructorType: ConstructorKind.GENERATIVE,
+            constructorKind: ConstructorKind.GENERATIVE,
             returnType: DartType(
               name: 'FakeClass',
               library: 'package:pkg/fake_class.dart',

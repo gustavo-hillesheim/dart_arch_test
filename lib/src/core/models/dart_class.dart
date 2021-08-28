@@ -12,11 +12,12 @@ class DartClass extends Equatable {
 
   DartClass({
     required this.name,
-    required this.fields,
-    required this.methods,
+    List<DartVariable>? fields,
+    List<DartMethod>? methods,
     this.isAbstract = false,
     this.isEnum = false,
-  });
+  })  : fields = fields ?? [],
+        methods = methods ?? [];
 
   @override
   List<Object?> get props => [name, isAbstract, isEnum, fields, methods];

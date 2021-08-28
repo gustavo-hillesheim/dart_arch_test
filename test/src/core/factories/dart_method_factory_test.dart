@@ -52,7 +52,7 @@ void main() {
         name: 'aConstructor',
         returnType: stringDartType,
         kind: MethodKind.CONSTRUCTOR,
-        constructorType: ConstructorKind.FACTORY,
+        constructorKind: ConstructorKind.FACTORY,
         parameters: [],
       ),
     );

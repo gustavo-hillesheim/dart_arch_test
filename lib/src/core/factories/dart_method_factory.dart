@@ -21,8 +21,8 @@ class DartMethodFactory {
         name: simpleName,
         kind: methodKindFromMirror(mirror),
         returnType: typeFactory.fromTypeMirror(mirror.returnType),
-        constructorType:
-            mirror.isConstructor ? constructorTypeFromMirror(mirror) : null,
+        constructorKind:
+            mirror.isConstructor ? constructorKindFromMirror(mirror) : null,
         isAbstract: mirror.isAbstract,
         isStatic: mirror.isStatic,
         parameters: parameters);

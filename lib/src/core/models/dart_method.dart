@@ -10,18 +10,20 @@ class DartMethod extends Equatable {
   final bool isStatic;
   final DartType returnType;
   final MethodKind kind;
-  final ConstructorKind? constructorType;
+  final ConstructorKind? constructorKind;
   final List<DartParameter> parameters;
 
   DartMethod({
     required this.name,
     required this.returnType,
-    required this.parameters,
-    this.constructorType,
+    this.constructorKind,
+    List<DartParameter>? parameters,
     this.kind = MethodKind.REGULAR,
     this.isAbstract = false,
     this.isStatic = false,
-  });
+  })  : parameters = parameters ?? [],
+        assert(kind != MethodKind.CONSTRUCTOR || constructorKind != null,
+            'If kind is CONSTRUCTOR, then a constructorKind must be specified');
 
   @override
   List<Object?> get props => [
@@ -30,7 +32,7 @@ class DartMethod extends Equatable {
         isStatic,
         returnType,
         kind,
-        constructorType,
+        constructorKind,
         parameters
       ];
 }

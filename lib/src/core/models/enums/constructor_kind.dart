@@ -2,7 +2,7 @@ import 'dart:mirrors';
 
 enum ConstructorKind { CONST, FACTORY, GENERATIVE, REDIRECTING }
 
-ConstructorKind constructorTypeFromMirror(MethodMirror methodMirror) {
+ConstructorKind constructorKindFromMirror(MethodMirror methodMirror) {
   if (!methodMirror.isConstructor) {
     throw Exception('MethodMirror does not belong to a constructor');
   }
