@@ -23,7 +23,7 @@ void main() {
         DartType(
           name: 'MyType',
           package: 'pkg',
-          library: 'package:pkg/src/my_type.dart',
+          library: 'src/my_type.dart',
         ));
   });
 }

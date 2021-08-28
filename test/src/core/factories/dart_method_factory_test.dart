@@ -17,8 +17,10 @@ void main() {
   });
 
   test('should create DartMethod from MethodMirror', () {
-    final methodMirror = FakeMethodMirror('aMethod',
-        parameters: [FakeParameterMirror('aParameter', type: String)]);
+    final methodMirror = FakeMethodMirror(
+      'aMethod',
+      parameters: [FakeParameterMirror('aParameter', type: String)],
+    );
 
     final dartMethod = factory.fromMethodMirror(methodMirror);
 
@@ -34,11 +36,9 @@ void main() {
   });
 
   test('should create factory constructor DartMethod from MethodMirror', () {
-    final methodMirror = FakeMethodMirror(
+    final methodMirror = FakeMethodMirror.constructor(
       'aConstructor',
-      isConstructor: true,
-      isFactoryConstructor: true,
-      isRegularMethod: false,
+      ConstructorKind.FACTORY,
       returnType: String,
     );
 
@@ -51,16 +51,13 @@ void main() {
         returnType: stringDartType,
         kind: MethodKind.CONSTRUCTOR,
         constructorKind: ConstructorKind.FACTORY,
-        parameters: [],
       ),
     );
   });
 
   test('should create getter DartMethod from MethodMirror', () {
-    final methodMirror = FakeMethodMirror(
+    final methodMirror = FakeMethodMirror.getter(
       'aGetter',
-      isGetter: true,
-      isRegularMethod: false,
       returnType: String,
     );
 
@@ -72,7 +69,6 @@ void main() {
         name: 'aGetter',
         returnType: stringDartType,
         kind: MethodKind.GETTER,
-        parameters: [],
       ),
     );
   });

@@ -9,11 +9,18 @@ class DartTypeFactory {
     final package = mirror.location != null
         ? UriUtils.getPackageName(mirror.location!.sourceUri)
         : '';
-    final path = mirror.location?.sourceUri.toString() ?? 'unknown';
+    late String library;
+    if (mirror.location != null) {
+      library = mirror.location!.sourceUri
+          .toString()
+          .replaceFirst('package:$package/', '');
+    } else {
+      library = 'unknown';
+    }
     return DartType(
       name: name,
       package: package,
-      library: path,
+      library: library,
     );
   }
 }

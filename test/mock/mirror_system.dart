@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:mirrors';
 
 import 'package:arch_test/src/core/models/dart_type.dart';
+import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
 import 'package:mocktail/mocktail.dart';
 
 final Map<Uri, LibraryMirror> mockLibraries =
@@ -135,6 +136,26 @@ class FakeMethodMirror extends Mock implements MethodMirror {
                     .length <
                 2,
             'Only one method type is allowed');
+
+  factory FakeMethodMirror.constructor(String name, ConstructorKind kind,
+      {Type returnType = Void, TypeMirror? returnTypeMirror}) {
+    return FakeMethodMirror(
+      name,
+      isRegularMethod: false,
+      isConstructor: true,
+      isConstConstructor: kind == ConstructorKind.CONST,
+      isFactoryConstructor: kind == ConstructorKind.FACTORY,
+      isGenerativeConstructor: kind == ConstructorKind.GENERATIVE,
+      isRedirectingConstructor: kind == ConstructorKind.REDIRECTING,
+      returnType: returnType,
+      returnTypeMirror: returnTypeMirror,
+    );
+  }
+
+  factory FakeMethodMirror.getter(String name, {Type returnType = Void}) {
+    return FakeMethodMirror(name,
+        isGetter: true, isRegularMethod: false, returnType: returnType);
+  }
 }
 
 class FakeVariableMirror extends Mock implements VariableMirror {

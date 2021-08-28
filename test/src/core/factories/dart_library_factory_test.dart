@@ -32,15 +32,12 @@ void main() {
         classes: [
           DartClass(
             name: 'FakeClass',
-            fields: [],
-            methods: [],
           ),
         ],
         methods: [
           DartMethod(
             name: 'utilFunction',
             returnType: stringDartType,
-            parameters: [],
           ),
         ],
       ),

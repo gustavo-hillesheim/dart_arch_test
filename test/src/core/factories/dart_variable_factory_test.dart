@@ -25,14 +25,10 @@ void main() {
       dartVariable,
       DartVariable(
         name: 'imAVariable',
-        isFinal: false,
-        isConst: false,
-        isPrivate: false,
-        isStatic: false,
         type: DartType(
           name: 'DartVariable',
           package: 'arch_test',
-          library: 'package:arch_test/src/core/models/dart_variable.dart',
+          library: 'src/core/models/dart_variable.dart',
         ),
       ),
     );
@@ -53,9 +49,7 @@ void main() {
       DartVariable(
         name: '_variable',
         isFinal: true,
-        isConst: false,
         isPrivate: true,
-        isStatic: false,
         type: doubleDartType,
       ),
     );
@@ -75,9 +69,7 @@ void main() {
       dartVariable,
       DartVariable(
         name: 'MY_CONST',
-        isFinal: false,
         isConst: true,
-        isPrivate: false,
         isStatic: true,
         type: intDartType,
       ),

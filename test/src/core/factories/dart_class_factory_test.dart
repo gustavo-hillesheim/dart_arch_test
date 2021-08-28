@@ -34,11 +34,9 @@ void main() {
         'cMethod',
         returnType: String,
       ),
-      #FakeClass: FakeMethodMirror(
+      #FakeClass: FakeMethodMirror.constructor(
         'FakeClass',
-        isRegularMethod: false,
-        isConstructor: true,
-        isGenerativeConstructor: true,
+        ConstructorKind.GENERATIVE,
         returnTypeMirror:
             FakeTypeMirror('FakeClass', 'package:pkg/fake_class.dart'),
       ),
@@ -66,7 +64,6 @@ void main() {
           DartMethod(
             name: 'cMethod',
             returnType: stringDartType,
-            parameters: [],
           ),
           DartMethod(
             name: 'FakeClass',
@@ -74,10 +71,9 @@ void main() {
             constructorKind: ConstructorKind.GENERATIVE,
             returnType: DartType(
               name: 'FakeClass',
-              library: 'package:pkg/fake_class.dart',
+              library: 'fake_class.dart',
               package: 'pkg',
             ),
-            parameters: [],
           ),
         ],
       ),
@@ -94,8 +90,6 @@ void main() {
       DartClass(
         name: 'MyEnum',
         isEnum: true,
-        fields: [],
-        methods: [],
       ),
     );
   });
@@ -111,8 +105,6 @@ void main() {
       DartClass(
         name: 'MyAbstractClass',
         isAbstract: true,
-        fields: [],
-        methods: [],
       ),
     );
   });
