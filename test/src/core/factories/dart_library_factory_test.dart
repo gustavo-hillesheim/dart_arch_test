@@ -1,12 +1,8 @@
-import 'package:arch_test/src/core/factories/dart_class_factory.dart';
 import 'package:arch_test/src/core/factories/dart_library_factory.dart';
-import 'package:arch_test/src/core/factories/dart_method_factory.dart';
-import 'package:arch_test/src/core/factories/dart_parameter_factory.dart';
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
-import 'package:arch_test/src/core/factories/dart_variable_factory.dart';
 import 'package:arch_test/src/core/models/dart_class.dart';
 import 'package:arch_test/src/core/models/dart_library.dart';
 import 'package:arch_test/src/core/models/dart_method.dart';
+import 'package:arch_test/src/di_container.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -16,18 +12,7 @@ void main() {
   late DartLibraryFactory factory;
 
   setUp(() {
-    final typeFactory = DartTypeFactory();
-    final methodFactory = DartMethodFactory(
-      typeFactory,
-      DartParameterFactory(typeFactory),
-    );
-    factory = DartLibraryFactory(
-      DartClassFactory(
-        DartVariableFactory(typeFactory),
-        methodFactory,
-      ),
-      methodFactory,
-    );
+    factory = setupDIContainer().get<DartLibraryFactory>();
   });
 
   test('should create DartLibrary from LibraryMirror', () {

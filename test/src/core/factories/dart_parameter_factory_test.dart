@@ -1,7 +1,7 @@
 import 'package:arch_test/src/core/factories/dart_parameter_factory.dart';
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
+import 'package:arch_test/src/di_container.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -11,7 +11,7 @@ void main() {
   late DartParameterFactory factory;
 
   setUp(() {
-    factory = DartParameterFactory(DartTypeFactory());
+    factory = setupDIContainer().get<DartParameterFactory>();
   });
 
   test('should create DartParameter from ParameterMirror', () {

@@ -1,7 +1,7 @@
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
 import 'package:arch_test/src/core/factories/dart_variable_factory.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/dart_variable.dart';
+import 'package:arch_test/src/di_container.dart';
 import 'package:test/test.dart';
 
 import '../../../mock/mirror_system.dart';
@@ -10,7 +10,7 @@ void main() {
   late DartVariableFactory factory;
 
   setUp(() {
-    factory = DartVariableFactory(DartTypeFactory());
+    factory = setupDIContainer().get<DartVariableFactory>();
   });
 
   test('should create DartVariable from VariableMirror', () {

@@ -1,14 +1,11 @@
 import 'package:arch_test/src/core/factories/dart_class_factory.dart';
-import 'package:arch_test/src/core/factories/dart_method_factory.dart';
-import 'package:arch_test/src/core/factories/dart_parameter_factory.dart';
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
-import 'package:arch_test/src/core/factories/dart_variable_factory.dart';
 import 'package:arch_test/src/core/models/dart_class.dart';
 import 'package:arch_test/src/core/models/dart_method.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/dart_variable.dart';
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
 import 'package:arch_test/src/core/models/enums/method_kind.dart';
+import 'package:arch_test/src/di_container.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
 
@@ -18,9 +15,7 @@ void main() {
   late DartClassFactory factory;
 
   setUp(() {
-    final typeFactory = DartTypeFactory();
-    factory = DartClassFactory(DartVariableFactory(typeFactory),
-        DartMethodFactory(typeFactory, DartParameterFactory(typeFactory)));
+    factory = setupDIContainer().get<DartClassFactory>();
   });
 
   test('should create DartClass from ClassMirror', () {
