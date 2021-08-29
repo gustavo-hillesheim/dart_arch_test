@@ -23,4 +23,9 @@ class DartVariable extends Equatable {
   @override
   List<Object?> get props =>
       [name, isFinal, isConst, isPrivate, isStatic, type];
+
+  @override
+  String toString() {
+    return 'DartVariable(name="$name", isFinal=$isFinal, isConst=$isConst, isPrivate=$isPrivate, isStatic=$isStatic, type=$type)';
+  }
 }

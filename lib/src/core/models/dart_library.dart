@@ -19,4 +19,9 @@ class DartLibrary extends Equatable {
 
   @override
   List<Object?> get props => [package, name, classes, methods];
+
+  @override
+  String toString() {
+    return 'DartLibrary(name="$name", package="$package", classes=$classes, methods=$methods)';
+  }
 }

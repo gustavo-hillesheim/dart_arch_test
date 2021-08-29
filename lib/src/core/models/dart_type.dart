@@ -1,3 +1,6 @@
+import 'dart:mirrors';
+
+import 'package:arch_test/src/core/factories/dart_type_factory.dart';
 import 'package:equatable/equatable.dart';
 
 /// Representation of a Dart type.
@@ -13,6 +16,19 @@ class DartType extends Equatable {
     required this.library,
   });
 
+  factory DartType.voidType() {
+    return DartType(name: 'void', package: '', library: 'unknown');
+  }
+
+  factory DartType.from(Type type) {
+    return DartTypeFactory().fromTypeMirror(reflectType(type));
+  }
+
   @override
   List<Object?> get props => [name, package, library];
+
+  @override
+  String toString() {
+    return 'DartType(name="$name", package="$package", library="$library")';
+  }
 }

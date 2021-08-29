@@ -21,4 +21,9 @@ class DartClass extends Equatable {
 
   @override
   List<Object?> get props => [name, isAbstract, isEnum, fields, methods];
+
+  @override
+  String toString() {
+    return 'DartClass(name="$name", isAbstract=$isAbstract, isEnum=$isEnum, fields=$fields, methods=$methods)';
+  }
 }

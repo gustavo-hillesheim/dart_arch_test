@@ -8,5 +8,8 @@ run_watch:
 test_watch:
 	nodemon --watch lib --watch test --exec \"dart test\" -e dart
 
+test_examples:
+	cd example/core_example && dart test
+
 coverage:
 	dart run code_coverage

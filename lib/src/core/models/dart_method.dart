@@ -35,4 +35,9 @@ class DartMethod extends Equatable {
         constructorKind,
         parameters
       ];
+
+  @override
+  String toString() {
+    return 'DartMethod(name="$name", isAbstract=$isAbstract, isStatic=$isStatic, returnType=$returnType, kind=$kind, constructorKind=$constructorKind, parameters=$parameters)';
+  }
 }

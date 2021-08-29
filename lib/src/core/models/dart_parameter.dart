@@ -22,4 +22,9 @@ class DartParameter extends Equatable {
   @override
   List<Object?> get props =>
       [name, type, hasDefaultValue, isConst, isFinal, kind];
+
+  @override
+  String toString() {
+    return 'DartParameter(name="$name", type=$type, hasDefaultValue=$hasDefaultValue, isConst=$isConst, isFinal=$isFinal, kind=$kind)';
+  }
 }
