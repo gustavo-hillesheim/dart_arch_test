@@ -10,7 +10,7 @@ void main() {
   late DartTypeFactory factory;
 
   setUp(() {
-    factory = setupDIContainer().get<DartTypeFactory>();
+    factory = setupDIContainer().resolve<DartTypeFactory>();
   });
 
   test('should create DartType from TypeMirror', () {

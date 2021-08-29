@@ -11,7 +11,7 @@ void main() {
   late DartParameterFactory factory;
 
   setUp(() {
-    factory = setupDIContainer().get<DartParameterFactory>();
+    factory = setupDIContainer().resolve<DartParameterFactory>();
   });
 
   test('should create DartParameter from ParameterMirror', () {

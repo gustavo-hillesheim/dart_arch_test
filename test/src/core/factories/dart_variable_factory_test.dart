@@ -10,7 +10,7 @@ void main() {
   late DartVariableFactory factory;
 
   setUp(() {
-    factory = setupDIContainer().get<DartVariableFactory>();
+    factory = setupDIContainer().resolve<DartVariableFactory>();
   });
 
   test('should create DartVariable from VariableMirror', () {

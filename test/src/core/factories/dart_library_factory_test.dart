@@ -12,7 +12,7 @@ void main() {
   late DartLibraryFactory factory;
 
   setUp(() {
-    factory = setupDIContainer().get<DartLibraryFactory>();
+    factory = setupDIContainer().resolve<DartLibraryFactory>();
   });
 
   test('should create DartLibrary from LibraryMirror', () {

@@ -13,7 +13,7 @@ void main() {
   late DartMethodFactory factory;
 
   setUp(() {
-    factory = setupDIContainer().get<DartMethodFactory>();
+    factory = setupDIContainer().resolve<DartMethodFactory>();
   });
 
   test('should create DartMethod from MethodMirror', () {

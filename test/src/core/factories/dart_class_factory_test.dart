@@ -15,7 +15,7 @@ void main() {
   late DartClassFactory factory;
 
   setUp(() {
-    factory = setupDIContainer().get<DartClassFactory>();
+    factory = setupDIContainer().resolve<DartClassFactory>();
   });
 
   test('should create DartClass from ClassMirror', () {
