@@ -22,7 +22,10 @@ void main() {
                 fields: [
                   DartVariable(
                     name: 'arguments',
-                    type: DartType.from(List),
+                    type: DartType.from(
+                      List,
+                      generics: [DartType.from(String)],
+                    ),
                     isFinal: true,
                   ),
                   DartVariable(
@@ -50,7 +53,10 @@ void main() {
                     parameters: [
                       DartParameter(
                         name: 'arguments',
-                        type: DartType.from(List),
+                        type: DartType.from(
+                          List,
+                          generics: [DartType.from(String)],
+                        ),
                       ),
                     ],
                   ),
@@ -67,7 +73,13 @@ void main() {
                 isStatic: true,
                 returnType: DartType.voidType(),
                 parameters: [
-                  DartParameter(name: 'arguments', type: DartType.from(List)),
+                  DartParameter(
+                    name: 'arguments',
+                    type: DartType.from(
+                      List,
+                      generics: [DartType.from(String)],
+                    ),
+                  ),
                 ],
               ),
             ],

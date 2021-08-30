@@ -9,26 +9,35 @@ class DartType extends Equatable {
   final String name;
   final String package;
   final String library;
+  final List<DartType> generics;
 
   DartType({
     required this.name,
     required this.package,
     required this.library,
-  });
+    List<DartType>? generics,
+  }) : generics = generics ?? [];
 
   factory DartType.voidType() {
     return DartType(name: 'void', package: '', library: 'unknown');
   }
 
-  factory DartType.from(Type type) {
-    return DartTypeFactory().fromTypeMirror(reflectType(type));
+  factory DartType.from(Type type, {List<DartType>? generics}) {
+    const factory = DartTypeFactory();
+    final dartType = factory.fromTypeMirror(reflectType(type));
+    return DartType(
+      name: dartType.name,
+      package: dartType.package,
+      library: dartType.library,
+      generics: generics,
+    );
   }
 
   @override
-  List<Object?> get props => [name, package, library];
+  List<Object?> get props => [name, package, library, generics];
 
   @override
   String toString() {
-    return 'DartType(name="$name", package="$package", library="$library")';
+    return 'DartType(name="$name", package="$package", library="$library", generics=$generics)';
   }
 }

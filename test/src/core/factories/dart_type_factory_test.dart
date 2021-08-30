@@ -19,11 +19,28 @@ void main() {
     final dartType = factory.fromTypeMirror(typeMirror);
 
     expect(
-        dartType,
-        DartType(
-          name: 'MyType',
-          package: 'pkg',
-          library: 'src/my_type.dart',
-        ));
+      dartType,
+      DartType(
+        name: 'MyType',
+        package: 'pkg',
+        library: 'src/my_type.dart',
+      ),
+    );
+  });
+
+  test('should create DartType with generics from TypeMirror', () {
+    final typeMirror = FakeTypeMirror.fromType(List, typeArguments: [String]);
+
+    final dartType = factory.fromTypeMirror(typeMirror);
+
+    expect(
+      dartType,
+      DartType(
+        name: 'List',
+        package: 'dart:core',
+        library: 'dart:core/list.dart',
+        generics: [stringDartType],
+      ),
+    );
   });
 }

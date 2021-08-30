@@ -180,16 +180,24 @@ class FakeVariableMirror extends Mock implements VariableMirror {
 class FakeTypeMirror extends Mock implements TypeMirror {
   final Symbol simpleName;
   final SourceLocation? location;
+  final List<TypeMirror> typeArguments;
 
-  FakeTypeMirror(String name, String sourcePath)
+  FakeTypeMirror(String name, String sourcePath,
+      {List<TypeMirror>? typeArguments})
       : simpleName = Symbol(name),
-        location = FakeSourceLocation(sourcePath);
+        location = FakeSourceLocation(sourcePath),
+        typeArguments = typeArguments ?? [];
 
-  factory FakeTypeMirror.fromType(Type type) {
+  factory FakeTypeMirror.fromType(Type type, {List<Type>? typeArguments}) {
     final typeMirror = reflectType(type);
     final name = MirrorSystem.getName(typeMirror.simpleName);
     final path = typeMirror.location?.sourceUri.toString() ?? '';
-    return FakeTypeMirror(name, path);
+    return FakeTypeMirror(
+      name,
+      path,
+      typeArguments:
+          typeArguments?.map((t) => FakeTypeMirror.fromType(t)).toList(),
+    );
   }
 
   factory FakeTypeMirror.voidType() {
