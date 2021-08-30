@@ -38,7 +38,8 @@ final List<String> dartDefaultLibraries = [
 Map<Uri, LibraryMirror> createLibraryMirrorMap(List<String> urisStrs) {
   final map = <Uri, LibraryMirror>{};
   for (final uri in urisStrs) {
-    final library = FakeLibraryMirror(uri, declarations: {});
+    final library =
+        FakeLibraryMirror(uri, declarations: {}, libraryDependencies: []);
     map[library.uri] = library;
   }
   return map;
@@ -77,9 +78,24 @@ class FakeMirrorSystem extends Mock implements MirrorSystem {}
 class FakeLibraryMirror extends Mock implements LibraryMirror {
   final Uri uri;
   final Map<Symbol, DeclarationMirror> declarations;
+  final List<LibraryDependencyMirror> libraryDependencies;
 
-  FakeLibraryMirror(String uri, {required this.declarations})
+  FakeLibraryMirror(String uri,
+      {required this.declarations, required this.libraryDependencies})
       : uri = Uri.parse(uri);
+}
+
+class FakeLibraryDependencyMirror extends Mock
+    implements LibraryDependencyMirror {
+  final bool isImport;
+  final bool isExport;
+  final LibraryMirror? targetLibrary;
+
+  FakeLibraryDependencyMirror(
+      {this.isImport = true, this.isExport = false, String? uri})
+      : targetLibrary = uri != null
+            ? FakeLibraryMirror(uri, declarations: {}, libraryDependencies: [])
+            : null;
 }
 
 class FakeClassMirror extends Mock implements ClassMirror {

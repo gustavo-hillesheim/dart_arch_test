@@ -14,7 +14,7 @@ void main() {
         name: 'core_example',
         libraries: [
           DartLibrary(
-            name: 'helper/text_printer.dart',
+            name: 'helper\\text_printer.dart',
             package: 'core_example',
             classes: [
               DartClass(
@@ -81,6 +81,13 @@ void main() {
                     ),
                   ),
                 ],
+              ),
+            ],
+            dependencies: [
+              DartLibraryDependency(
+                kind: LibraryDependencyKind.IMPORT,
+                package: 'core_example',
+                library: 'helper\\text_printer.dart',
               ),
             ],
           ),
