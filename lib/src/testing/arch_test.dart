@@ -1,12 +1,13 @@
 import 'package:arch_test/src/core/core.dart';
+import 'package:arch_test/src/testing/types.dart';
 import 'exception.dart';
 
 class ArchTest<T> {
-  final TargetProvider<List<T>> targetProvider;
+  final Filter<List<T>> filter;
   final Condition<T> condition;
 
   ArchTest({
-    required this.targetProvider,
+    required this.filter,
     required this.condition,
   });
 
@@ -19,14 +20,10 @@ class ArchTest<T> {
 
   List<String> getViolations(DartPackage package) {
     final violations = <String>[];
-    final targets = targetProvider(package);
+    final targets = filter(package);
     for (final target in targets) {
       condition(target, violations.add);
     }
     return violations;
   }
 }
-
-typedef TargetProvider<T> = T Function(DartPackage package);
-typedef Condition<T> = void Function(
-    T target, void Function(String) addViolation);

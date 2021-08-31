@@ -8,7 +8,7 @@ import '../../mock/models.dart';
 void main() {
   test('should return all classes in the package', () {
     expect(
-      TargetProviders.classes(createSamplePackage()),
+      Filters.classes(createSamplePackage()),
       [
         createTestClass(),
       ],
@@ -16,7 +16,7 @@ void main() {
   });
 
   test('should return all methods from the package', () {
-    expect(TargetProviders.methods(createSamplePackage()), [
+    expect(Filters.methods(createSamplePackage()), [
       DartMethod(name: 'main', returnType: DartType.voidType()),
       DartMethod(
         name: 'TestClass',
@@ -34,7 +34,7 @@ void main() {
 
   test('should return all libraries in the package', () {
     expect(
-      TargetProviders.libraries(createSamplePackage()),
+      Filters.libraries(createSamplePackage()),
       [createSampleLibrary()],
     );
   });

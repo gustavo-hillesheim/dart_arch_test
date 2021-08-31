@@ -12,7 +12,7 @@ void main() {
 
   setUp(() {
     allClassesHaveConstructorTest = ArchTest<DartClass>(
-      targetProvider: (pkg) => pkg.libraries
+      filter: (pkg) => pkg.libraries
           .map((lib) => lib.classes)
           .fold(<DartClass>[], (cls1, cls2) => [...cls1, ...cls2]),
       condition: (cls, addViolation) {
@@ -24,7 +24,7 @@ void main() {
       },
     );
     allClassesHaveConstConstructorTest = ArchTest<DartClass>(
-      targetProvider: (pkg) => pkg.libraries
+      filter: (pkg) => pkg.libraries
           .map((lib) => lib.classes)
           .fold(<DartClass>[], (cls1, cls2) => [...cls1, ...cls2]),
       condition: (cls, addViolation) {
