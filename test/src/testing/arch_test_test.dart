@@ -3,6 +3,8 @@ import 'package:arch_test/src/testing/arch_test.dart';
 import 'package:arch_test/src/testing/exception.dart';
 import 'package:test/test.dart';
 
+import '../../mock/models.dart';
+
 void main() {
   late DartPackage package;
   late ArchTest<DartClass> allClassesHaveConstConstructorTest;
@@ -34,38 +36,7 @@ void main() {
         }
       },
     );
-    package = DartPackage(
-      name: 'test_pkg',
-      libraries: [
-        DartLibrary(
-          name: 'main.dart',
-          package: 'test_pkg',
-          classes: [
-            DartClass(
-              name: 'TestClass',
-              library: 'main.dart',
-              package: 'test_pkg',
-              fields: [
-                DartVariable(name: 'id', type: DartType.from(int)),
-              ],
-              methods: [
-                DartMethod(
-                  name: 'TestClass',
-                  returnType: DartType(
-                    name: 'TestClass',
-                    library: 'main.dart',
-                    package: 'test_pkg',
-                  ),
-                  kind: MethodKind.CONSTRUCTOR,
-                  constructorKind: ConstructorKind.GENERATIVE,
-                ),
-                DartMethod(name: 'setId', returnType: DartType.voidType()),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
+    package = createSamplePackage();
   });
 
   test('Should succeed on check that all classes have constructor', () {
