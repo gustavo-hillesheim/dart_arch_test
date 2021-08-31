@@ -6,5 +6,9 @@ test_examples:
 	cd example/core_example && dart test
 	cd example/testing_with_core && dart test
 
+test_all:
+	dart test
+	make test_examples
+
 coverage:
 	dart run code_coverage
