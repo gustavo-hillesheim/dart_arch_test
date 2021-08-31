@@ -9,7 +9,7 @@ void main() {
   late DartPackage package;
 
   setUp(() {
-    package = ArchTest().loadPackage('testing_with_core');
+    package = createPackageLoader().loadPackage('testing_with_core');
   });
 
   DartLibrary? getLibrary(String libraryName) {

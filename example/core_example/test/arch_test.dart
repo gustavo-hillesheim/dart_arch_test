@@ -5,8 +5,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('should create DartPackage correctly', () {
-    final archTest = ArchTest();
-    final dartPackage = archTest.loadPackage('core_example');
+    final dartPackage = createPackageLoader().loadPackage('core_example');
 
     expect(
       dartPackage,

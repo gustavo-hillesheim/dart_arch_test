@@ -1,12 +1,7 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/src/core/dart_package_loader.dart';
-import 'package:arch_test/src/core/factories/dart_class_factory.dart';
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/factories/dart_library_factory.dart';
-import 'package:arch_test/src/core/factories/dart_method_factory.dart';
-import 'package:arch_test/src/core/factories/dart_parameter_factory.dart';
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
-import 'package:arch_test/src/core/factories/dart_variable_factory.dart';
 import 'package:arch_test/src/di_container.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/expect.dart';
