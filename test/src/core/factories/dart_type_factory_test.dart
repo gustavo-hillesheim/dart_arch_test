@@ -23,7 +23,7 @@ void main() {
       DartType(
         name: 'MyType',
         package: 'pkg',
-        library: 'src/my_type.dart',
+        library: 'src\\my_type.dart',
       ),
     );
   });
@@ -38,7 +38,7 @@ void main() {
       DartType(
         name: 'List',
         package: 'dart:core',
-        library: 'dart:core/list.dart',
+        library: 'dart:core\\list.dart',
         generics: [stringDartType],
       ),
     );

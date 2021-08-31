@@ -7,6 +7,7 @@ import 'package:arch_test/src/core/factories/dart_method_factory.dart';
 import 'package:arch_test/src/core/factories/dart_parameter_factory.dart';
 import 'package:arch_test/src/core/factories/dart_type_factory.dart';
 import 'package:arch_test/src/core/factories/dart_variable_factory.dart';
+import 'package:arch_test/src/di_container.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
@@ -18,20 +19,10 @@ void main() {
   late DartPackageLoader dartPackageLoader;
 
   setUp(() {
+    final diContainer = setupDIContainer();
     mirrorSystem = FakeMirrorSystem();
-    final typeFactory = DartTypeFactory();
-    final methodFactory = DartMethodFactory(
-      typeFactory,
-      DartParameterFactory(typeFactory),
-    );
-    final libraryFactory = DartLibraryFactory(
-      DartClassFactory(
-        DartVariableFactory(typeFactory),
-        methodFactory,
-      ),
-      methodFactory,
-    );
-    dartPackageLoader = DartPackageLoader(mirrorSystem, libraryFactory);
+    dartPackageLoader = DartPackageLoader(
+        mirrorSystem, diContainer.resolve<DartLibraryFactory>());
   });
 
   test('should create DartPackage for given package', () {

@@ -19,28 +19,38 @@ void main() {
   });
 
   test('should create DartClass from ClassMirror', () {
-    final classMirror = FakeClassMirror('FakeClass', declarations: {
-      #aField: FakeVariableMirror(
-        'aField',
-        type: String,
-      ),
-      #_bField: FakeVariableMirror(
-        '_bField',
-        isFinal: true,
-        isPrivate: true,
-        type: double,
-      ),
-      #cMethod: FakeMethodMirror(
-        'cMethod',
-        returnType: String,
-      ),
-      #FakeClass: FakeMethodMirror.constructor(
-        'FakeClass',
-        ConstructorKind.GENERATIVE,
-        returnTypeMirror:
-            FakeTypeMirror('FakeClass', 'package:pkg/fake_class.dart'),
-      ),
-    });
+    final classMirror = FakeClassMirror('FakeClass',
+        path: 'package:pkg/fake_class.dart',
+        superclass:
+            FakeClassMirror('SuperClass', path: 'package:pkg/super_class.dart'),
+        superinterfaces: [
+          FakeClassMirror('SuperInterface',
+              path: 'package:pkg/super_interface.dart'),
+          FakeClassMirror('MegaInterface',
+              path: 'package:pkg/mega_interface.dart'),
+        ],
+        declarations: {
+          #aField: FakeVariableMirror(
+            'aField',
+            type: String,
+          ),
+          #_bField: FakeVariableMirror(
+            '_bField',
+            isFinal: true,
+            isPrivate: true,
+            type: double,
+          ),
+          #cMethod: FakeMethodMirror(
+            'cMethod',
+            returnType: String,
+          ),
+          #FakeClass: FakeMethodMirror.constructor(
+            'FakeClass',
+            ConstructorKind.GENERATIVE,
+            returnTypeMirror:
+                FakeTypeMirror('FakeClass', 'package:pkg/fake_class.dart'),
+          ),
+        });
 
     final dartClass = factory.fromClassMirror(classMirror);
 
@@ -48,6 +58,25 @@ void main() {
       dartClass,
       DartClass(
         name: 'FakeClass',
+        package: 'pkg',
+        library: 'fake_class.dart',
+        superClass: DartClass(
+          name: 'SuperClass',
+          package: 'pkg',
+          library: 'super_class.dart',
+        ),
+        superInterfaces: [
+          DartClass(
+            name: 'SuperInterface',
+            package: 'pkg',
+            library: 'super_interface.dart',
+          ),
+          DartClass(
+            name: 'MegaInterface',
+            package: 'pkg',
+            library: 'mega_interface.dart',
+          ),
+        ],
         fields: [
           DartVariable(
             name: 'aField',
@@ -81,7 +110,8 @@ void main() {
   });
 
   test('should create DartClass for enum ClassMirror', () {
-    final enumMirror = FakeClassMirror('MyEnum', isEnum: true);
+    final enumMirror = FakeClassMirror('MyEnum',
+        path: 'package:pkg/fake_enum.dart', isEnum: true);
 
     final dartClass = factory.fromClassMirror(enumMirror);
 
@@ -89,14 +119,16 @@ void main() {
       dartClass,
       DartClass(
         name: 'MyEnum',
+        package: 'pkg',
+        library: 'fake_enum.dart',
         isEnum: true,
       ),
     );
   });
 
   test('should create DartClass for abstract class ClassMirror', () {
-    final abstractClassMirror =
-        FakeClassMirror('MyAbstractClass', isAbstract: true);
+    final abstractClassMirror = FakeClassMirror('MyAbstractClass',
+        path: 'package:pkg/fake_abstract_class.dart', isAbstract: true);
 
     final dartClass = factory.fromClassMirror(abstractClassMirror);
 
@@ -104,6 +136,8 @@ void main() {
       dartClass,
       DartClass(
         name: 'MyAbstractClass',
+        package: 'pkg',
+        library: 'fake_abstract_class.dart',
         isAbstract: true,
       ),
     );

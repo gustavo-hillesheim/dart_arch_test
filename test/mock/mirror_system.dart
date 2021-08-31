@@ -48,25 +48,25 @@ Map<Uri, LibraryMirror> createLibraryMirrorMap(List<String> urisStrs) {
 final doubleDartType = DartType(
   name: 'double',
   package: 'dart:core',
-  library: 'dart:core/double.dart',
+  library: 'dart:core\\double.dart',
 );
 
 final voidDartType = DartType(
   name: 'Void',
   package: 'dart:ffi',
-  library: 'dart:ffi/native_type.dart',
+  library: 'dart:ffi\\native_type.dart',
 );
 
 final intDartType = DartType(
   name: 'int',
   package: 'dart:core',
-  library: 'dart:core/int.dart',
+  library: 'dart:core\\int.dart',
 );
 
 final stringDartType = DartType(
   name: 'String',
   package: 'dart:core',
-  library: 'dart:core/string.dart',
+  library: 'dart:core\\string.dart',
 );
 
 /**
@@ -103,13 +103,27 @@ class FakeClassMirror extends Mock implements ClassMirror {
   final bool isAbstract;
   final bool isEnum;
   final Map<Symbol, DeclarationMirror> declarations;
+  final SourceLocation? location;
+  final ClassMirror? superclass;
+  final List<ClassMirror> superinterfaces;
+  final List<TypeMirror> typeArguments;
+  final bool hasReflectedType;
+  final Type reflectedType;
 
   FakeClassMirror(
     String name, {
+    required String path,
     this.isAbstract = false,
     this.isEnum = false,
     this.declarations = const {},
-  }) : simpleName = Symbol(name);
+    this.superinterfaces = const [],
+    this.typeArguments = const [],
+    this.superclass,
+    Type? reflectedType,
+  })  : simpleName = Symbol(name),
+        location = FakeSourceLocation(path),
+        hasReflectedType = reflectedType != null,
+        reflectedType = reflectedType ?? Void;
 }
 
 class FakeMethodMirror extends Mock implements MethodMirror {
@@ -197,12 +211,16 @@ class FakeTypeMirror extends Mock implements TypeMirror {
   final Symbol simpleName;
   final SourceLocation? location;
   final List<TypeMirror> typeArguments;
+  final bool hasReflectedType;
+  final Type reflectedType;
 
   FakeTypeMirror(String name, String sourcePath,
-      {List<TypeMirror>? typeArguments})
+      {List<TypeMirror>? typeArguments, Type? reflectedType})
       : simpleName = Symbol(name),
         location = FakeSourceLocation(sourcePath),
-        typeArguments = typeArguments ?? [];
+        typeArguments = typeArguments ?? [],
+        hasReflectedType = reflectedType != null,
+        reflectedType = reflectedType ?? Void;
 
   factory FakeTypeMirror.fromType(Type type, {List<Type>? typeArguments}) {
     final typeMirror = reflectType(type);

@@ -19,6 +19,8 @@ void main() {
             classes: [
               DartClass(
                 name: 'TextPrinter',
+                library: 'helper\\text_printer.dart',
+                package: 'core_example',
                 fields: [
                   DartVariable(
                     name: 'arguments',

@@ -12,7 +12,7 @@ KiwiContainer setupDIContainer() {
   diContainer.registerFactory((i) => DartVariableFactory(i()));
   diContainer.registerFactory((i) => DartParameterFactory(i()));
   diContainer.registerFactory((i) => DartMethodFactory(i(), i()));
-  diContainer.registerFactory((i) => DartClassFactory(i(), i()));
+  diContainer.registerFactory((i) => DartClassFactory(i(), i(), i()));
   diContainer.registerFactory((i) => DartLibraryFactory(i(), i()));
   return diContainer;
 }

@@ -20,7 +20,8 @@ void main() {
   test('should create DartLibrary from LibraryMirror', () {
     final libraryMirror =
         FakeLibraryMirror('package:pkg/library.dart', declarations: {
-      #FakeClass: FakeClassMirror('FakeClass'),
+      #FakeClass:
+          FakeClassMirror('FakeClass', path: 'package:pkg/library.dart'),
       #utilFunction: FakeMethodMirror('utilFunction', returnType: String),
     }, libraryDependencies: [
       FakeLibraryDependencyMirror(uri: 'package:pkg/helpers/utils.dart'),
@@ -39,9 +40,7 @@ void main() {
         name: 'library.dart',
         package: 'pkg',
         classes: [
-          DartClass(
-            name: 'FakeClass',
-          ),
+          DartClass(name: 'FakeClass', package: 'pkg', library: 'library.dart'),
         ],
         methods: [
           DartMethod(

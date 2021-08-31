@@ -22,6 +22,10 @@ class DartType extends Equatable {
     return DartType(name: 'void', package: '', library: 'unknown');
   }
 
+  factory DartType.dynamicType() {
+    return DartType(name: 'dynamic', package: '', library: 'unknown');
+  }
+
   factory DartType.from(Type type, {List<DartType>? generics}) {
     const factory = DartTypeFactory();
     final dartType = factory.fromTypeMirror(reflectType(type));

@@ -28,7 +28,7 @@ void main() {
         type: DartType(
           name: 'DartVariable',
           package: 'arch_test',
-          library: 'src/core/models/dart_variable.dart',
+          library: 'src\\core\\models\\dart_variable.dart',
         ),
       ),
     );

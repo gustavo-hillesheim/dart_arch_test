@@ -11,14 +11,7 @@ class DartTypeFactory {
     final package = mirror.location != null
         ? UriUtils.getPackageName(mirror.location!.sourceUri)
         : '';
-    late String library;
-    if (mirror.location != null) {
-      library = mirror.location!.sourceUri
-          .toString()
-          .replaceFirst('package:$package/', '');
-    } else {
-      library = 'unknown';
-    }
+    final library = UriUtils.getLibraryPathFromSourceLocation(mirror.location);
     final generics = mirror.typeArguments.map(fromTypeMirror).toList();
     return DartType(
       name: name,

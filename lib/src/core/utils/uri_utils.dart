@@ -1,3 +1,5 @@
+import 'dart:mirrors';
+
 import 'package:path/path.dart';
 
 class UriUtils {
@@ -10,6 +12,13 @@ class UriUtils {
     final path = uri.replaceFirst('package:', '');
     final package = path.substring(0, path.indexOf(separator));
     return package;
+  }
+
+  static String getLibraryPathFromSourceLocation(SourceLocation? location) {
+    if (location != null) {
+      return getLibraryPath(location.sourceUri.toString());
+    }
+    return 'unknown';
   }
 
   static String getLibraryPath(String uri, [String? package]) {
