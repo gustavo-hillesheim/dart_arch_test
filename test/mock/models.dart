@@ -1,4 +1,5 @@
 import 'package:arch_test/src/core/core.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 
 DartPackage createSamplePackage() {
   return DartPackage(
@@ -10,12 +11,18 @@ DartPackage createSamplePackage() {
 DartLibrary createSampleLibrary() {
   return DartLibrary(
     name: 'main.dart',
-    package: 'test_pkg',
+    location: ElementLocation.unknown(),
     classes: [
       createTestClass(),
     ],
+    dependencies: [],
     methods: [
-      DartMethod(name: 'main', returnType: DartType.voidType()),
+      DartMethod(
+        name: 'main',
+        returnType: DartType.voidType(),
+        location: ElementLocation.unknown(),
+        parameters: [],
+      ),
     ],
   );
 }
@@ -23,23 +30,34 @@ DartLibrary createSampleLibrary() {
 DartClass createTestClass() {
   return DartClass(
     name: 'TestClass',
-    library: 'main.dart',
-    package: 'test_pkg',
+    location: ElementLocation.unknown(),
+    generics: [],
+    superInterfaces: [],
     fields: [
-      DartVariable(name: 'id', type: DartType.from(int)),
+      DartVariable(
+        name: 'id',
+        type: DartType.from(int),
+        location: ElementLocation.unknown(),
+      ),
     ],
     methods: [
-      DartMethod(
+      DartConstructor(
         name: 'TestClass',
+        location: ElementLocation.unknown(),
+        parameters: [],
         returnType: DartType(
           name: 'TestClass',
-          library: 'main.dart',
-          package: 'test_pkg',
+          generics: [],
+          location: ElementLocation.unknown(),
         ),
-        kind: MethodKind.CONSTRUCTOR,
         constructorKind: ConstructorKind.GENERATIVE,
       ),
-      DartMethod(name: 'setId', returnType: DartType.voidType()),
+      DartMethod(
+        name: 'setId',
+        returnType: DartType.voidType(),
+        parameters: [],
+        location: ElementLocation.unknown(),
+      ),
     ],
   );
 }

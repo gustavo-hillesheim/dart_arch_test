@@ -1,7 +1,9 @@
 import 'dart:ffi';
 import 'dart:mirrors';
 
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -47,26 +49,27 @@ Map<Uri, LibraryMirror> createLibraryMirrorMap(List<String> urisStrs) {
 
 final doubleDartType = DartType(
   name: 'double',
-  package: 'dart:core',
-  library: 'dart:core\\double.dart',
+  generics: [],
+  location: ElementLocation(uri: 'dart:core/double.dart', line: 1, column: 1),
 );
 
 final voidDartType = DartType(
   name: 'Void',
-  package: 'dart:ffi',
-  library: 'dart:ffi\\native_type.dart',
+  generics: [],
+  location:
+      ElementLocation(uri: 'dart:ffi/native_type.dart', line: 1, column: 1),
 );
 
 final intDartType = DartType(
   name: 'int',
-  package: 'dart:core',
-  library: 'dart:core\\int.dart',
+  generics: [],
+  location: ElementLocation(uri: 'dart:core/int.dart', line: 1, column: 1),
 );
 
 final stringDartType = DartType(
   name: 'String',
-  package: 'dart:core',
-  library: 'dart:core\\string.dart',
+  generics: [],
+  location: ElementLocation(uri: 'dart:core/string.dart', line: 1, column: 1),
 );
 
 /**

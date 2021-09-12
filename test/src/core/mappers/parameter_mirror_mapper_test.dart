@@ -1,5 +1,6 @@
-import 'package:arch_test/src/core/factories/dart_parameter_factory.dart';
+import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
 import 'package:arch_test/src/di_container.dart';
 import 'package:test/expect.dart';
@@ -8,21 +9,22 @@ import 'package:test/scaffolding.dart';
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late DartParameterFactory factory;
+  late ParameterMirrorMapper mapper;
 
   setUp(() {
-    factory = setupDIContainer().resolve<DartParameterFactory>();
+    mapper = setupDIContainer().resolve<ParameterMirrorMapper>();
   });
 
   test('should create DartParameter from ParameterMirror', () {
     final parameterMirror = FakeParameterMirror('aParameter', type: String);
 
-    final dartParameter = factory.fromParameterMirror(parameterMirror);
+    final dartParameter = mapper.toDartParameter(parameterMirror);
 
     expect(
       dartParameter,
       DartParameter(
         name: 'aParameter',
+        location: ElementLocation.unknown(),
         type: stringDartType,
       ),
     );
@@ -35,12 +37,13 @@ void main() {
       isFinal: true,
     );
 
-    final dartParameter = factory.fromParameterMirror(parameterMirror);
+    final dartParameter = mapper.toDartParameter(parameterMirror);
 
     expect(
       dartParameter,
       DartParameter(
         name: 'aParameter',
+        location: ElementLocation.unknown(),
         type: stringDartType,
         isFinal: true,
       ),
@@ -54,12 +57,13 @@ void main() {
       isConst: true,
     );
 
-    final dartParameter = factory.fromParameterMirror(parameterMirror);
+    final dartParameter = mapper.toDartParameter(parameterMirror);
 
     expect(
       dartParameter,
       DartParameter(
         name: 'aParameter',
+        location: ElementLocation.unknown(),
         type: stringDartType,
         isConst: true,
       ),
@@ -74,12 +78,13 @@ void main() {
       hasDefaultValue: true,
     );
 
-    final dartParameter = factory.fromParameterMirror(parameterMirror);
+    final dartParameter = mapper.toDartParameter(parameterMirror);
 
     expect(
       dartParameter,
       DartParameter(
         name: 'aParameter',
+        location: ElementLocation.unknown(),
         type: stringDartType,
         hasDefaultValue: true,
       ),
@@ -93,12 +98,13 @@ void main() {
       isOptional: true,
     );
 
-    final dartParameter = factory.fromParameterMirror(parameterMirror);
+    final dartParameter = mapper.toDartParameter(parameterMirror);
 
     expect(
       dartParameter,
       DartParameter(
         name: 'aParameter',
+        location: ElementLocation.unknown(),
         type: stringDartType,
         kind: ParameterKind.POSITIONAL,
       ),
@@ -113,12 +119,13 @@ void main() {
       isNamed: true,
     );
 
-    final dartParameter = factory.fromParameterMirror(parameterMirror);
+    final dartParameter = mapper.toDartParameter(parameterMirror);
 
     expect(
       dartParameter,
       DartParameter(
         name: 'aParameter',
+        location: ElementLocation.unknown(),
         type: stringDartType,
         kind: ParameterKind.NAMED,
       ),

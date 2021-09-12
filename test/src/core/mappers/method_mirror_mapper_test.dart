@@ -1,6 +1,7 @@
-import 'package:arch_test/src/core/factories/dart_method_factory.dart';
+import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_method.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
 import 'package:arch_test/src/core/models/enums/method_kind.dart';
 import 'package:arch_test/src/di_container.dart';
@@ -10,10 +11,10 @@ import 'package:test/scaffolding.dart';
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late DartMethodFactory factory;
+  late MethodMirrorMapper mapper;
 
   setUp(() {
-    factory = setupDIContainer().resolve<DartMethodFactory>();
+    mapper = setupDIContainer().resolve<MethodMirrorMapper>();
   });
 
   test('should create DartMethod from MethodMirror', () {
@@ -22,16 +23,22 @@ void main() {
       parameters: [FakeParameterMirror('aParameter', type: String)],
     );
 
-    final dartMethod = factory.fromMethodMirror(methodMirror);
+    final dartMethod = mapper.toDartMethod(methodMirror);
 
     expect(
       dartMethod,
       DartMethod(
-        name: 'aMethod',
-        returnType: voidDartType,
-        kind: MethodKind.REGULAR,
-        parameters: [DartParameter(name: 'aParameter', type: stringDartType)],
-      ),
+          name: 'aMethod',
+          returnType: voidDartType,
+          kind: MethodKind.REGULAR,
+          parameters: [
+            DartParameter(
+              name: 'aParameter',
+              type: stringDartType,
+              location: ElementLocation.unknown(),
+            ),
+          ],
+          location: ElementLocation.unknown()),
     );
   });
 
@@ -42,15 +49,16 @@ void main() {
       returnType: String,
     );
 
-    final dartMethod = factory.fromMethodMirror(methodMirror);
+    final dartMethod = mapper.toDartMethod(methodMirror);
 
     expect(
       dartMethod,
-      DartMethod(
+      DartConstructor(
         name: 'aConstructor',
         returnType: stringDartType,
-        kind: MethodKind.CONSTRUCTOR,
         constructorKind: ConstructorKind.FACTORY,
+        parameters: [],
+        location: ElementLocation.unknown(),
       ),
     );
   });
@@ -61,7 +69,7 @@ void main() {
       returnType: String,
     );
 
-    final dartMethod = factory.fromMethodMirror(methodMirror);
+    final dartMethod = mapper.toDartMethod(methodMirror);
 
     expect(
       dartMethod,
@@ -69,6 +77,8 @@ void main() {
         name: 'aGetter',
         returnType: stringDartType,
         kind: MethodKind.GETTER,
+        parameters: [],
+        location: ElementLocation.unknown(),
       ),
     );
   });

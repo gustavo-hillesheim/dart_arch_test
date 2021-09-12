@@ -1,7 +1,6 @@
 import 'dart:mirrors';
 
 import 'package:arch_test/src/core/core.dart';
-import 'package:arch_test/src/core/factories/dart_library_factory.dart';
 import 'package:arch_test/src/di_container.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/expect.dart';
@@ -17,7 +16,7 @@ void main() {
     final diContainer = setupDIContainer();
     mirrorSystem = FakeMirrorSystem();
     dartPackageLoader = DartPackageLoader(
-        mirrorSystem, diContainer.resolve<DartLibraryFactory>());
+        mirrorSystem, diContainer.resolve<LibraryMirrorMapper>());
   });
 
   test('should create DartPackage for given package', () {

@@ -1,3 +1,4 @@
+import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/models.dart';
 import 'package:arch_test/src/testing/target_providers.dart';
 import 'package:test/expect.dart';
@@ -17,18 +18,29 @@ void main() {
 
   test('should return all methods from the package', () {
     expect(Filters.methods(createSamplePackage()), [
-      DartMethod(name: 'main', returnType: DartType.voidType()),
       DartMethod(
+        name: 'main',
+        returnType: DartType.voidType(),
+        location: ElementLocation.unknown(),
+        parameters: [],
+      ),
+      DartConstructor(
         name: 'TestClass',
+        location: ElementLocation.unknown(),
+        parameters: [],
         returnType: DartType(
           name: 'TestClass',
-          library: 'main.dart',
-          package: 'test_pkg',
+          generics: [],
+          location: ElementLocation.unknown(),
         ),
-        kind: MethodKind.CONSTRUCTOR,
         constructorKind: ConstructorKind.GENERATIVE,
       ),
-      DartMethod(name: 'setId', returnType: DartType.voidType()),
+      DartMethod(
+        name: 'setId',
+        returnType: DartType.voidType(),
+        parameters: [],
+        location: ElementLocation.unknown(),
+      ),
     ]);
   });
 

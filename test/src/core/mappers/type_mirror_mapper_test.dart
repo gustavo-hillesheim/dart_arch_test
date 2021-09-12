@@ -1,5 +1,6 @@
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
+import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/di_container.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
@@ -7,23 +8,24 @@ import 'package:test/test.dart';
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late DartTypeFactory factory;
+  late TypeMirrorMapper mapper;
 
   setUp(() {
-    factory = setupDIContainer().resolve<DartTypeFactory>();
+    mapper = setupDIContainer().resolve<TypeMirrorMapper>();
   });
 
   test('should create DartType from TypeMirror', () {
     final typeMirror = FakeTypeMirror('MyType', 'package:pkg/src/my_type.dart');
 
-    final dartType = factory.fromTypeMirror(typeMirror);
+    final dartType = mapper.toDartType(typeMirror);
 
     expect(
       dartType,
       DartType(
         name: 'MyType',
-        package: 'pkg',
-        library: 'src\\my_type.dart',
+        generics: [],
+        location: ElementLocation(
+            uri: 'package:pkg/src/my_type.dart', column: 1, line: 1),
       ),
     );
   });
@@ -31,14 +33,14 @@ void main() {
   test('should create DartType with generics from TypeMirror', () {
     final typeMirror = FakeTypeMirror.fromType(List, typeArguments: [String]);
 
-    final dartType = factory.fromTypeMirror(typeMirror);
+    final dartType = mapper.toDartType(typeMirror);
 
     expect(
       dartType,
       DartType(
         name: 'List',
-        package: 'dart:core',
-        library: 'dart:core\\list.dart',
+        location:
+            ElementLocation(uri: 'dart:core/list.dart', column: 1, line: 1),
         generics: [stringDartType],
       ),
     );

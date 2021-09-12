@@ -29,7 +29,7 @@ void main() {
           .fold(<DartClass>[], (cls1, cls2) => [...cls1, ...cls2]),
       condition: (cls, addViolation) {
         final hasConstConstructor = cls.methods.any((method) =>
-            method.kind == MethodKind.CONSTRUCTOR &&
+            method is DartConstructor &&
             method.constructorKind == ConstructorKind.CONST);
         if (!hasConstConstructor) {
           addViolation('All classes should have a const constructor');
