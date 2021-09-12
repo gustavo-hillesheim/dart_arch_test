@@ -1,22 +1,22 @@
+import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/src/core/models/dart_element.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/library_dependency_kind.dart';
-import 'package:equatable/equatable.dart';
 
-class DartLibraryDependency extends Equatable {
+class DartLibraryDependency extends DartElement {
   final LibraryDependencyKind kind;
-  final String package;
-  final String library;
 
   DartLibraryDependency({
+    required String targetLibrary,
+    required ElementLocation location,
+    required DartLibrary sourceLibrary,
     required this.kind,
-    required this.package,
-    required this.library,
-  });
+  }) : super(name: targetLibrary, location: location, parent: sourceLibrary);
+
+  DartLibrary get sourceLibrary => parent as DartLibrary;
+
+  String get targetLibrary => name;
 
   @override
-  List<Object?> get props => [kind, package, library];
-
-  @override
-  String toString() {
-    return 'DartLibraryDependency(kind=$kind, package="$package", library="$library")';
-  }
+  List<Object?> get props => super.props + [kind];
 }

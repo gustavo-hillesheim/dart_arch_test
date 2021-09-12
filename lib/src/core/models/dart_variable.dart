@@ -1,10 +1,10 @@
+import 'package:arch_test/src/core/models/dart_element.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
-import 'package:equatable/equatable.dart';
+import 'package:arch_test/src/core/models/element_location.dart';
 
 /// Representation of a Dart variable.
 /// Can be fields of a class, parameters or top level variables.
-class DartVariable extends Equatable {
-  final String name;
+class DartVariable extends DartElement {
   final bool isFinal;
   final bool isConst;
   final bool isPrivate;
@@ -12,20 +12,17 @@ class DartVariable extends Equatable {
   final DartType type;
 
   DartVariable({
-    required this.name,
+    required String name,
+    required ElementLocation location,
+    required DartElement parent,
     required this.type,
     this.isFinal = false,
     this.isConst = false,
     this.isPrivate = false,
     this.isStatic = false,
-  });
+  }) : super(name: name, location: location, parent: parent);
 
   @override
   List<Object?> get props =>
-      [name, isFinal, isConst, isPrivate, isStatic, type];
-
-  @override
-  String toString() {
-    return 'DartVariable(name="$name", isFinal=$isFinal, isConst=$isConst, isPrivate=$isPrivate, isStatic=$isStatic, type=$type)';
-  }
+      super.props + [isFinal, isConst, isPrivate, isStatic, type];
 }
