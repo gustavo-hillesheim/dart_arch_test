@@ -14,8 +14,6 @@ class DartClass extends DartType {
 
   DartClass({
     required String name,
-    required DartLibrary library,
-    required String package,
     required ElementLocation location,
     required List<DartType> generics,
     required this.fields,
@@ -26,7 +24,6 @@ class DartClass extends DartType {
     this.superClass,
   }) : super(
           name: name,
-          library: library,
           generics: generics,
           location: location,
         );

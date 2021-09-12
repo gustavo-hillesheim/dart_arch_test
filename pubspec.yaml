@@ -14,3 +14,4 @@ dev_dependencies:
 dependencies: 
   equatable: ^2.0.3
   kiwi: ^3.0.0
+  meta: ^1.7.0

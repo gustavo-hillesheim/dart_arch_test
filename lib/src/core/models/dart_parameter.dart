@@ -14,15 +14,12 @@ class DartParameter extends DartElement {
   DartParameter({
     required String name,
     required ElementLocation location,
-    required DartMethod method,
     required this.type,
     this.hasDefaultValue = false,
     this.isConst = false,
     this.isFinal = false,
     this.kind = ParameterKind.REGULAR,
-  }) : super(name: name, location: location, parent: method);
-
-  DartMethod get method => parent as DartMethod;
+  }) : super(name: name, location: location);
 
   @override
   List<Object?> get props =>

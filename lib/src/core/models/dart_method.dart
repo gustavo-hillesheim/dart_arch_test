@@ -15,13 +15,12 @@ class DartMethod extends DartElement {
   DartMethod({
     required String name,
     required ElementLocation location,
-    required DartElement parent,
     required this.returnType,
     required this.parameters,
     this.kind = MethodKind.REGULAR,
     this.isAbstract = false,
     this.isStatic = false,
-  }) : super(name: name, location: location, parent: parent);
+  }) : super(name: name, location: location);
 
   @override
   List<Object?> get props =>
@@ -34,14 +33,12 @@ class DartConstructor extends DartMethod {
   DartConstructor({
     required String name,
     required ElementLocation location,
-    required DartElement parent,
     required DartType returnType,
     required List<DartParameter> parameters,
     required this.constructorKind,
   }) : super(
           name: name,
           location: location,
-          parent: parent,
           returnType: returnType,
           parameters: parameters,
           kind: MethodKind.CONSTRUCTOR,

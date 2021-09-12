@@ -1,28 +1,29 @@
 import 'dart:mirrors';
 
 import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/src/core/factories/dart_class_factory.dart';
-import 'package:arch_test/src/core/factories/dart_method_factory.dart';
+import 'package:arch_test/src/core/mappers/class_mirror_mapper.dart';
+import 'package:arch_test/src/core/mappers/method_mirror_mapper.dart';
 import 'package:arch_test/src/core/models/dart_library.dart';
 import 'package:arch_test/src/core/models/dart_library_dependency.dart';
 import 'package:arch_test/src/core/models/enums/library_dependency_kind.dart';
+import 'package:arch_test/src/core/utils/mirror_utils.dart';
 import 'package:arch_test/src/core/utils/uri_utils.dart';
 import 'package:path/path.dart';
 
-class DartLibraryFactory {
-  final DartClassFactory classFactory;
-  final DartMethodFactory methodFactory;
+class LibraryMirrorMapper {
+  final ClassMirrorMapper classMirrorMapper;
+  final MethodMirrorMapper methodMirrorMapper;
 
-  DartLibraryFactory(this.classFactory, this.methodFactory);
+  LibraryMirrorMapper(this.classMirrorMapper, this.methodMirrorMapper);
 
-  DartLibrary fromLibraryMirror(LibraryMirror mirror) {
+  DartLibrary toDartLibrary(LibraryMirror mirror) {
     final path = mirror.uri.toString();
     final package = UriUtils.getPackageName(mirror.uri);
     final name = UriUtils.getLibraryPath(path, package);
 
     return DartLibrary(
       name: name,
-      package: package,
+      location: MirrorUtils.toElementLocation(mirror.location),
       classes: _getClasses(mirror),
       methods: _getMethods(mirror),
       dependencies: _getDependencies(mirror, dirname(path)),
@@ -32,14 +33,14 @@ class DartLibraryFactory {
   List<DartClass> _getClasses(LibraryMirror mirror) {
     return mirror.declarations.values
         .whereType<ClassMirror>()
-        .map(classFactory.fromClassMirror)
+        .map(classMirrorMapper.toDartClass)
         .toList(growable: false);
   }
 
   List<DartMethod> _getMethods(LibraryMirror mirror) {
     return mirror.declarations.values
         .whereType<MethodMirror>()
-        .map(methodFactory.fromMethodMirror)
+        .map(methodMirrorMapper.toDartMethod)
         .toList(growable: false);
   }
 
@@ -76,8 +77,8 @@ class DartLibraryFactory {
 
     return DartLibraryDependency(
       kind: kind,
-      package: package,
-      library: name,
+      targetLibrary: name,
+      location: MirrorUtils.toElementLocation(mirror.location),
     );
   }
 }

@@ -11,6 +11,6 @@ final diContainer = setupDIContainer();
 DartPackageLoader createPackageLoader() {
   return DartPackageLoader(
     currentMirrorSystem(),
-    diContainer.resolve<DartLibraryFactory>(),
+    diContainer.resolve<LibraryMirrorMapper>(),
   );
 }

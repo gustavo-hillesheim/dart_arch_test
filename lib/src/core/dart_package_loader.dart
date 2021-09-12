@@ -1,14 +1,12 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/src/core/factories/dart_library_factory.dart';
-import 'package:arch_test/src/core/models/dart_library.dart';
-import 'package:arch_test/src/core/models/dart_package.dart';
+import 'package:arch_test/src/core/core.dart';
 
 class DartPackageLoader {
   final MirrorSystem mirrorSystem;
-  final DartLibraryFactory dartLibraryFactory;
+  final LibraryMirrorMapper libraryMirrorMapper;
 
-  DartPackageLoader(this.mirrorSystem, this.dartLibraryFactory);
+  DartPackageLoader(this.mirrorSystem, this.libraryMirrorMapper);
 
   DartPackage loadPackage(String packageName) {
     final libraries = _findLibraries(packageName);
@@ -17,7 +15,7 @@ class DartPackageLoader {
 
   List<DartLibrary> _findLibraries(String packageName) {
     return _findLibrariesOfPackage(packageName)
-        .map(dartLibraryFactory.fromLibraryMirror)
+        .map(libraryMirrorMapper.toDartLibrary)
         .toList(growable: false);
   }
 

@@ -1,7 +1,7 @@
 import 'dart:mirrors';
 
 import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
+import 'package:arch_test/src/core/mappers/mappers.dart';
 import 'package:arch_test/src/core/models/dart_element.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 
@@ -12,12 +12,9 @@ class DartType extends DartElement {
 
   DartType({
     required String name,
-    required DartLibrary library,
     required ElementLocation location,
     required this.generics,
-  }) : super(name: name, parent: library, location: location);
-
-  DartLibrary get library => parent as DartLibrary;
+  }) : super(name: name, location: location);
 
   factory DartType.voidType() {
     return DartType._coreType('void');
@@ -29,30 +26,27 @@ class DartType extends DartElement {
 
   factory DartType._coreType(String name) {
     final package = DartPackage(name: 'unknown', libraries: []);
-    final location = ElementLocation(uri: 'unknown', column: 1, row: 1);
+    final location = ElementLocation.unknown();
     final library = DartLibrary(
       name: 'unknown',
       classes: [],
       dependencies: [],
       methods: [],
-      package: package,
       location: location,
     );
     package.libraries.add(library);
     return DartType(
       name: name,
-      library: library,
       location: location,
       generics: [],
     );
   }
 
   factory DartType.from(Type type, {List<DartType>? generics}) {
-    const factory = DartTypeFactory();
-    final dartType = factory.fromTypeMirror(reflectType(type));
+    const factory = TypeMirrorMapper();
+    final dartType = factory.toDartType(reflectType(type));
     return DartType(
       name: dartType.name,
-      library: dartType.library,
       location: dartType.location,
       generics: generics ?? [],
     );

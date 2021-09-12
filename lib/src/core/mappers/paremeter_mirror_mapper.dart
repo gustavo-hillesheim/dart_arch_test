@@ -1,19 +1,21 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/src/core/factories/dart_type_factory.dart';
+import 'package:arch_test/src/core/mappers/type_mirror_mapper.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
+import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
-class DartParameterFactory {
-  final DartTypeFactory typeFactory;
+class ParameterMirrorMapper {
+  final TypeMirrorMapper typeMirrorMapper;
 
-  DartParameterFactory(this.typeFactory);
+  ParameterMirrorMapper(this.typeMirrorMapper);
 
-  DartParameter fromParameterMirror(ParameterMirror mirror) {
+  DartParameter toDartParameter(ParameterMirror mirror) {
     final simpleName = MirrorSystem.getName(mirror.simpleName);
     return DartParameter(
       name: simpleName,
-      type: typeFactory.fromTypeMirror(mirror.type),
+      location: MirrorUtils.toElementLocation(mirror.location),
+      type: typeMirrorMapper.toDartType(mirror.type),
       isFinal: mirror.isFinal,
       isConst: mirror.isConst,
       hasDefaultValue: mirror.hasDefaultValue,

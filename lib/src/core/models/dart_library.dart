@@ -7,7 +7,6 @@ import 'package:arch_test/src/core/models/element_location.dart';
 
 /// Representation of a Dart library
 class DartLibrary extends DartElement {
-  final DartPackage package;
   final List<DartClass> classes;
   final List<DartMethod> methods;
   final List<DartLibraryDependency> dependencies;
@@ -15,13 +14,11 @@ class DartLibrary extends DartElement {
   DartLibrary({
     required String name,
     required ElementLocation location,
-    required this.package,
     required this.classes,
     required this.methods,
     required this.dependencies,
-  }) : super(name: name, location: location, parent: null);
+  }) : super(name: name, location: location);
 
   @override
-  List<Object?> get props =>
-      super.props + [package, classes, methods, dependencies];
+  List<Object?> get props => super.props + [classes, methods, dependencies];
 }

@@ -14,13 +14,12 @@ class DartVariable extends DartElement {
   DartVariable({
     required String name,
     required ElementLocation location,
-    required DartElement parent,
     required this.type,
     this.isFinal = false,
     this.isConst = false,
     this.isPrivate = false,
     this.isStatic = false,
-  }) : super(name: name, location: location, parent: parent);
+  }) : super(name: name, location: location);
 
   @override
   List<Object?> get props =>

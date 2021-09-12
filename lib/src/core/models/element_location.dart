@@ -3,10 +3,17 @@ import 'package:equatable/equatable.dart';
 class ElementLocation extends Equatable {
   final String uri;
   final int column;
-  final int row;
+  final int line;
 
-  ElementLocation({required this.uri, required this.column, required this.row});
+  ElementLocation(
+      {required this.uri, required this.column, required this.line});
+
+  /// Useful when a Mirror does not have a SourceLocation, or representing
+  /// types that don't have a class (void, dynamic, etc)
+  factory ElementLocation.unknown() {
+    return ElementLocation(uri: 'unknown', column: 1, line: 1);
+  }
 
   @override
-  List<Object?> get props => [uri, column, row];
+  List<Object?> get props => [uri, column, line];
 }

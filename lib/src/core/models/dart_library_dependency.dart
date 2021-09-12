@@ -9,11 +9,8 @@ class DartLibraryDependency extends DartElement {
   DartLibraryDependency({
     required String targetLibrary,
     required ElementLocation location,
-    required DartLibrary sourceLibrary,
     required this.kind,
-  }) : super(name: targetLibrary, location: location, parent: sourceLibrary);
-
-  DartLibrary get sourceLibrary => parent as DartLibrary;
+  }) : super(name: targetLibrary, location: location);
 
   String get targetLibrary => name;
 
