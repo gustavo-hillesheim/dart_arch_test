@@ -1,3 +1,4 @@
+import 'package:arch_test/src/core/utils/uri_utils.dart';
 import 'package:equatable/equatable.dart';
 
 class ElementLocation extends Equatable {
@@ -13,6 +14,9 @@ class ElementLocation extends Equatable {
   factory ElementLocation.unknown() {
     return ElementLocation(uri: 'unknown', column: 1, line: 1);
   }
+
+  String get package => UriUtils.getPackageNameFromString(uri);
+  String get library => UriUtils.getLibraryPath(uri);
 
   @override
   List<Object?> get props => [uri, column, line];

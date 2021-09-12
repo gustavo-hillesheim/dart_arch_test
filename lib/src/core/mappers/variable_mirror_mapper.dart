@@ -17,7 +17,7 @@ class VariableMirrorMapper {
       isFinal: mirror.isFinal,
       isPrivate: mirror.isPrivate,
       isStatic: mirror.isStatic,
-      location: MirrorUtils.toElementLocation(mirror.location),
+      location: MirrorUtils.elementLocation(mirror),
       type: typeMirrorMapper.toDartType(mirror.type),
     );
   }

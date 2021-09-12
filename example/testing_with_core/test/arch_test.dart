@@ -29,14 +29,12 @@ void main() {
     final equals = DeepCollectionEquality();
     final myProps = [
       one.name,
-      one.package,
-      one.library,
+      one.location,
       ignoreGenerics ? null : one.generics
     ];
     final otherProps = [
       other.name,
-      other.package,
-      other.library,
+      other.location,
       ignoreGenerics ? null : other.generics
     ];
     return equals.equals(myProps, otherProps);
@@ -72,8 +70,8 @@ void main() {
     final classes = getClassesInFolder('entity');
 
     for (final cls in classes) {
-      final folderBasename = dirname(cls.library);
-      final library = getLibrary(cls.library)!;
+      final folderBasename = dirname(cls.location.library);
+      final library = getLibrary(cls.location.library)!;
 
       final allowedDependencies = library.dependencies
           .where((dep) =>
@@ -113,7 +111,7 @@ void main() {
     for (final cls in classes) {
       expect(
         checkImports(
-          getLibrary(cls.library)!,
+          getLibrary(cls.location.library)!,
           allowedFolders: ['repository', 'entity'],
         ),
         true,
@@ -164,7 +162,7 @@ void main() {
     for (final cls in classes) {
       expect(
         checkImports(
-          getLibrary(cls.library)!,
+          getLibrary(cls.location.library)!,
           allowedFolders: ['service', 'repository', 'entity'],
         ),
         true,

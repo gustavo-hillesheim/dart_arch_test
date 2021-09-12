@@ -13,7 +13,7 @@ class TypeMirrorMapper {
     return DartType(
       name: name,
       generics: generics,
-      location: MirrorUtils.toElementLocation(mirror.location),
+      location: MirrorUtils.elementLocation(mirror),
     );
   }
 }

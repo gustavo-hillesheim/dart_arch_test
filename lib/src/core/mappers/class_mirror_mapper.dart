@@ -35,7 +35,7 @@ class ClassMirrorMapper {
 
     return DartClass(
       name: simpleName,
-      location: MirrorUtils.toElementLocation(mirror.location),
+      location: MirrorUtils.elementLocation(mirror),
       generics: generics,
       isAbstract: mirror.isAbstract,
       isEnum: mirror.isEnum,

@@ -66,17 +66,17 @@ void main() {
           DartLibraryDependency(
             kind: LibraryDependencyKind.IMPORT,
             location: ElementLocation.unknown(),
-            targetLibrary: 'helpers\\utils.dart',
+            path: 'package:pkg\\helpers\\utils.dart',
           ),
           DartLibraryDependency(
             kind: LibraryDependencyKind.EXPORT,
             location: ElementLocation.unknown(),
-            targetLibrary: 'helpers\\components.dart',
+            path: 'package:pkg\\helpers\\components.dart',
           ),
           DartLibraryDependency(
             kind: LibraryDependencyKind.IMPORT,
             location: ElementLocation.unknown(),
-            targetLibrary: 'helpers\\services.dart',
+            path: 'package:pkg\\helpers\\services.dart',
           ),
         ],
       ),

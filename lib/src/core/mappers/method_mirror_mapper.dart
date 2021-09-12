@@ -18,7 +18,7 @@ class MethodMirrorMapper {
     final parameters = mirror.parameters
         .map(parameterMirrorMapper.toDartParameter)
         .toList(growable: false);
-    final location = MirrorUtils.toElementLocation(mirror.location);
+    final location = MirrorUtils.elementLocation(mirror);
     final returnType = typeMirrorMapper.toDartType(mirror.returnType);
     if (mirror.isConstructor) {
       return DartConstructor(

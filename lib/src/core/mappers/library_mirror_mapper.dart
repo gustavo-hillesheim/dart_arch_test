@@ -23,7 +23,7 @@ class LibraryMirrorMapper {
 
     return DartLibrary(
       name: name,
-      location: MirrorUtils.toElementLocation(mirror.location),
+      location: MirrorUtils.elementLocation(mirror),
       classes: _getClasses(mirror),
       methods: _getMethods(mirror),
       dependencies: _getDependencies(mirror, dirname(path)),
@@ -69,16 +69,14 @@ class LibraryMirrorMapper {
       path = join(basePath, path);
     }
     path = normalize(path);
-    final package = UriUtils.getPackageNameFromString(path);
-    final name = UriUtils.getLibraryPath(path, package);
     final kind = mirror.isImport
         ? LibraryDependencyKind.IMPORT
         : LibraryDependencyKind.EXPORT;
 
     return DartLibraryDependency(
       kind: kind,
-      targetLibrary: name,
-      location: MirrorUtils.toElementLocation(mirror.location),
+      path: path,
+      location: MirrorUtils.dependencyElementLocation(mirror),
     );
   }
 }

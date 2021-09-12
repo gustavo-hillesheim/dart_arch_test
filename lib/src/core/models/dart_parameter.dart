@@ -4,6 +4,7 @@ import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
 
+/// Location for parameters is always unknown
 class DartParameter extends DartElement {
   final DartType type;
   final bool hasDefaultValue;

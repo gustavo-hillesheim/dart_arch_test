@@ -14,7 +14,7 @@ class ParameterMirrorMapper {
     final simpleName = MirrorSystem.getName(mirror.simpleName);
     return DartParameter(
       name: simpleName,
-      location: MirrorUtils.toElementLocation(mirror.location),
+      location: MirrorUtils.elementLocation(mirror),
       type: typeMirrorMapper.toDartType(mirror.type),
       isFinal: mirror.isFinal,
       isConst: mirror.isConst,
