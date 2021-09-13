@@ -1,8 +1,9 @@
+import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_library.dart';
 import 'package:equatable/equatable.dart';
 
 /// Representation of a Dart package
-class DartPackage extends Equatable {
+class DartPackage extends Equatable implements DartElementsParent {
   final String name;
   final List<DartLibrary> libraries;
 
@@ -13,7 +14,5 @@ class DartPackage extends Equatable {
   List<Object?> get props => [name, libraries];
 
   @override
-  String toString() {
-    return 'DartPackage(name="$name", libraries=$libraries)';
-  }
+  List<DartElement> get children => libraries;
 }

@@ -4,7 +4,7 @@ import 'package:arch_test/src/core/models/dart_variable.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 
 /// Representation of a Dart class
-class DartClass extends DartType {
+class DartClass extends DartType implements DartElementsParent {
   final bool isAbstract;
   final bool isEnum;
   final List<DartVariable> fields;
@@ -32,4 +32,7 @@ class DartClass extends DartType {
   List<Object?> get props =>
       super.props +
       [isAbstract, isEnum, fields, methods, superClass, superInterfaces];
+
+  @override
+  List<DartElement> get children => [...methods, ...fields];
 }
