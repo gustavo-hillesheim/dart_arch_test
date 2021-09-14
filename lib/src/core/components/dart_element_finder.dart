@@ -1,5 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/dart_element_ref.dart';
+import 'package:arch_test/src/testing/exception.dart';
 
 class DartElementFinder {
   T? findByRef<T extends DartElement>(
@@ -28,9 +29,10 @@ class DartElementFinder {
     } else if (elementsFound.isEmpty) {
       return null;
     } else {
-      throw Exception(
-        'Found more than one element on source $source with matcher $matcher.'
-        'Total elements found: ${elementsFound.length}',
+      throw MultipleElementsFoundException(
+        matcher: matcher,
+        source: source,
+        elementsFound: elementsFound,
       );
     }
   }

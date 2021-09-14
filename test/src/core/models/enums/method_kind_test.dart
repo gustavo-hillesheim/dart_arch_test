@@ -1,4 +1,5 @@
 import 'package:arch_test/src/core/models/enums/method_kind.dart';
+import 'package:arch_test/src/testing/exception.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -29,6 +30,7 @@ void main() {
   });
   test('should throw error on unknown MethodKind', () {
     final mirror = FakeMethodMirror('', isRegularMethod: false);
-    expect(() => methodKindFromMirror(mirror), throwsA(isA<Exception>()));
+    expect(() => methodKindFromMirror(mirror),
+        throwsA(isA<UnknownMethodTypeException>()));
   });
 }

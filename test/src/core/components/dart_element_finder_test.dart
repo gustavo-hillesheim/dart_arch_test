@@ -1,5 +1,6 @@
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
 import 'package:arch_test/src/core/core.dart';
+import 'package:arch_test/src/testing/exception.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -56,7 +57,7 @@ void main() {
       () async {
     expect(
       () => finder.findOneByMatcher(matcher: (_) => true, source: mockPackage),
-      throwsA(isA<Exception>()),
+      throwsA(isA<MultipleElementsFoundException>()),
     );
   });
 }

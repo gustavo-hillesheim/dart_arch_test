@@ -1,4 +1,5 @@
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
+import 'package:arch_test/src/testing/exception.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -47,10 +48,12 @@ void main() {
       isRegularMethod: false,
       isConstructor: true,
     );
-    expect(() => constructorKindFromMirror(mirror), throwsA(isA<Exception>()));
+    expect(() => constructorKindFromMirror(mirror),
+        throwsA(isA<UnknownConstructorTypeException>()));
   });
   test('should throw error on non-constructor MethodMirror', () {
     final mirror = FakeMethodMirror('');
-    expect(() => constructorKindFromMirror(mirror), throwsA(isA<Exception>()));
+    expect(() => constructorKindFromMirror(mirror),
+        throwsA(isA<MethodIsNotConstructorException>()));
   });
 }

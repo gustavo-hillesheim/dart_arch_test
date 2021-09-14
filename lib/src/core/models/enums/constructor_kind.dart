@@ -1,10 +1,12 @@
 import 'dart:mirrors';
 
+import 'package:arch_test/src/testing/exception.dart';
+
 enum ConstructorKind { CONST, FACTORY, GENERATIVE, REDIRECTING }
 
 ConstructorKind constructorKindFromMirror(MethodMirror methodMirror) {
   if (!methodMirror.isConstructor) {
-    throw Exception('MethodMirror does not belong to a constructor');
+    throw MethodIsNotConstructorException(methodMirror: methodMirror);
   }
   if (methodMirror.isConstConstructor) {
     return ConstructorKind.CONST;
@@ -18,5 +20,5 @@ ConstructorKind constructorKindFromMirror(MethodMirror methodMirror) {
   if (methodMirror.isRedirectingConstructor) {
     return ConstructorKind.REDIRECTING;
   }
-  throw Exception('Unknown constructor type');
+  throw UnknownConstructorTypeException(methodMirror: methodMirror);
 }
