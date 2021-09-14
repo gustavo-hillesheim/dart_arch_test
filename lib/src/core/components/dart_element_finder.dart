@@ -4,16 +4,14 @@ import 'package:arch_test/src/testing/exception.dart';
 
 class DartElementFinder {
   T? findByRef<T extends DartElement>(
-    DartElementRef ref, {
+    DartElementRef<T> ref, {
     required DartElementsParent source,
   }) {
     return findOneByMatcher<T>(
         source: source, matcher: (el) => ref.matches(el));
   }
 
-  /// [type] Must be a type that extends DartElement, otherwise will return am empty list.
   List<T> findByType<T extends DartElement>({
-    required Type type,
     required DartElementsParent source,
   }) {
     return findByMatcher(matcher: (el) => el is T, source: source);

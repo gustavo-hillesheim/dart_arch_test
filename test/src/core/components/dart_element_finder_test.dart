@@ -10,9 +10,8 @@ void main() {
     finder = DartElementFinder();
   });
 
-  test('Should find class by ref', () async {
-    final ref = DartElementRef(
-      elementType: DartClass,
+  test('Should find class by ref', () {
+    final ref = DartElementRef<DartClass>(
       name: 'SomeClass',
       location: ElementLocation(
         uri: 'package:pkg/some_class.dart',
@@ -26,19 +25,24 @@ void main() {
     expect(dartClass, isA<DartClass>());
   });
 
-  test('Should return elements of given type', () async {
-    final dartClasses =
-        finder.findByType<DartClass>(type: DartClass, source: mockPackage);
+  test('Should return all elements', () {
+    final elements = finder.findByMatcher(
+      matcher: (_) => true,
+      source: mockPackage,
+    );
+    expect(elements.length, 4);
+  });
+
+  test('Should return elements of given type', () {
+    final dartClasses = finder.findByType<DartClass>(source: mockPackage);
     expect(dartClasses.length, 1);
 
-    final dartMethods =
-        finder.findByType<DartMethod>(type: DartMethod, source: mockPackage);
+    final dartMethods = finder.findByType<DartMethod>(source: mockPackage);
     expect(dartMethods.length, 2);
   });
 
-  test('Should return null if element does not exist', () async {
-    final ref = DartElementRef(
-      elementType: DartClass,
+  test('Should return null if element does not exist', () {
+    final ref = DartElementRef<DartClass>(
       name: 'NonexistingClass',
       location: ElementLocation(
         uri: 'package:pkg/non_existing_class.dart',
