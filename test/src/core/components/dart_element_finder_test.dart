@@ -1,6 +1,6 @@
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
 import 'package:arch_test/src/core/core.dart';
-import 'package:arch_test/src/testing/exception.dart';
+import 'package:arch_test/src/exception.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -16,7 +16,7 @@ void main() {
       location: ElementLocation(
         uri: 'package:pkg/some_class.dart',
         column: 1,
-        line: 1,
+        line: 5,
       ),
     );
 
@@ -66,51 +66,79 @@ void main() {
   });
 }
 
-final mockPackage = DartPackage(name: 'pkg', libraries: [
-  DartLibrary(
-    name: 'some_class.dart',
-    location: ElementLocation(
-      uri: 'package:pkg/some_class.dart',
-      column: 1,
-      line: 1,
-    ),
-    classes: [
-      DartClass(
-        name: 'SomeClass',
-        location: ElementLocation(
-          uri: 'package:pkg/some_class.dart',
-          column: 1,
-          line: 1,
-        ),
-        superInterfaces: [],
-        generics: [],
-        fields: [],
-        methods: [
-          DartMethod(
-            name: 'doNothing',
+final mockPackage = DartPackage(
+  name: 'pkg',
+  libraries: [
+    DartLibrary(
+      name: 'some_class.dart',
+      location: ElementLocation(
+        uri: 'package:pkg/some_class.dart',
+        column: 1,
+        line: 1,
+      ),
+      parentRef: null,
+      classes: [
+        DartClass(
+          name: 'SomeClass',
+          location: ElementLocation(
+            uri: 'package:pkg/some_class.dart',
+            column: 1,
+            line: 5,
+          ),
+          parentRef: DartElementRef<DartLibrary>(
+            name: 'package:pkg/some_class.dart',
             location: ElementLocation(
               uri: 'package:pkg/some_class.dart',
-              column: 3,
-              line: 2,
+              column: 1,
+              line: 1,
             ),
-            returnType: DartType.voidType(),
-            parameters: [],
           ),
-        ],
-      ),
-    ],
-    methods: [
-      DartMethod(
-        name: 'main',
-        location: ElementLocation(
-          uri: 'package:pkg/some_class.dart',
-          column: 1,
-          line: 5,
+          superInterfaces: [],
+          generics: [],
+          fields: [],
+          methods: [
+            DartMethod(
+              name: 'doNothing',
+              location: ElementLocation(
+                uri: 'package:pkg/some_class.dart',
+                column: 3,
+                line: 2,
+              ),
+              parentRef: DartElementRef<DartClass>(
+                name: 'package:pkg/some_class.dart',
+                location: ElementLocation(
+                  uri: 'package:pkg/some_class.dart',
+                  column: 1,
+                  line: 5,
+                ),
+              ),
+              returnType: DartType.voidType(),
+              parameters: [],
+            ),
+          ],
         ),
-        returnType: DartType.voidType(),
-        parameters: [],
-      ),
-    ],
-    dependencies: [],
-  ),
-]);
+      ],
+      methods: [
+        DartMethod(
+          name: 'main',
+          location: ElementLocation(
+            uri: 'package:pkg/some_class.dart',
+            column: 1,
+            line: 5,
+          ),
+          parentRef: DartElementRef<DartLibrary>(
+            name: 'package:pkg/some_class.dart',
+            location: ElementLocation(
+              uri: 'package:pkg/some_class.dart',
+              column: 1,
+              line: 1,
+            ),
+          ),
+          returnType: DartType.voidType(),
+          parameters: [],
+        ),
+      ],
+      dependencies: [],
+    ),
+  ],
+);

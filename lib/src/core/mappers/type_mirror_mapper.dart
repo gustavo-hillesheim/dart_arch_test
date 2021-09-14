@@ -14,6 +14,7 @@ class TypeMirrorMapper {
       name: name,
       generics: generics,
       location: MirrorUtils.elementLocation(mirror),
+      parentRef: MirrorUtils.elementRef(mirror.owner),
     );
   }
 }

@@ -10,8 +10,10 @@ class UriUtils {
   static String getPackageNameFromString(String uri) {
     uri = normalize(uri);
     final path = uri.replaceFirst('package:', '');
-    final package = path.substring(0, path.indexOf(separator));
-    return package;
+    if (path.contains(separator)) {
+      return path.substring(0, path.indexOf(separator));
+    }
+    return path;
   }
 
   static String getLibraryPathFromSourceLocation(SourceLocation? location) {

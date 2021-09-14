@@ -4,15 +4,19 @@ import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/mappers.dart';
 import 'package:arch_test/src/core/models/dart_element.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
+import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
 /// Representation of a Dart type.
 /// Can be from method return types, or variables types.
 class DartType extends DartElement {
   final List<DartType> generics;
+  @override
+  final DartElementRef? parentRef;
 
   DartType({
     required String name,
     required ElementLocation location,
+    required this.parentRef,
     required this.generics,
   }) : super(name: name, location: location);
 
@@ -33,12 +37,14 @@ class DartType extends DartElement {
       dependencies: [],
       methods: [],
       location: location,
+      parentRef: null,
     );
     package.libraries.add(library);
     return DartType(
       name: name,
       location: location,
       generics: [],
+      parentRef: null,
     );
   }
 
@@ -49,6 +55,7 @@ class DartType extends DartElement {
       name: dartType.name,
       location: dartType.location,
       generics: generics ?? [],
+      parentRef: dartType.parentRef,
     );
   }
 

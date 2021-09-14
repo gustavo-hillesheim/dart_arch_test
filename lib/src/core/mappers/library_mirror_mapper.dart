@@ -24,6 +24,7 @@ class LibraryMirrorMapper {
     return DartLibrary(
       name: name,
       location: MirrorUtils.elementLocation(mirror),
+      parentRef: null,
       classes: _getClasses(mirror),
       methods: _getMethods(mirror),
       dependencies: _getDependencies(mirror, dirname(path)),
@@ -77,6 +78,7 @@ class LibraryMirrorMapper {
       kind: kind,
       path: path,
       location: MirrorUtils.dependencyElementLocation(mirror),
+      parentRef: MirrorUtils.elementRef<DartLibrary>(mirror.sourceLibrary),
     );
   }
 }

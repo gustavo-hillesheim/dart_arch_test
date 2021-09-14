@@ -12,6 +12,7 @@ DartLibrary createSampleLibrary() {
   return DartLibrary(
     name: 'main.dart',
     location: ElementLocation.unknown(),
+    parentRef: null,
     classes: [
       createTestClass(),
     ],
@@ -21,6 +22,10 @@ DartLibrary createSampleLibrary() {
         name: 'main',
         returnType: DartType.voidType(),
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartLibrary>(
+          name: 'main.dart',
+          location: ElementLocation.unknown(),
+        ),
         parameters: [],
       ),
     ],
@@ -31,6 +36,10 @@ DartClass createTestClass() {
   return DartClass(
     name: 'TestClass',
     location: ElementLocation.unknown(),
+    parentRef: DartElementRef<DartLibrary>(
+      name: 'main.dart',
+      location: ElementLocation.unknown(),
+    ),
     generics: [],
     superInterfaces: [],
     fields: [
@@ -38,17 +47,29 @@ DartClass createTestClass() {
         name: 'id',
         type: DartType.from(int),
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartClass>(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+        ),
       ),
     ],
     methods: [
       DartConstructor(
         name: 'TestClass',
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartClass>(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+        ),
         parameters: [],
         returnType: DartType(
           name: 'TestClass',
           generics: [],
           location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartLibrary>(
+            name: 'main.dart',
+            location: ElementLocation.unknown(),
+          ),
         ),
         constructorKind: ConstructorKind.GENERATIVE,
       ),
@@ -57,6 +78,10 @@ DartClass createTestClass() {
         returnType: DartType.voidType(),
         parameters: [],
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartClass>(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+        ),
       ),
     ],
   );

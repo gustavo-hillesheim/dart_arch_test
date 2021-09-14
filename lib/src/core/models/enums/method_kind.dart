@@ -1,6 +1,6 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/src/testing/exception.dart';
+import 'package:arch_test/src/exception.dart';
 
 enum MethodKind { SETTER, GETTER, CONSTRUCTOR, OPERATOR, REGULAR }
 

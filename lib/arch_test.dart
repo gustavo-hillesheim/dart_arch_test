@@ -5,6 +5,7 @@ import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/di_container.dart';
 
 export 'src/core/models/models.dart';
+export 'src/exception.dart';
 
 final diContainer = setupDIContainer();
 

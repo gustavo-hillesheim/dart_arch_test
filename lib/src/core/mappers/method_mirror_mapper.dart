@@ -24,6 +24,7 @@ class MethodMirrorMapper {
       return DartConstructor(
         name: simpleName,
         location: location,
+        parentRef: MirrorUtils.elementRef(mirror.owner),
         returnType: returnType,
         parameters: parameters,
         constructorKind: constructorKindFromMirror(mirror),
@@ -32,6 +33,7 @@ class MethodMirrorMapper {
     return DartMethod(
       name: simpleName,
       kind: methodKindFromMirror(mirror),
+      parentRef: MirrorUtils.elementRef(mirror.owner),
       location: location,
       returnType: returnType,
       isAbstract: mirror.isAbstract,

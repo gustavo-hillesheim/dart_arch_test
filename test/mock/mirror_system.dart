@@ -51,6 +51,11 @@ final doubleDartType = DartType(
   name: 'double',
   generics: [],
   location: ElementLocation(uri: 'dart:core/double.dart', line: 1, column: 1),
+  parentRef: DartElementRef<DartLibrary>(
+    name: 'dart:core',
+    location: ElementLocation(
+        uri: 'dart:core-patch/string_buffer_patch.dart', line: 1, column: 1),
+  ),
 );
 
 final voidDartType = DartType(
@@ -58,18 +63,32 @@ final voidDartType = DartType(
   generics: [],
   location:
       ElementLocation(uri: 'dart:ffi/native_type.dart', line: 1, column: 1),
+  parentRef: DartElementRef<DartLibrary>(
+    name: 'dart:ffi',
+    location: ElementLocation(uri: 'dart:ffi/union.dart', line: 1, column: 1),
+  ),
 );
 
 final intDartType = DartType(
   name: 'int',
   generics: [],
   location: ElementLocation(uri: 'dart:core/int.dart', line: 1, column: 1),
+  parentRef: DartElementRef<DartLibrary>(
+    name: 'dart:core',
+    location: ElementLocation(
+        uri: 'dart:core-patch/string_buffer_patch.dart', line: 1, column: 1),
+  ),
 );
 
 final stringDartType = DartType(
   name: 'String',
   generics: [],
   location: ElementLocation(uri: 'dart:core/string.dart', line: 1, column: 1),
+  parentRef: DartElementRef<DartLibrary>(
+    name: 'dart:core',
+    location: ElementLocation(
+        uri: 'dart:core-patch/string_buffer_patch.dart', line: 1, column: 1),
+  ),
 );
 
 /**
@@ -93,10 +112,14 @@ class FakeLibraryDependencyMirror extends Mock
   final bool isImport;
   final bool isExport;
   final LibraryMirror? targetLibrary;
+  final LibraryMirror sourceLibrary;
 
-  FakeLibraryDependencyMirror(
-      {this.isImport = true, this.isExport = false, String? uri})
-      : targetLibrary = uri != null
+  FakeLibraryDependencyMirror({
+    required this.sourceLibrary,
+    this.isImport = true,
+    this.isExport = false,
+    String? uri,
+  }) : targetLibrary = uri != null
             ? FakeLibraryMirror(uri, declarations: {}, libraryDependencies: [])
             : null;
 }
@@ -216,14 +239,20 @@ class FakeTypeMirror extends Mock implements TypeMirror {
   final List<TypeMirror> typeArguments;
   final bool hasReflectedType;
   final Type reflectedType;
+  final DeclarationMirror? owner;
 
-  FakeTypeMirror(String name, String sourcePath,
-      {List<TypeMirror>? typeArguments, Type? reflectedType})
-      : simpleName = Symbol(name),
+  FakeTypeMirror(
+    String name,
+    String sourcePath, {
+    List<TypeMirror>? typeArguments,
+    Type? reflectedType,
+    DeclarationMirror? owner,
+  })  : simpleName = Symbol(name),
         location = FakeSourceLocation(sourcePath),
         typeArguments = typeArguments ?? [],
         hasReflectedType = reflectedType != null,
-        reflectedType = reflectedType ?? Void;
+        reflectedType = reflectedType ?? Void,
+        owner = owner;
 
   factory FakeTypeMirror.fromType(Type type, {List<Type>? typeArguments}) {
     final typeMirror = reflectType(type);
@@ -234,6 +263,7 @@ class FakeTypeMirror extends Mock implements TypeMirror {
       path,
       typeArguments:
           typeArguments?.map((t) => FakeTypeMirror.fromType(t)).toList(),
+      owner: typeMirror.owner,
     );
   }
 

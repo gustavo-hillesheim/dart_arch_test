@@ -1,5 +1,5 @@
 import 'package:arch_test/src/core/models/enums/method_kind.dart';
-import 'package:arch_test/src/testing/exception.dart';
+import 'package:arch_test/src/exception.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 

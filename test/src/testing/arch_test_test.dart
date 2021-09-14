@@ -1,6 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/testing/arch_test.dart';
-import 'package:arch_test/src/testing/exception.dart';
+import 'package:arch_test/src/exception.dart';
 import 'package:test/test.dart';
 
 import '../../mock/models.dart';

@@ -1,3 +1,4 @@
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/dart_element.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
@@ -10,10 +11,13 @@ class DartVariable extends DartElement {
   final bool isPrivate;
   final bool isStatic;
   final DartType type;
+  @override
+  final DartElementRef? parentRef;
 
   DartVariable({
     required String name,
     required ElementLocation location,
+    required this.parentRef,
     required this.type,
     this.isFinal = false,
     this.isConst = false,

@@ -28,17 +28,20 @@ void main() {
     expect(
       dartMethod,
       DartMethod(
-          name: 'aMethod',
-          returnType: voidDartType,
-          kind: MethodKind.REGULAR,
-          parameters: [
-            DartParameter(
-              name: 'aParameter',
-              type: stringDartType,
-              location: ElementLocation.unknown(),
-            ),
-          ],
-          location: ElementLocation.unknown()),
+        name: 'aMethod',
+        returnType: voidDartType,
+        kind: MethodKind.REGULAR,
+        parameters: [
+          DartParameter(
+            name: 'aParameter',
+            type: stringDartType,
+            location: ElementLocation.unknown(),
+            parentRef: null,
+          ),
+        ],
+        location: ElementLocation.unknown(),
+        parentRef: null,
+      ),
     );
   });
 
@@ -59,6 +62,7 @@ void main() {
         constructorKind: ConstructorKind.FACTORY,
         parameters: [],
         location: ElementLocation.unknown(),
+        parentRef: null,
       ),
     );
   });
@@ -79,6 +83,7 @@ void main() {
         kind: MethodKind.GETTER,
         parameters: [],
         location: ElementLocation.unknown(),
+        parentRef: null,
       ),
     );
   });

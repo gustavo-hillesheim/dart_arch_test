@@ -1,5 +1,6 @@
 import 'dart:mirrors';
 
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/method_mirror_mapper.dart';
 import 'package:arch_test/src/core/mappers/type_mirror_mapper.dart';
 import 'package:arch_test/src/core/mappers/variable_mirror_mapper.dart';
@@ -36,6 +37,7 @@ class ClassMirrorMapper {
     return DartClass(
       name: simpleName,
       location: MirrorUtils.elementLocation(mirror),
+      parentRef: MirrorUtils.elementRef<DartLibrary>(mirror.owner),
       generics: generics,
       isAbstract: mirror.isAbstract,
       isEnum: mirror.isEnum,

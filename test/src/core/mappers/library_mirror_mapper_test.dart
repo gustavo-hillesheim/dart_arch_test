@@ -1,3 +1,5 @@
+import 'dart:mirrors';
+
 import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_class.dart';
 import 'package:arch_test/src/core/models/dart_library.dart';
@@ -19,27 +21,18 @@ void main() {
   });
 
   test('should create DartLibrary from LibraryMirror', () {
-    final libraryMirror =
-        FakeLibraryMirror('package:pkg/library.dart', declarations: {
-      #FakeClass:
-          FakeClassMirror('FakeClass', path: 'package:pkg/library.dart'),
-      #utilFunction: FakeMethodMirror('utilFunction', returnType: String),
-    }, libraryDependencies: [
-      FakeLibraryDependencyMirror(uri: 'package:pkg/helpers/utils.dart'),
-      FakeLibraryDependencyMirror(),
-      FakeLibraryDependencyMirror(
-          uri: 'helpers/components.dart', isExport: true, isImport: false),
-      FakeLibraryDependencyMirror(uri: './helpers/services.dart'),
-      FakeLibraryDependencyMirror(uri: 'file://path/to/some/lib/main.dart'),
-    ]);
+    final dartLibrary = mapper.toDartLibrary(createLibraryMirror());
 
-    final dartLibrary = mapper.toDartLibrary(libraryMirror);
-
+    final libraryRef = DartElementRef<DartLibrary>(
+      name: 'library.dart',
+      location: ElementLocation.unknown(),
+    );
     expect(
       dartLibrary,
       DartLibrary(
         name: 'library.dart',
         location: ElementLocation.unknown(),
+        parentRef: null,
         classes: [
           DartClass(
             name: 'FakeClass',
@@ -48,6 +41,7 @@ void main() {
               column: 1,
               line: 1,
             ),
+            parentRef: null,
             fields: [],
             generics: [],
             superInterfaces: [],
@@ -58,6 +52,7 @@ void main() {
           DartMethod(
             name: 'utilFunction',
             location: ElementLocation.unknown(),
+            parentRef: null,
             returnType: stringDartType,
             parameters: [],
           ),
@@ -66,20 +61,58 @@ void main() {
           DartLibraryDependency(
             kind: LibraryDependencyKind.IMPORT,
             location: ElementLocation.unknown(),
+            parentRef: libraryRef,
             path: 'package:pkg\\helpers\\utils.dart',
           ),
           DartLibraryDependency(
             kind: LibraryDependencyKind.EXPORT,
             location: ElementLocation.unknown(),
+            parentRef: libraryRef,
             path: 'package:pkg\\helpers\\components.dart',
           ),
           DartLibraryDependency(
             kind: LibraryDependencyKind.IMPORT,
             location: ElementLocation.unknown(),
+            parentRef: libraryRef,
             path: 'package:pkg\\helpers\\services.dart',
           ),
         ],
       ),
     );
   });
+}
+
+LibraryMirror createLibraryMirror() {
+  final dependencies = <LibraryDependencyMirror>[];
+  final libraryMirror = FakeLibraryMirror(
+    'package:pkg/library.dart',
+    declarations: {
+      #FakeClass:
+          FakeClassMirror('FakeClass', path: 'package:pkg/library.dart'),
+      #utilFunction: FakeMethodMirror('utilFunction', returnType: String),
+    },
+    libraryDependencies: dependencies,
+  );
+  dependencies.add(FakeLibraryDependencyMirror(
+    uri: 'package:pkg/helpers/utils.dart',
+    sourceLibrary: libraryMirror,
+  ));
+  dependencies.add(FakeLibraryDependencyMirror(
+    sourceLibrary: libraryMirror,
+  ));
+  dependencies.add(FakeLibraryDependencyMirror(
+    uri: 'helpers/components.dart',
+    isExport: true,
+    isImport: false,
+    sourceLibrary: libraryMirror,
+  ));
+  dependencies.add(FakeLibraryDependencyMirror(
+    uri: './helpers/services.dart',
+    sourceLibrary: libraryMirror,
+  ));
+  dependencies.add(FakeLibraryDependencyMirror(
+    uri: 'file://path/to/some/lib/main.dart',
+    sourceLibrary: libraryMirror,
+  ));
+  return libraryMirror;
 }

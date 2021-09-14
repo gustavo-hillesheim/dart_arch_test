@@ -16,6 +16,7 @@ class DartClass extends DartType implements DartElementsParent {
     required String name,
     required ElementLocation location,
     required List<DartType> generics,
+    required DartElementRef<DartLibrary>? parentRef,
     required this.fields,
     required this.methods,
     required this.superInterfaces,
@@ -26,6 +27,7 @@ class DartClass extends DartType implements DartElementsParent {
           name: name,
           generics: generics,
           location: location,
+          parentRef: parentRef,
         );
 
   @override

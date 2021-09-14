@@ -1,6 +1,6 @@
 import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/testing/types.dart';
-import 'exception.dart';
+import '../exception.dart';
 
 class ArchTest<T> {
   final Filter<List<T>> filter;

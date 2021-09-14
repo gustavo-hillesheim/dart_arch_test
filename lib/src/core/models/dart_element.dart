@@ -1,19 +1,20 @@
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:equatable/equatable.dart';
 
-class DartElement extends Equatable {
+abstract class DartElement extends Equatable {
   final String name;
   final ElementLocation location;
-  // Temporarily removed since a reference to a parent element requires
-  // circular dependency between the objects
-  //final DartElement? parent;
+  DartElementRef? get parentRef;
 
   DartElement({
     required this.name,
-    //required this.parent,
     required this.location,
   });
 
+  String get package => location.package;
+  String get library => location.library;
+
   @override
-  List<Object?> get props => [name, location];
+  List<Object?> get props => [name, parentRef, location];
 }

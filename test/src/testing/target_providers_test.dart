@@ -22,16 +22,28 @@ void main() {
         name: 'main',
         returnType: DartType.voidType(),
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartLibrary>(
+          name: 'main.dart',
+          location: ElementLocation.unknown(),
+        ),
         parameters: [],
       ),
       DartConstructor(
         name: 'TestClass',
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartClass>(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+        ),
         parameters: [],
         returnType: DartType(
           name: 'TestClass',
           generics: [],
           location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartLibrary>(
+            name: 'main.dart',
+            location: ElementLocation.unknown(),
+          ),
         ),
         constructorKind: ConstructorKind.GENERATIVE,
       ),
@@ -40,6 +52,10 @@ void main() {
         returnType: DartType.voidType(),
         parameters: [],
         location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartClass>(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+        ),
       ),
     ]);
   });

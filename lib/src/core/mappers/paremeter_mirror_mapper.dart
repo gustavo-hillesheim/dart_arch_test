@@ -1,5 +1,6 @@
 import 'dart:mirrors';
 
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/type_mirror_mapper.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
@@ -15,6 +16,7 @@ class ParameterMirrorMapper {
     return DartParameter(
       name: simpleName,
       location: MirrorUtils.elementLocation(mirror),
+      parentRef: MirrorUtils.elementRef<DartMethod>(mirror.owner),
       type: typeMirrorMapper.toDartType(mirror.type),
       isFinal: mirror.isFinal,
       isConst: mirror.isConst,

@@ -49,3 +49,10 @@ class UnknownMethodTypeException implements Exception {
 
   UnknownMethodTypeException({required this.methodMirror});
 }
+
+class UnsupportedMirrorType implements Exception {
+  final String message;
+
+  UnsupportedMirrorType(Type mirrorType)
+      : message = 'The type ${mirrorType.toString()} is not supported';
+}

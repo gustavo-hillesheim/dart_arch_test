@@ -1,3 +1,4 @@
+import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/dart_element.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
@@ -11,10 +12,13 @@ class DartMethod extends DartElement {
   final DartType returnType;
   final MethodKind kind;
   final List<DartParameter> parameters;
+  @override
+  final DartElementRef? parentRef;
 
   DartMethod({
     required String name,
     required ElementLocation location,
+    required this.parentRef,
     required this.returnType,
     required this.parameters,
     this.kind = MethodKind.REGULAR,
@@ -35,6 +39,7 @@ class DartConstructor extends DartMethod {
     required ElementLocation location,
     required DartType returnType,
     required List<DartParameter> parameters,
+    required DartElementRef? parentRef,
     required this.constructorKind,
   }) : super(
           name: name,
@@ -44,6 +49,7 @@ class DartConstructor extends DartMethod {
           kind: MethodKind.CONSTRUCTOR,
           isAbstract: false,
           isStatic: false,
+          parentRef: parentRef,
         );
 
   @override

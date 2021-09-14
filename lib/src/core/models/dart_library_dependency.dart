@@ -7,17 +7,20 @@ import 'package:arch_test/src/core/utils/uri_utils.dart';
 /// Location for library dependencies is always unknown
 class DartLibraryDependency extends DartElement {
   final LibraryDependencyKind kind;
+  @override
+  final DartElementRef<DartLibrary>? parentRef;
 
   DartLibraryDependency({
     required String path,
     required ElementLocation location,
+    required this.parentRef,
     required this.kind,
   }) : super(name: path, location: location);
 
   String get path => name;
 
-  String get package => UriUtils.getPackageNameFromString(path);
-  String get library => UriUtils.getLibraryPath(path);
+  String get targetPackage => UriUtils.getPackageNameFromString(path);
+  String get targetLibrary => UriUtils.getLibraryPath(path);
 
   @override
   List<Object?> get props => super.props + [kind];

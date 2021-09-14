@@ -11,10 +11,13 @@ class DartParameter extends DartElement {
   final bool isConst;
   final bool isFinal;
   final ParameterKind kind;
+  @override
+  final DartElementRef<DartMethod>? parentRef;
 
   DartParameter({
     required String name,
     required ElementLocation location,
+    required this.parentRef,
     required this.type,
     this.hasDefaultValue = false,
     this.isConst = false,

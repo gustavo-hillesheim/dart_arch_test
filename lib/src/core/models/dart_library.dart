@@ -11,10 +11,14 @@ class DartLibrary extends DartElement implements DartElementsParent {
   final List<DartClass> classes;
   final List<DartMethod> methods;
   final List<DartLibraryDependency> dependencies;
+  // Libraries are the top-most DartElement in a package, so they don't have a parent
+  @override
+  final DartElementRef? parentRef = null;
 
   DartLibrary({
     required String name,
     required ElementLocation location,
+    required DartElementRef? parentRef,
     required this.classes,
     required this.methods,
     required this.dependencies,

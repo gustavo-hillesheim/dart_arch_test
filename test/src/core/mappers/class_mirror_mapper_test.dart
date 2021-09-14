@@ -5,7 +5,6 @@ import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/dart_variable.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
-import 'package:arch_test/src/core/models/enums/method_kind.dart';
 import 'package:arch_test/src/di_container.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
@@ -64,6 +63,7 @@ void main() {
           column: 1,
           line: 1,
         ),
+        parentRef: null,
         generics: [],
         superClass: DartClass(
           name: 'SuperClass',
@@ -72,6 +72,7 @@ void main() {
             column: 1,
             line: 1,
           ),
+          parentRef: null,
           superInterfaces: [],
           generics: [],
           methods: [],
@@ -85,6 +86,7 @@ void main() {
               column: 1,
               line: 1,
             ),
+            parentRef: null,
             generics: [],
             superInterfaces: [],
             methods: [],
@@ -97,6 +99,7 @@ void main() {
               column: 1,
               line: 1,
             ),
+            parentRef: null,
             methods: [],
             superInterfaces: [],
             generics: [],
@@ -107,11 +110,13 @@ void main() {
           DartVariable(
             name: 'aField',
             location: ElementLocation.unknown(),
+            parentRef: null,
             type: stringDartType,
           ),
           DartVariable(
             name: '_bField',
             location: ElementLocation.unknown(),
+            parentRef: null,
             isFinal: true,
             isPrivate: true,
             type: doubleDartType,
@@ -121,12 +126,14 @@ void main() {
           DartMethod(
             name: 'cMethod',
             location: ElementLocation.unknown(),
+            parentRef: null,
             returnType: stringDartType,
             parameters: [],
           ),
           DartConstructor(
             name: 'FakeClass',
             location: ElementLocation.unknown(),
+            parentRef: null,
             constructorKind: ConstructorKind.GENERATIVE,
             parameters: [],
             returnType: DartType(
@@ -137,6 +144,7 @@ void main() {
                 column: 1,
                 line: 1,
               ),
+              parentRef: null,
             ),
           ),
         ],
@@ -159,6 +167,7 @@ void main() {
           column: 1,
           line: 1,
         ),
+        parentRef: null,
         isEnum: true,
         superInterfaces: [],
         generics: [],
@@ -183,6 +192,7 @@ void main() {
           column: 1,
           line: 1,
         ),
+        parentRef: null,
         isAbstract: true,
         fields: [],
         methods: [],
