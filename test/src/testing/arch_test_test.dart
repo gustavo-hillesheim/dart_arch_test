@@ -1,4 +1,5 @@
 import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/src/core/components/dart_element_finder.dart';
 import 'package:arch_test/src/testing/arch_test.dart';
 import 'package:arch_test/src/exception.dart';
 import 'package:test/test.dart';
@@ -12,9 +13,9 @@ void main() {
 
   setUp(() {
     allClassesHaveConstructorTest = ArchTest<DartClass>(
-      filter: (pkg) => pkg.libraries
-          .map((lib) => lib.classes)
-          .fold(<DartClass>[], (cls1, cls2) => [...cls1, ...cls2]),
+      elementsProvider: (pkg) =>
+          DartElementFinder().findByType<DartClass>(source: pkg),
+      filter: (classes) => classes,
       condition: (cls, addViolation) {
         final hasConstructor =
             cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
@@ -24,9 +25,9 @@ void main() {
       },
     );
     allClassesHaveConstConstructorTest = ArchTest<DartClass>(
-      filter: (pkg) => pkg.libraries
-          .map((lib) => lib.classes)
-          .fold(<DartClass>[], (cls1, cls2) => [...cls1, ...cls2]),
+      elementsProvider: (pkg) =>
+          DartElementFinder().findByType<DartClass>(source: pkg),
+      filter: (classes) => classes,
       condition: (cls, addViolation) {
         final hasConstConstructor = cls.methods.any((method) =>
             method is DartConstructor &&

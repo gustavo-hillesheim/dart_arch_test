@@ -4,7 +4,6 @@ import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/mappers.dart';
 import 'package:arch_test/src/core/models/dart_element.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
-import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
 /// Representation of a Dart type.
 /// Can be from method return types, or variables types.
