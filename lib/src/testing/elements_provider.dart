@@ -9,7 +9,15 @@ abstract class ElementsProviders {
       (package) => _finder.findByType<DartLibrary>(source: package);
 
   static ElementsProvider<DartClass> classes =
-      (package) => _finder.findByType<DartClass>(source: package);
+      (package) => _finder.findByMatcher(
+            source: package,
+            matcher: (el) => el is DartClass && !el.isEnum,
+          );
+
+  static ElementsProvider<DartClass> enums = (package) => _finder.findByMatcher(
+        matcher: (el) => el is DartClass && el.isEnum,
+        source: package,
+      );
 
   static ElementsProvider<DartMethod> methods =
       (package) => _finder.findByType<DartMethod>(source: package);

@@ -16,6 +16,15 @@ void main() {
     );
   });
 
+  test('should return all enums in the package', () {
+    expect(
+      ElementsProviders.enums(createSamplePackage()),
+      [
+        createMyEnum(),
+      ],
+    );
+  });
+
   test('should return all methods from the package', () {
     expect(ElementsProviders.methods(createSamplePackage()), [
       DartConstructor(

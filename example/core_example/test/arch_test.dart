@@ -54,10 +54,7 @@ void main() {
                         column: 1,
                       ),
                     ),
-                    type: DartType.from(
-                      List,
-                      generics: [DartType.from(String)],
-                    ),
+                    type: DartType.from<List<String>>(),
                     isFinal: true,
                   ),
                   DartVariable(
@@ -75,7 +72,7 @@ void main() {
                         column: 1,
                       ),
                     ),
-                    type: DartType.from(int),
+                    type: DartType.from<int>(),
                     isPrivate: true,
                   ),
                 ],
@@ -100,7 +97,7 @@ void main() {
                       DartParameter(
                         name: 'text',
                         location: ElementLocation.unknown(),
-                        type: DartType.from(String),
+                        type: DartType.from<String>(),
                         parentRef: DartElementRef<DartMethod>(
                           name: 'printText',
                           location: ElementLocation(
@@ -128,16 +125,13 @@ void main() {
                         column: 1,
                       ),
                     ),
-                    returnType: DartType.from(TextPrinter),
+                    returnType: DartType.from<TextPrinter>(),
                     constructorKind: ConstructorKind.GENERATIVE,
                     parameters: [
                       DartParameter(
                         name: 'arguments',
                         location: ElementLocation.unknown(),
-                        type: DartType.from(
-                          List,
-                          generics: [DartType.from(String)],
-                        ),
+                        type: DartType.from<List<String>>(),
                         parentRef: DartElementRef<DartConstructor>(
                           name: 'TextPrinter',
                           location: ElementLocation(
@@ -187,10 +181,7 @@ void main() {
                   DartParameter(
                     name: 'arguments',
                     location: ElementLocation.unknown(),
-                    type: DartType.from(
-                      List,
-                      generics: [DartType.from(String)],
-                    ),
+                    type: DartType.from<List<String>>(),
                     parentRef: DartElementRef<DartMethod>(
                       name: 'main',
                       location: ElementLocation(

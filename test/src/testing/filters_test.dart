@@ -50,7 +50,7 @@ final v1 = DartVariable(
   location: ElementLocation(
       uri: 'package:pkg/variables/values.dart', column: 1, line: 1),
   parentRef: null,
-  type: DartType.from(String),
+  type: DartType.from<String>(),
 );
 final v2 = DartVariable(
   name: 'v2',
@@ -60,6 +60,6 @@ final v2 = DartVariable(
     line: 1,
   ),
   parentRef: null,
-  type: DartType.from(String),
+  type: DartType.from<String>(),
 );
 final elements = [v1, v2];

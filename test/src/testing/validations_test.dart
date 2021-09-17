@@ -1,19 +1,29 @@
+import 'dart:mirrors';
+
 import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/src/core/mappers/class_mirror_mapper.dart';
+import 'package:arch_test/src/di_container.dart';
 import 'package:arch_test/src/testing/validations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 void main() {
   late AddViolationMock addViolationMock;
+  late ClassMirrorMapper classMirrorMapper;
 
   setUp(() {
     addViolationMock = AddViolationMock();
+    classMirrorMapper = setupDIContainer().resolve<ClassMirrorMapper>();
   });
 
   group('Validations.nameEndsWith', () {
     test('should add violation', () {
       final condition = Validations.nameEndsWith('Repository');
-      condition(FakeDartElement(name: 'NotARepositoryClass'), addViolationMock);
+      condition(
+        FakeDartElement(name: 'NotARepositoryClass'),
+        FakeDartPackage(),
+        addViolationMock,
+      );
 
       verify(() => addViolationMock(
           'Name of NotARepositoryClass should end with "Repository"'));
@@ -21,7 +31,11 @@ void main() {
 
     test('should not add violation', () {
       final condition = Validations.nameEndsWith('UseCase');
-      condition(FakeDartElement(name: 'GetUserUseCase'), addViolationMock);
+      condition(
+        FakeDartElement(name: 'GetUserUseCase'),
+        FakeDartPackage(),
+        addViolationMock,
+      );
 
       verifyNever(() => addViolationMock(any()));
     });
@@ -30,7 +44,11 @@ void main() {
   group('Validations.nameStartsWith', () {
     test('should add violation', () {
       final condition = Validations.nameStartsWith('Abstract');
-      condition(FakeDartElement(name: 'NotAbstract'), addViolationMock);
+      condition(
+        FakeDartElement(name: 'NotAbstract'),
+        FakeDartPackage(),
+        addViolationMock,
+      );
 
       verify(() =>
           addViolationMock('Name of NotAbstract should start with "Abstract"'));
@@ -38,7 +56,11 @@ void main() {
 
     test('should not add violation', () {
       final condition = Validations.nameStartsWith('Abstract');
-      condition(FakeDartElement(name: 'AbstractRepository'), addViolationMock);
+      condition(
+        FakeDartElement(name: 'AbstractRepository'),
+        FakeDartPackage(),
+        addViolationMock,
+      );
 
       verifyNever(() => addViolationMock(any()));
     });
@@ -54,7 +76,7 @@ void main() {
         ],
       );
 
-      condition(library, addViolationMock);
+      condition(library, FakeDartPackage(), addViolationMock);
 
       verify(
         () => addViolationMock(
@@ -77,7 +99,7 @@ void main() {
         ],
       );
 
-      condition(library, addViolationMock);
+      condition(library, FakeDartPackage(), addViolationMock);
 
       verify(
         () => addViolationMock(
@@ -95,7 +117,7 @@ void main() {
         'package:my_package/models/user_model.dart',
       ]);
 
-      condition(library, addViolationMock);
+      condition(library, FakeDartPackage(), addViolationMock);
 
       verifyNever(() => addViolationMock(any()));
     });
@@ -103,22 +125,43 @@ void main() {
 
   group('Validations.extendsClass', () {
     test('should add violation', () {
-      final condition = Validations.extendsClass(
-        FakeDartClass(name: 'NonExistentType'),
+      Validations.extendsClass<AbstractRepository>()(
+        classMirrorMapper.toDartClass(reflectClass(NonRepository)),
+        FakeDartPackage(),
+        addViolationMock,
       );
 
-      condition(FakeDartClass(name: 'SomeClass'), addViolationMock);
-
-      verify(() => addViolationMock('SomeClass should extend NonExistentType'));
+      verify(() => addViolationMock(
+            'NonRepository should extend AbstractRepository<dynamic>',
+          ));
     });
 
-    test('should not add violation', () {
-      final condition = Validations.extendsClass(
-        FakeDartClass(name: 'AbstractRepository'),
+    test('should add violation for non specific repository', () {
+      Validations.extendsClass<AbstractRepository<String>>()(
+        classMirrorMapper.toDartClass(reflectClass(UserRepository)),
+        FakeDartPackage(),
+        addViolationMock,
       );
 
-      condition(
-        FakeDartClass(superClass: FakeDartClass(name: 'AbstractRepository')),
+      verify(() => addViolationMock(
+            'UserRepository should extend AbstractRepository<String>',
+          ));
+    });
+
+    test('should not add violation for non specific repository', () {
+      Validations.extendsClass<AbstractRepository>()(
+        classMirrorMapper.toDartClass(reflectClass(UserRepository)),
+        FakeDartPackage(),
+        addViolationMock,
+      );
+
+      verifyNever(() => addViolationMock(any()));
+    });
+
+    test('should not add violation for specific repository', () {
+      Validations.extendsClass<AbstractRepository<String>>()(
+        classMirrorMapper.toDartClass(reflectClass(SpecificRepository)),
+        FakeDartPackage(),
         addViolationMock,
       );
 
@@ -128,23 +171,19 @@ void main() {
 
   group('Validations.implementsClass', () {
     test('should add violation', () {
-      final condition = Validations.implementsClass(
-        FakeDartClass(name: 'SomeInterface'),
+      Validations.implementsClass<UseCase>()(
+        classMirrorMapper.toDartClass(reflectClass(NonUseCase)),
+        FakeDartPackage(),
+        addViolationMock,
       );
 
-      condition(FakeDartClass(name: 'ErroredClass'), addViolationMock);
-
-      verify(() =>
-          addViolationMock('ErroredClass should implement SomeInterface'));
+      verify(() => addViolationMock('NonUseCase should implement UseCase'));
     });
 
     test('should not add violation', () {
-      final condition = Validations.implementsClass(
-        FakeDartClass(name: 'UseCase'),
-      );
-
-      condition(
-        FakeDartClass(superInterfaces: [FakeDartClass(name: 'UseCase')]),
+      Validations.implementsClass<UseCase>()(
+        classMirrorMapper.toDartClass(reflectClass(UserUseCase)),
+        FakeDartPackage(),
         addViolationMock,
       );
 
@@ -153,20 +192,25 @@ void main() {
   });
 }
 
-class FakeDartClass extends DartClass {
-  FakeDartClass({
-    DartClass? superClass,
-    List<DartClass>? superInterfaces,
-    String? name,
-  }) : super(
+class UseCase {}
+
+class UserUseCase implements UseCase {}
+
+class NonUseCase {}
+
+class AbstractRepository<T> {}
+
+class UserRepository extends AbstractRepository {}
+
+class SpecificRepository extends AbstractRepository<String> {}
+
+class NonRepository {}
+
+class FakeDartPackage extends DartPackage {
+  FakeDartPackage({String? name})
+      : super(
           name: name ?? '',
-          fields: [],
-          methods: [],
-          superClass: superClass,
-          superInterfaces: superInterfaces ?? [],
-          generics: [],
-          location: ElementLocation(uri: '', column: 1, line: 1),
-          parentRef: null,
+          libraries: [],
         );
 }
 

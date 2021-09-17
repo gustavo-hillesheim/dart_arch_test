@@ -13,10 +13,7 @@ void main() {
   test('Name of classes on "entity" folder should end with "Entity"', () {
     ArchTest<DartClass>(
       elementsProvider: ElementsProviders.classes,
-      filter: Filters.combine([
-        Filters.pathMatches('entity'),
-        (el) => !el.isEnum,
-      ]),
+      filter: Filters.pathMatches('entity'),
       validation: Validations.nameEndsWith('Entity'),
     ).validate(package);
   });
@@ -27,9 +24,7 @@ void main() {
     ArchTest<DartLibrary>(
       elementsProvider: ElementsProviders.libraries,
       filter: Filters.pathMatches('entity'),
-      validation: Validations.noDependencyMatches(
-        'package:testing_with_testing\\\\(?!entity)',
-      ),
+      validation: Validations.onlyHaveDependenciesFromFolders(['entity']),
     ).validate(package);
   });
 
@@ -37,10 +32,7 @@ void main() {
       () {
     ArchTest<DartClass>(
       elementsProvider: ElementsProviders.classes,
-      filter: Filters.combine([
-        Filters.pathMatches('repository'),
-        (el) => !el.isEnum,
-      ]),
+      filter: Filters.pathMatches('repository'),
       validation: Validations.nameEndsWith('Repository'),
     ).validate(package);
   });
@@ -51,8 +43,8 @@ void main() {
     ArchTest<DartLibrary>(
       elementsProvider: ElementsProviders.libraries,
       filter: Filters.pathMatches('repository'),
-      validation: Validations.noDependencyMatches(
-        'package:testing_with_testing\\\\(?!(entity)|(repository))',
+      validation: Validations.onlyHaveDependenciesFromFolders(
+        ['entity', 'repository'],
       ),
     ).validate(package);
   });
@@ -60,21 +52,15 @@ void main() {
   test('Repository classes should extends from BaseRepository', () {
     ArchTest<DartClass>(
       elementsProvider: ElementsProviders.classes,
-      filter: Filters.combine([
-        Filters.pathMatches('repository'),
-        (el) => !el.isEnum,
-      ]),
-      validation: Validations.nameEndsWith('str'),
+      filter: Filters.pathMatches('repository'),
+      validation: Validations.extendsClass<BaseRepository>(),
     ).validate(package);
-  }, skip: 'Disabled until changes in Validations.extendsClass');
+  });
 
   test('Name of classes in "service" folder should end in "Service"', () {
     ArchTest<DartClass>(
       elementsProvider: ElementsProviders.classes,
-      filter: Filters.combine([
-        Filters.pathMatches('service'),
-        (el) => !el.isEnum,
-      ]),
+      filter: Filters.pathMatches('service'),
       validation: Validations.nameEndsWith('Service'),
     ).validate(package);
   });
@@ -85,8 +71,8 @@ void main() {
     ArchTest<DartLibrary>(
       elementsProvider: ElementsProviders.libraries,
       filter: Filters.pathMatches('service'),
-      validation: Validations.noDependencyMatches(
-        'package:testing_with_testing\\\\(?!(entity)|(repository)|(service))',
+      validation: Validations.onlyHaveDependenciesFromFolders(
+        ['entity', 'repository', 'service'],
       ),
     ).validate(package);
   });
@@ -94,10 +80,7 @@ void main() {
   test('Name of classes in "controller" folder should end in "Controller"', () {
     ArchTest<DartClass>(
       elementsProvider: ElementsProviders.classes,
-      filter: Filters.combine([
-        Filters.pathMatches('controller'),
-        (el) => !el.isEnum,
-      ]),
+      filter: Filters.pathMatches('controller'),
       validation: Validations.nameEndsWith('Controller'),
     ).validate(package);
   });

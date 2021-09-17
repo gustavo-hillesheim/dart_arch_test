@@ -13,10 +13,12 @@ void main() {
 
   setUp(() {
     allClassesHaveConstructorTest = ArchTest<DartClass>(
-      elementsProvider: (pkg) =>
-          DartElementFinder().findByType<DartClass>(source: pkg),
+      elementsProvider: (pkg) => DartElementFinder().findByMatcher(
+        source: pkg,
+        matcher: (el) => el is DartClass && !el.isEnum,
+      ),
       filter: (_) => true,
-      validation: (cls, addViolation) {
+      validation: (cls, _, addViolation) {
         final hasConstructor =
             cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
         if (!hasConstructor) {
@@ -25,10 +27,12 @@ void main() {
       },
     );
     allClassesHaveConstConstructorTest = ArchTest<DartClass>(
-      elementsProvider: (pkg) =>
-          DartElementFinder().findByType<DartClass>(source: pkg),
+      elementsProvider: (pkg) => DartElementFinder().findByMatcher(
+        source: pkg,
+        matcher: (el) => el is DartClass && !el.isEnum,
+      ),
       filter: (_) => true,
-      validation: (cls, addViolation) {
+      validation: (cls, _, addViolation) {
         final hasConstConstructor = cls.methods.any((method) =>
             method is DartConstructor &&
             method.constructorKind == ConstructorKind.CONST);

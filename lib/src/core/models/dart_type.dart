@@ -47,13 +47,13 @@ class DartType extends DartElement {
     );
   }
 
-  factory DartType.from(Type type, {List<DartType>? generics}) {
+  static DartType from<T>() {
     const factory = TypeMirrorMapper();
-    final dartType = factory.toDartType(reflectType(type));
+    final dartType = factory.toDartType(reflectType(T));
     return DartType(
       name: dartType.name,
       location: dartType.location,
-      generics: generics ?? [],
+      generics: dartType.generics,
       parentRef: dartType.parentRef,
     );
   }

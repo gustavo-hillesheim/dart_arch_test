@@ -25,7 +25,7 @@ class ArchTest<T extends DartElement> {
     final violations = <String>[];
     final targets = elementsProvider(package).where(filter);
     for (final target in targets) {
-      validation(target, violations.add);
+      validation(target, package, violations.add);
     }
     return violations;
   }
