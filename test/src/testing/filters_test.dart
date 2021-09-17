@@ -11,36 +11,36 @@ void main() {
     final elements =
         DartElementFinder().findByType<DartElement>(source: package);
 
-    expect(Filters.id(elements), elements);
+    expect(elements.where(Filters.id), elements);
   });
 
   group('Filters.pathMatches', () {
     test('should return all elements', () {
-      expect(Filters.pathMatches('values')(elements), [v1, v2]);
+      expect(elements.where(Filters.pathMatches('values')), [v1, v2]);
     });
 
     test('should return only v1', () {
-      expect(Filters.pathMatches('variables')(elements), [v1]);
+      expect(elements.where(Filters.pathMatches('variables')), [v1]);
     });
   });
 
   group('Filters.nameStartsWith', () {
     test('should return all elements', () {
-      expect(Filters.nameStartsWith('v')(elements), [v1, v2]);
+      expect(elements.where(Filters.nameStartsWith('v')), [v1, v2]);
     });
 
     test('should return no elements', () {
-      expect(Filters.nameStartsWith('abc')(elements), []);
+      expect(elements.where(Filters.nameStartsWith('abc')), []);
     });
   });
 
   group('Filters.nameEndsWith', () {
     test('should return only v1', () {
-      expect(Filters.nameEndsWith('1')(elements), [v1]);
+      expect(elements.where(Filters.nameEndsWith('1')), [v1]);
     });
 
     test('should return no elements', () {
-      expect(Filters.nameEndsWith('123')(elements), []);
+      expect(elements.where(Filters.nameEndsWith('123')), []);
     });
   });
 }

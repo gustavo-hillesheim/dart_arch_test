@@ -23,7 +23,7 @@ class ArchTest<T extends DartElement> {
 
   List<String> getViolations(DartPackage package) {
     final violations = <String>[];
-    final targets = filter(elementsProvider(package));
+    final targets = elementsProvider(package).where(filter);
     for (final target in targets) {
       validation(target, violations.add);
     }

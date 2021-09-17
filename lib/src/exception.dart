@@ -12,6 +12,11 @@ class ViolationsException implements Exception {
       : message =
             'Found the following violations on package "${package.name}": '
                 '\r\n${violations.map((v) => '- $v').join(';\r\n')}';
+
+  @override
+  String toString() {
+    return 'ViolationsException(\n$message\n)';
+  }
 }
 
 class MultipleElementsFoundException implements Exception {

@@ -15,7 +15,7 @@ void main() {
     allClassesHaveConstructorTest = ArchTest<DartClass>(
       elementsProvider: (pkg) =>
           DartElementFinder().findByType<DartClass>(source: pkg),
-      filter: (classes) => classes,
+      filter: (_) => true,
       validation: (cls, addViolation) {
         final hasConstructor =
             cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
@@ -27,7 +27,7 @@ void main() {
     allClassesHaveConstConstructorTest = ArchTest<DartClass>(
       elementsProvider: (pkg) =>
           DartElementFinder().findByType<DartClass>(source: pkg),
-      filter: (classes) => classes,
+      filter: (_) => true,
       validation: (cls, addViolation) {
         final hasConstConstructor = cls.methods.any((method) =>
             method is DartConstructor &&
