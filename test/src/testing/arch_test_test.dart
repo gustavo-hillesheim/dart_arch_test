@@ -16,7 +16,7 @@ void main() {
       elementsProvider: (pkg) =>
           DartElementFinder().findByType<DartClass>(source: pkg),
       filter: (classes) => classes,
-      condition: (cls, addViolation) {
+      validation: (cls, addViolation) {
         final hasConstructor =
             cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
         if (!hasConstructor) {
@@ -28,7 +28,7 @@ void main() {
       elementsProvider: (pkg) =>
           DartElementFinder().findByType<DartClass>(source: pkg),
       filter: (classes) => classes,
-      condition: (cls, addViolation) {
+      validation: (cls, addViolation) {
         final hasConstConstructor = cls.methods.any((method) =>
             method is DartConstructor &&
             method.constructorKind == ConstructorKind.CONST);

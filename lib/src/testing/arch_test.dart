@@ -6,11 +6,11 @@ import '../exception.dart';
 class ArchTest<T extends DartElement> {
   final ElementsProvider<T> elementsProvider;
   final Filter<T> filter;
-  final Condition<T> condition;
+  final Validation<T> validation;
 
   ArchTest({
     required this.elementsProvider,
-    required this.condition,
+    required this.validation,
     Filter<T>? filter,
   }) : filter = filter ?? Filters.id;
 
@@ -25,7 +25,7 @@ class ArchTest<T extends DartElement> {
     final violations = <String>[];
     final targets = filter(elementsProvider(package));
     for (final target in targets) {
-      condition(target, violations.add);
+      validation(target, violations.add);
     }
     return violations;
   }

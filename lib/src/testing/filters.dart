@@ -4,8 +4,8 @@ import 'package:arch_test/src/testing/types.dart';
 abstract class Filters {
   static List<T> id<T extends DartElement>(List<T> els) => els;
 
-  static Filter<T> pathMatches<T extends DartElement>(String str) {
-    return _createFilter((el) => RegExp(str).hasMatch(el.library));
+  static Filter<T> pathMatches<T extends DartElement>(String regExp) {
+    return _createFilter((el) => RegExp(regExp).hasMatch(el.library));
   }
 
   static Filter<T> nameStartsWith<T extends DartElement>(String str) {
