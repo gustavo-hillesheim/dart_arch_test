@@ -1,6 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/dart_element_ref.dart';
-import 'package:arch_test/src/exception.dart';
+import 'package:arch_test/src/core/exception.dart';
 
 class DartElementFinder {
   T? findByRef<T extends DartElement>(

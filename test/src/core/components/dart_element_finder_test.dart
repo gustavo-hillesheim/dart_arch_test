@@ -1,6 +1,6 @@
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
 import 'package:arch_test/src/core/core.dart';
-import 'package:arch_test/src/exception.dart';
+import 'package:arch_test/src/core/exception.dart';
 import 'package:test/test.dart';
 
 void main() {

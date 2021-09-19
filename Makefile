@@ -5,6 +5,7 @@ test_watch:
 test_examples:
 	cd example/core_example && dart test
 	cd example/testing_with_core && dart test
+	cd example/testing_with_testing && dart test
 
 test_all:
 	dart test

@@ -1,6 +1,6 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/src/exception.dart';
+import 'package:arch_test/src/core/exception.dart';
 
 enum ConstructorKind { CONST, FACTORY, GENERATIVE, REDIRECTING }
 

@@ -6,8 +6,8 @@ import 'package:arch_test/src/di_container.dart';
 
 export 'src/core/components/components.dart';
 export 'src/core/models/models.dart';
+export 'src/core/exception.dart';
 export 'src/testing/testing.dart';
-export 'src/exception.dart';
 
 final diContainer = setupDIContainer();
 

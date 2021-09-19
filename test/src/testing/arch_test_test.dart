@@ -1,7 +1,8 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
 import 'package:arch_test/src/testing/arch_test.dart';
-import 'package:arch_test/src/exception.dart';
+import 'package:arch_test/src/testing/exception.dart';
+import 'package:arch_test/src/testing/models/element_violations.dart';
 import 'package:test/test.dart';
 
 import '../../mock/models.dart';
@@ -22,7 +23,7 @@ void main() {
         final hasConstructor =
             cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
         if (!hasConstructor) {
-          addViolation('All classes should have a constructor');
+          addViolation('Should have a constructor');
         }
       },
     );
@@ -37,7 +38,7 @@ void main() {
             method is DartConstructor &&
             method.constructorKind == ConstructorKind.CONST);
         if (!hasConstConstructor) {
-          addViolation('All classes should have a const constructor');
+          addViolation('Should have a const constructor');
         }
       },
     );
@@ -54,7 +55,10 @@ void main() {
     final violations =
         allClassesHaveConstConstructorTest.getViolations(package);
 
-    expect(violations, ['All classes should have a const constructor']);
+    expect(violations, [
+      ElementViolations(createTestClass())
+        ..add('Should have a const constructor'),
+    ]);
   });
 
   test('Should not throw exception for if no violations are found', () {
@@ -69,7 +73,10 @@ void main() {
     } on ViolationsException catch (e) {
       expect(
           allClassesHaveConstConstructorTest.getViolations(package).length, 1);
-      expect(e.violations, ['All classes should have a const constructor']);
+      expect(e.violations, [
+        ElementViolations(createTestClass())
+          ..add('Should have a const constructor'),
+      ]);
       expect(e.package, package);
     }
   });

@@ -3,7 +3,7 @@ import 'dart:mirrors';
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/utils/uri_utils.dart';
-import 'package:arch_test/src/exception.dart';
+import 'package:arch_test/src/core/exception.dart';
 
 class MirrorUtils {
   static DartElementRef<T>? elementRef<T extends DartElement>(

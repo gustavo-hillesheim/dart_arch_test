@@ -3,22 +3,6 @@ import 'dart:mirrors';
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
 
-class ViolationsException implements Exception {
-  final String message;
-  final List<String> violations;
-  final DartPackage package;
-
-  ViolationsException({required this.violations, required this.package})
-      : message =
-            'Found the following violations on package "${package.name}": '
-                '\r\n${violations.map((v) => '- $v').join(';\r\n')}';
-
-  @override
-  String toString() {
-    return 'ViolationsException(\n$message\n)';
-  }
-}
-
 class MultipleElementsFoundException implements Exception {
   final String message;
   final DartElementMatcher matcher;

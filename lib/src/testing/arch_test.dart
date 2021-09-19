@@ -1,7 +1,8 @@
 import 'package:arch_test/src/core/core.dart';
+import 'package:arch_test/src/testing/exception.dart';
 import 'package:arch_test/src/testing/filters.dart';
+import 'package:arch_test/src/testing/models/element_violations.dart';
 import 'package:arch_test/src/testing/types.dart';
-import '../exception.dart';
 
 class ArchTest<T extends DartElement> {
   final ElementsProvider<T> elementsProvider;
@@ -21,11 +22,15 @@ class ArchTest<T extends DartElement> {
     }
   }
 
-  List<String> getViolations(DartPackage package) {
-    final violations = <String>[];
+  List<ElementViolations> getViolations(DartPackage package) {
+    final violations = <ElementViolations>[];
     final targets = elementsProvider(package).where(filter);
     for (final target in targets) {
-      validation(target, package, violations.add);
+      final elementViolations = ElementViolations(target);
+      validation(target, package, elementViolations.add);
+      if (elementViolations.isNotEmpty) {
+        violations.add(elementViolations);
+      }
     }
     return violations;
   }
