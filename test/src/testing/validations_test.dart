@@ -25,8 +25,7 @@ void main() {
         addViolationMock,
       );
 
-      verify(() => addViolationMock(
-          'Name of NotARepositoryClass should end with "Repository"'));
+      verify(() => addViolationMock('Name should end with "Repository"'));
     });
 
     test('should not add violation', () {
@@ -50,8 +49,7 @@ void main() {
         addViolationMock,
       );
 
-      verify(() =>
-          addViolationMock('Name of NotAbstract should start with "Abstract"'));
+      verify(() => addViolationMock('Name should start with "Abstract"'));
     });
 
     test('should not add violation', () {
@@ -66,7 +64,7 @@ void main() {
     });
   });
 
-  group('Validations.noImportMatches', () {
+  group('Validations.noDependencyMatches', () {
     test('should add violation', () {
       final condition = Validations.noDependencyMatches('forbidden_folder');
       final library = FakeDartLibrary(
@@ -80,17 +78,17 @@ void main() {
 
       verify(
         () => addViolationMock(
-          'Errors in library path/to/lib.dart.\n'
+          'No dependency can match the regex "forbidden_folder".\n'
           'Invalid imports:\n'
           '- package:some_package/forbidden_folder/components.dart',
         ),
       );
     });
 
-    test('should add violation with additional message', () {
+    test('should add violation with description', () {
       final condition = Validations.noDependencyMatches(
         'forbidden_folder',
-        message: 'Should not import from "forbidden_folder"',
+        description: 'Should not import from "forbidden_folder"',
       );
       final library = FakeDartLibrary(
         name: 'path/to/lib.dart',
@@ -103,7 +101,6 @@ void main() {
 
       verify(
         () => addViolationMock(
-          'Errors in library path/to/lib.dart.\n'
           'Should not import from "forbidden_folder".\n'
           'Invalid imports:\n'
           '- package:some_package/forbidden_folder/components.dart',
@@ -132,7 +129,7 @@ void main() {
       );
 
       verify(() => addViolationMock(
-            'NonRepository should extend AbstractRepository<dynamic>',
+            'Should extend AbstractRepository<dynamic>',
           ));
     });
 
@@ -144,7 +141,7 @@ void main() {
       );
 
       verify(() => addViolationMock(
-            'UserRepository should extend AbstractRepository<String>',
+            'Should extend AbstractRepository<String>',
           ));
     });
 
@@ -177,7 +174,7 @@ void main() {
         addViolationMock,
       );
 
-      verify(() => addViolationMock('NonUseCase should implement UseCase'));
+      verify(() => addViolationMock('Should implement UseCase'));
     });
 
     test('should not add violation', () {

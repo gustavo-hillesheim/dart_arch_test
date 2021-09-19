@@ -7,14 +7,14 @@ abstract class Validations {
   static Validation<T> nameEndsWith<T extends DartElement>(String str) {
     return _createValidation(
       (el) => el.name.endsWith(str),
-      (el) => 'Name of ${el.name} should end with "$str"',
+      'Name should end with "$str"',
     );
   }
 
   static Validation<T> nameStartsWith<T extends DartElement>(String str) {
     return _createValidation(
       (el) => el.name.startsWith(str),
-      (el) => 'Name of ${el.name} should start with "$str"',
+      'Name should start with "$str"',
     );
   }
 
@@ -24,7 +24,7 @@ abstract class Validations {
       (el) =>
           _matchType(el, type) ||
           el.superInterfaces.any((interface) => _matchType(interface, type)),
-      (el) => '${el.name} should implement ${C.toString()}',
+      'Should implement ${C.toString()}',
     );
   }
 
@@ -34,7 +34,7 @@ abstract class Validations {
       (el) =>
           _matchType(el, type) ||
           el.superClass != null && _matchType(el.superClass!, type),
-      (el) => '${el.name} should extend ${C.toString()}',
+      'Should extend ${C.toString()}',
     );
   }
 
@@ -69,7 +69,7 @@ abstract class Validations {
 
   static Validation<DartLibrary> noDependencyMatches(
     String regExp, {
-    String message = '',
+    String? description,
   }) {
     return (lib, _, addViolation) {
       final regExpMatcher = RegExp(regExp);
@@ -77,8 +77,7 @@ abstract class Validations {
           lib.dependencies.where((dep) => regExpMatcher.hasMatch(dep.path));
       if (invalidDependencies.isNotEmpty) {
         addViolation(
-          'Errors in library ${lib.name}.\n' +
-              (message.isNotEmpty ? '$message.\n' : '') +
+          '${description ?? 'No dependency can match the regex "$regExp"'}.\n' +
               _buildInvalidImports(invalidDependencies),
         );
       }
@@ -100,8 +99,7 @@ abstract class Validations {
       });
       if (invalidDependencies.isNotEmpty) {
         addViolation(
-          'Errors in library ${lib.name}.\n'
-                  'Can only have dependencies from folders $folders.\n' +
+          'Can only have dependencies from folders $folders.' +
               _buildInvalidImports(invalidDependencies),
         );
       }
@@ -115,10 +113,12 @@ abstract class Validations {
   }
 
   static Validation<T> _createValidation<T extends DartElement>(
-      bool Function(T el) validation, String Function(T el) violationMessage) {
+    bool Function(T el) validation,
+    String violationMessage,
+  ) {
     return (el, _, addViolation) {
       if (!validation(el)) {
-        addViolation(violationMessage(el));
+        addViolation(violationMessage);
       }
     };
   }
