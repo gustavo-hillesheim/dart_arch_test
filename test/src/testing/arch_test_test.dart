@@ -3,6 +3,7 @@ import 'package:arch_test/src/core/components/dart_element_finder.dart';
 import 'package:arch_test/src/testing/arch_test.dart';
 import 'package:arch_test/src/testing/exception.dart';
 import 'package:arch_test/src/testing/models/element_violations.dart';
+import 'package:arch_test/src/testing/models/filter.dart';
 import 'package:test/test.dart';
 
 import '../../mock/models.dart';
@@ -18,7 +19,7 @@ void main() {
         source: pkg,
         matcher: (el) => el is DartClass && !el.isEnum,
       ),
-      filter: (_) => true,
+      filter: Filter((_) => true),
       validation: (cls, _, addViolation) {
         final hasConstructor =
             cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
@@ -32,7 +33,7 @@ void main() {
         source: pkg,
         matcher: (el) => el is DartClass && !el.isEnum,
       ),
-      filter: (_) => true,
+      filter: Filter((_) => true),
       validation: (cls, _, addViolation) {
         final hasConstConstructor = cls.methods.any((method) =>
             method is DartConstructor &&

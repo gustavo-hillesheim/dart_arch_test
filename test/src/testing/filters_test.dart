@@ -11,7 +11,7 @@ void main() {
     final elements =
         DartElementFinder().findByType<DartElement>(source: package);
 
-    expect(elements.where(Filters.id), elements);
+    expect(elements.where(Filters.id()), elements);
   });
 
   group('Filters.pathMatches', () {
