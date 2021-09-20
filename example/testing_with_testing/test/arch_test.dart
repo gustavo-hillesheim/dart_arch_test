@@ -7,7 +7,7 @@ void main() {
   late DartPackage package;
 
   setUp(() {
-    package = createPackageLoader().loadPackage('testing_with_testing');
+    package = DartPackageLoader.instance.loadPackage('testing_with_testing');
   });
 
   test('Name of classes on "entity" folder should end with "Entity"', () {

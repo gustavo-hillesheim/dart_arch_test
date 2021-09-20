@@ -1,12 +1,18 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/type_mirror_mapper.dart';
+import 'package:arch_test/src/core/models/dart_method.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
 import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
 class ParameterMirrorMapper {
+  static ParameterMirrorMapper? _instance;
+  static ParameterMirrorMapper get instance {
+    _instance ??= ParameterMirrorMapper(TypeMirrorMapper.instance);
+    return _instance!;
+  }
+
   final TypeMirrorMapper typeMirrorMapper;
 
   ParameterMirrorMapper(this.typeMirrorMapper);

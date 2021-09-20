@@ -4,7 +4,6 @@ import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
 import 'package:arch_test/src/core/models/enums/method_kind.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -14,7 +13,7 @@ void main() {
   late MethodMirrorMapper mapper;
 
   setUp(() {
-    mapper = setupDIContainer().resolve<MethodMirrorMapper>();
+    mapper = MethodMirrorMapper.instance;
   });
 
   test('should create DartMethod from MethodMirror', () {

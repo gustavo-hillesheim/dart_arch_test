@@ -5,6 +5,12 @@ import 'package:arch_test/src/core/models/dart_variable.dart';
 import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
 class VariableMirrorMapper {
+  static VariableMirrorMapper? _instance;
+  static VariableMirrorMapper get instance {
+    _instance ??= VariableMirrorMapper(TypeMirrorMapper.instance);
+    return _instance!;
+  }
+
   final TypeMirrorMapper typeMirrorMapper;
 
   VariableMirrorMapper(this.typeMirrorMapper);

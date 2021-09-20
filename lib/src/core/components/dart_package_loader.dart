@@ -3,6 +3,15 @@ import 'dart:mirrors';
 import 'package:arch_test/src/core/core.dart';
 
 class DartPackageLoader {
+  static DartPackageLoader? _instance;
+  static DartPackageLoader get instance {
+    _instance ??= DartPackageLoader(
+      currentMirrorSystem(),
+      LibraryMirrorMapper.instance,
+    );
+    return _instance!;
+  }
+
   final MirrorSystem mirrorSystem;
   final LibraryMirrorMapper libraryMirrorMapper;
 

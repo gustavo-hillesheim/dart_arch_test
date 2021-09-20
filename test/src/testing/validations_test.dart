@@ -2,7 +2,6 @@ import 'dart:mirrors';
 
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/class_mirror_mapper.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:arch_test/src/testing/validations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -13,7 +12,7 @@ void main() {
 
   setUp(() {
     addViolationMock = AddViolationMock();
-    classMirrorMapper = setupDIContainer().resolve<ClassMirrorMapper>();
+    classMirrorMapper = ClassMirrorMapper.instance;
   });
 
   group('Validations.nameEndsWith', () {

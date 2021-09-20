@@ -9,7 +9,7 @@ void main() {
   late DartPackage package;
 
   setUp(() {
-    package = createPackageLoader().loadPackage('testing_with_core');
+    package = DartPackageLoader.instance.loadPackage('testing_with_core');
   });
 
   DartLibrary? getLibrary(String libraryName) {

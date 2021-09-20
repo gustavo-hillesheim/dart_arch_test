@@ -5,7 +5,6 @@ import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/dart_variable.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/constructor_kind.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
 
@@ -15,7 +14,7 @@ void main() {
   late ClassMirrorMapper mapper;
 
   setUp(() {
-    mapper = setupDIContainer().resolve<ClassMirrorMapper>();
+    mapper = ClassMirrorMapper.instance;
   });
 
   test('should create DartClass from ClassMirror', () {

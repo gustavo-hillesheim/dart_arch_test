@@ -7,7 +7,6 @@ import 'package:arch_test/src/core/models/dart_library_dependency.dart';
 import 'package:arch_test/src/core/models/dart_method.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/library_dependency_kind.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -17,7 +16,7 @@ void main() {
   late LibraryMirrorMapper mapper;
 
   setUp(() {
-    mapper = setupDIContainer().resolve<LibraryMirrorMapper>();
+    mapper = LibraryMirrorMapper.instance;
   });
 
   test('should create DartLibrary from LibraryMirror', () {

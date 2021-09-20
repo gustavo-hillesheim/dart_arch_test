@@ -1,13 +1,23 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/method_mirror_mapper.dart';
 import 'package:arch_test/src/core/mappers/type_mirror_mapper.dart';
 import 'package:arch_test/src/core/mappers/variable_mirror_mapper.dart';
 import 'package:arch_test/src/core/models/dart_class.dart';
+import 'package:arch_test/src/core/models/dart_library.dart';
 import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
 class ClassMirrorMapper {
+  static ClassMirrorMapper? _instance;
+  static ClassMirrorMapper get instance {
+    _instance ??= ClassMirrorMapper(
+      VariableMirrorMapper.instance,
+      MethodMirrorMapper.instance,
+      TypeMirrorMapper.instance,
+    );
+    return _instance!;
+  }
+
   final VariableMirrorMapper variableMirrorMapper;
   final MethodMirrorMapper methodMirrorMapper;
   final TypeMirrorMapper typeMirrorMapper;

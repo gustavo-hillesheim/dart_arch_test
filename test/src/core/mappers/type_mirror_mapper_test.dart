@@ -1,7 +1,6 @@
 import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
 
@@ -11,7 +10,7 @@ void main() {
   late TypeMirrorMapper mapper;
 
   setUp(() {
-    mapper = setupDIContainer().resolve<TypeMirrorMapper>();
+    mapper = TypeMirrorMapper.instance;
   });
 
   test('should create DartType from TypeMirror', () {

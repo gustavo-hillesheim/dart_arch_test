@@ -1,10 +1,15 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/utils/mirror_utils.dart';
 
 class TypeMirrorMapper {
+  static TypeMirrorMapper? _instance;
+  static TypeMirrorMapper get instance {
+    _instance ??= TypeMirrorMapper();
+    return _instance!;
+  }
+
   const TypeMirrorMapper();
 
   DartType toDartType(TypeMirror mirror) {

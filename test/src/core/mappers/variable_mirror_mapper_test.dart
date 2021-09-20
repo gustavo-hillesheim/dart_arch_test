@@ -2,7 +2,6 @@ import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_type.dart';
 import 'package:arch_test/src/core/models/dart_variable.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:test/test.dart';
 
 import '../../../mock/mirror_system.dart';
@@ -11,7 +10,7 @@ void main() {
   late VariableMirrorMapper mapper;
 
   setUp(() {
-    mapper = setupDIContainer().resolve<VariableMirrorMapper>();
+    mapper = VariableMirrorMapper.instance;
   });
 
   test('should create DartVariable from VariableMirror', () {

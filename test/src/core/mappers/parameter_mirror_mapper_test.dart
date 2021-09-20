@@ -2,7 +2,6 @@ import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/core/models/dart_parameter.dart';
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/enums/parameter_kind.dart';
-import 'package:arch_test/src/di_container.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -12,7 +11,7 @@ void main() {
   late ParameterMirrorMapper mapper;
 
   setUp(() {
-    mapper = setupDIContainer().resolve<ParameterMirrorMapper>();
+    mapper = ParameterMirrorMapper.instance;
   });
 
   test('should create DartParameter from ParameterMirror', () {

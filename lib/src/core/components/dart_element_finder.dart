@@ -3,6 +3,12 @@ import 'package:arch_test/src/core/models/dart_element_ref.dart';
 import 'package:arch_test/src/core/exception.dart';
 
 class DartElementFinder {
+  static DartElementFinder? _instance;
+  static DartElementFinder get instance {
+    _instance ??= DartElementFinder();
+    return _instance!;
+  }
+
   T? findByRef<T extends DartElement>(
     DartElementRef<T> ref, {
     required DartElementsParent source,

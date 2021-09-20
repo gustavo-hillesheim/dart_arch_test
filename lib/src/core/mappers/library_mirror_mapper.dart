@@ -1,16 +1,22 @@
 import 'dart:mirrors';
 
-import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/class_mirror_mapper.dart';
 import 'package:arch_test/src/core/mappers/method_mirror_mapper.dart';
-import 'package:arch_test/src/core/models/dart_library.dart';
-import 'package:arch_test/src/core/models/dart_library_dependency.dart';
-import 'package:arch_test/src/core/models/enums/library_dependency_kind.dart';
+import 'package:arch_test/src/core/models/models.dart';
 import 'package:arch_test/src/core/utils/mirror_utils.dart';
 import 'package:arch_test/src/core/utils/uri_utils.dart';
 import 'package:path/path.dart';
 
 class LibraryMirrorMapper {
+  static LibraryMirrorMapper? _instance;
+  static LibraryMirrorMapper get instance {
+    _instance ??= LibraryMirrorMapper(
+      ClassMirrorMapper.instance,
+      MethodMirrorMapper.instance,
+    );
+    return _instance!;
+  }
+
   final ClassMirrorMapper classMirrorMapper;
   final MethodMirrorMapper methodMirrorMapper;
 
