@@ -5,12 +5,12 @@ import 'package:arch_test/src/testing/models/element_violations.dart';
 import 'package:arch_test/src/testing/types.dart';
 
 class ArchTest<T extends DartElement> {
-  final ElementsProvider<T> elementsProvider;
+  final Selector<T> selector;
   final Filter<T> filter;
   final Validation<T> validation;
 
   ArchTest({
-    required this.elementsProvider,
+    required this.selector,
     required this.validation,
     Filter<T>? filter,
   }) : filter = filter ?? Filters.id;
@@ -24,7 +24,7 @@ class ArchTest<T extends DartElement> {
 
   List<ElementViolations> getViolations(DartPackage package) {
     final violations = <ElementViolations>[];
-    final targets = elementsProvider(package).where(filter);
+    final targets = selector(package).where(filter);
     for (final target in targets) {
       final elementViolations = ElementViolations(target);
       validation(target, package, elementViolations.add);

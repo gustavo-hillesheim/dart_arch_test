@@ -1,6 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 
-typedef ElementsProvider<T extends DartElement> = List<T> Function(
+typedef Selector<T extends DartElement> = List<T> Function(
   DartPackage package,
 );
 

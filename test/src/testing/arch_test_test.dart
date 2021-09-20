@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     allClassesHaveConstructorTest = ArchTest<DartClass>(
-      elementsProvider: (pkg) => DartElementFinder().findByMatcher(
+      selector: (pkg) => DartElementFinder().findByMatcher(
         source: pkg,
         matcher: (el) => el is DartClass && !el.isEnum,
       ),
@@ -28,7 +28,7 @@ void main() {
       },
     );
     allClassesHaveConstConstructorTest = ArchTest<DartClass>(
-      elementsProvider: (pkg) => DartElementFinder().findByMatcher(
+      selector: (pkg) => DartElementFinder().findByMatcher(
         source: pkg,
         matcher: (el) => el is DartClass && !el.isEnum,
       ),
