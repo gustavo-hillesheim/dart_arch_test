@@ -1,6 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
-import 'package:arch_test/src/testing/types.dart';
+import 'package:arch_test/src/testing/models/types.dart';
 
 abstract class Selectors {
   static final _finder = DartElementFinder();

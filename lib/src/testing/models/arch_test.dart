@@ -1,9 +1,9 @@
 import 'package:arch_test/src/core/core.dart';
 import 'package:arch_test/src/testing/exception.dart';
-import 'package:arch_test/src/testing/filters.dart';
+import 'package:arch_test/src/testing/premade/filters.dart';
 import 'package:arch_test/src/testing/models/element_violations.dart';
 import 'package:arch_test/src/testing/models/filter.dart';
-import 'package:arch_test/src/testing/types.dart';
+import 'package:arch_test/src/testing/models/types.dart';
 
 class ArchTest<T extends DartElement> {
   final Selector<T> selector;

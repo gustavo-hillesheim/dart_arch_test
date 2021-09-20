@@ -2,7 +2,7 @@ import 'dart:mirrors';
 
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/mappers/class_mirror_mapper.dart';
-import 'package:arch_test/src/testing/validations.dart';
+import 'package:arch_test/src/testing/premade/validations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 

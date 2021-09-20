@@ -1,10 +1,10 @@
 import 'package:arch_test/src/core/models/element_location.dart';
 import 'package:arch_test/src/core/models/models.dart';
-import 'package:arch_test/src/testing/selectors.dart';
+import 'package:arch_test/src/testing/premade/selectors.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
-import '../../mock/models.dart';
+import '../../../mock/models.dart';
 
 void main() {
   test('should return all classes in the package', () {

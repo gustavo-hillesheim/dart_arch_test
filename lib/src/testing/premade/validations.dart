@@ -1,5 +1,5 @@
 import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/src/testing/types.dart';
+import 'package:arch_test/src/testing/models/types.dart';
 import 'package:path/path.dart';
 import 'package:collection/collection.dart';
 

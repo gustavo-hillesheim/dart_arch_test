@@ -1,9 +1,9 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
-import 'package:arch_test/src/testing/filters.dart';
+import 'package:arch_test/src/testing/premade/filters.dart';
 import 'package:test/test.dart';
 
-import '../../mock/models.dart';
+import '../../../mock/models.dart';
 
 void main() {
   test('Filters.id should return all elements', () async {
