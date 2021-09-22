@@ -1,5 +1,5 @@
 import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/testing/models/types.dart';
+import 'package:arch_test/testing/models/models.dart';
 import 'package:path/path.dart';
 import 'package:collection/collection.dart';
 
@@ -71,39 +71,43 @@ abstract class Validations {
     String regExp, {
     String? description,
   }) {
-    return (lib, _, addViolation) {
-      final regExpMatcher = RegExp(regExp);
-      final invalidDependencies =
-          lib.dependencies.where((dep) => regExpMatcher.hasMatch(dep.path));
-      if (invalidDependencies.isNotEmpty) {
-        addViolation(
-          '${description ?? 'No dependency can match the regex "$regExp"'}.\n' +
-              _buildInvalidImports(invalidDependencies),
-        );
-      }
-    };
+    return Validation(
+      (lib, _, addViolation) {
+        final regExpMatcher = RegExp(regExp);
+        final invalidDependencies =
+            lib.dependencies.where((dep) => regExpMatcher.hasMatch(dep.path));
+        if (invalidDependencies.isNotEmpty) {
+          addViolation(
+            '${description ?? 'No dependency can match the regex "$regExp"'}.\n' +
+                _buildInvalidImports(invalidDependencies),
+          );
+        }
+      },
+    );
   }
 
   // Only validates folders from this package
   static Validation<DartLibrary> onlyHaveDependenciesFromFolders(
     List<String> folders,
   ) {
-    return (lib, package, addViolation) {
-      final invalidDependencies = lib.dependencies.where((dep) {
-        final isFromOtherPackage = dep.targetPackage != package.name;
-        return !folders.any((folder) {
-          final isDepFromFolder =
-              dep.targetLibrary.contains('$folder$separator');
-          return isDepFromFolder || isFromOtherPackage;
+    return Validation(
+      (lib, package, addViolation) {
+        final invalidDependencies = lib.dependencies.where((dep) {
+          final isFromOtherPackage = dep.targetPackage != package.name;
+          return !folders.any((folder) {
+            final isDepFromFolder =
+                dep.targetLibrary.contains('$folder$separator');
+            return isDepFromFolder || isFromOtherPackage;
+          });
         });
-      });
-      if (invalidDependencies.isNotEmpty) {
-        addViolation(
-          'Can only have dependencies from folders $folders.\n' +
-              _buildInvalidImports(invalidDependencies),
-        );
-      }
-    };
+        if (invalidDependencies.isNotEmpty) {
+          addViolation(
+            'Can only have dependencies from folders $folders.\n' +
+                _buildInvalidImports(invalidDependencies),
+          );
+        }
+      },
+    );
   }
 
   static String _buildInvalidImports(
@@ -116,10 +120,12 @@ abstract class Validations {
     bool Function(T el) validation,
     String violationMessage,
   ) {
-    return (el, _, addViolation) {
-      if (!validation(el)) {
-        addViolation(violationMessage);
-      }
-    };
+    return Validation(
+      (el, _, addViolation) {
+        if (!validation(el)) {
+          addViolation(violationMessage);
+        }
+      },
+    );
   }
 }

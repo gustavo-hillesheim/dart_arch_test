@@ -3,7 +3,8 @@ import 'package:arch_test/testing/exception.dart';
 import 'package:arch_test/testing/premade/filters.dart';
 import 'package:arch_test/testing/models/element_violations.dart';
 import 'package:arch_test/testing/models/filter.dart';
-import 'package:arch_test/testing/models/types.dart';
+import 'package:arch_test/testing/models/selector.dart';
+import 'package:arch_test/testing/models/validation.dart';
 
 class ArchRule<T extends DartElement> {
   final Selector<T> selector;

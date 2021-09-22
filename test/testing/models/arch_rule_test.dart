@@ -15,33 +15,41 @@ void main() {
 
   setUp(() {
     allClassesHaveConstructorTest = ArchRule<DartClass>(
-      selector: (pkg) => DartElementFinder().findByMatcher(
-        source: pkg,
-        matcher: (el) => el is DartClass && !el.isEnum,
+      selector: Selector(
+        (pkg) => DartElementFinder().findByMatcher(
+          source: pkg,
+          matcher: (el) => el is DartClass && !el.isEnum,
+        ),
       ),
       filter: Filter((_) => true),
-      validation: (cls, _, addViolation) {
-        final hasConstructor =
-            cls.methods.any((method) => method.kind == MethodKind.CONSTRUCTOR);
-        if (!hasConstructor) {
-          addViolation('Should have a constructor');
-        }
-      },
+      validation: Validation(
+        (cls, _, addViolation) {
+          final hasConstructor = cls.methods
+              .any((method) => method.kind == MethodKind.CONSTRUCTOR);
+          if (!hasConstructor) {
+            addViolation('Should have a constructor');
+          }
+        },
+      ),
     );
     allClassesHaveConstConstructorTest = ArchRule<DartClass>(
-      selector: (pkg) => DartElementFinder().findByMatcher(
-        source: pkg,
-        matcher: (el) => el is DartClass && !el.isEnum,
+      selector: Selector(
+        (pkg) => DartElementFinder().findByMatcher(
+          source: pkg,
+          matcher: (el) => el is DartClass && !el.isEnum,
+        ),
       ),
       filter: Filter((_) => true),
-      validation: (cls, _, addViolation) {
-        final hasConstConstructor = cls.methods.any((method) =>
-            method is DartConstructor &&
-            method.constructorKind == ConstructorKind.CONST);
-        if (!hasConstConstructor) {
-          addViolation('Should have a const constructor');
-        }
-      },
+      validation: Validation(
+        (cls, _, addViolation) {
+          final hasConstConstructor = cls.methods.any((method) =>
+              method is DartConstructor &&
+              method.constructorKind == ConstructorKind.CONST);
+          if (!hasConstConstructor) {
+            addViolation('Should have a const constructor');
+          }
+        },
+      ),
     );
     package = createSamplePackage();
   });
