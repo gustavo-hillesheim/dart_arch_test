@@ -1,5 +1,5 @@
-import 'package:arch_test/src/core/core.dart';
-import 'package:arch_test/src/core/models/element_location.dart';
+import 'package:arch_test/core/core.dart';
+import 'package:arch_test/core/models/element_location.dart';
 
 DartPackage createSamplePackage() {
   return DartPackage(

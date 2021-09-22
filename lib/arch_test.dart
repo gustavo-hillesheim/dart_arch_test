@@ -1,6 +1,6 @@
 library arch_test;
 
-export 'src/core/components/components.dart';
-export 'src/core/models/models.dart';
-export 'src/core/exception.dart';
-export 'src/testing/testing.dart';
+export 'core/components/components.dart';
+export 'core/models/models.dart';
+export 'core/exception.dart';
+export 'testing/testing.dart';
