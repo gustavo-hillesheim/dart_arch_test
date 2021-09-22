@@ -99,7 +99,7 @@ abstract class Validations {
       });
       if (invalidDependencies.isNotEmpty) {
         addViolation(
-          'Can only have dependencies from folders $folders.' +
+          'Can only have dependencies from folders $folders.\n' +
               _buildInvalidImports(invalidDependencies),
         );
       }

@@ -10,78 +10,87 @@ void main() {
     package = DartPackageLoader.instance.loadPackage('testing_with_testing');
   });
 
-  test('Name of classes on "entity" folder should end with "Entity"', () {
+  archTest(
+    'Name of classes on "entity" folder should end with "Entity"',
+    'testing_with_testing',
     ArchRule<DartClass>(
       selector: Selectors.classes,
       filter: Filters.pathMatches('entity'),
       validation: Validations.nameEndsWith('Entity'),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test(
-      'Entity libraries can not import libraries from outside of the "entity" folder, except from other packages',
-      () {
+  archTest(
+    'Entity libraries can not import libraries from outside of the "entity" folder, except from other packages',
+    'testing_with_testing',
     ArchRule<DartLibrary>(
       selector: Selectors.libraries,
       filter: Filters.pathMatches('entity'),
       validation: Validations.onlyHaveDependenciesFromFolders(['entity']),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test('Name of classes on "repository" folder should end with "Repository"',
-      () {
+  archTest(
+    'Name of classes on "repository" folder should end with "Repository"',
+    'testing_with_testing',
     ArchRule<DartClass>(
       selector: Selectors.classes,
       filter: Filters.pathMatches('repository'),
       validation: Validations.nameEndsWith('Repository'),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test(
-      'Repository libraries can only import libraries from the "repository" or "entity" folder or from other packages',
-      () {
+  archTest(
+    'Repository libraries can only import libraries from the "repository" or "entity" folder or from other packages',
+    'testing_with_testing',
     ArchRule<DartLibrary>(
       selector: Selectors.libraries,
       filter: Filters.pathMatches('repository'),
       validation: Validations.onlyHaveDependenciesFromFolders(
         ['entity', 'repository'],
       ),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test('Repository classes should extends from BaseRepository', () {
+  archTest(
+    'Repository classes should extends from BaseRepository',
+    'testing_with_testing',
     ArchRule<DartClass>(
       selector: Selectors.classes,
       filter: Filters.pathMatches('repository'),
       validation: Validations.extendsClass<BaseRepository>(),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test('Name of classes in "service" folder should end in "Service"', () {
+  archTest(
+    'Name of classes in "service" folder should end in "Service"',
+    'testing_with_testing',
     ArchRule<DartClass>(
       selector: Selectors.classes,
       filter: Filters.pathMatches('service'),
       validation: Validations.nameEndsWith('Service'),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test(
-      'Service libraries can only import libraries from "service", "repository" or "entity" folder or from other packages',
-      () {
+  archTest(
+    'Service libraries can only import libraries from "service", "repository" or "entity" folder or from other packages',
+    'testing_with_testing',
     ArchRule<DartLibrary>(
       selector: Selectors.libraries,
       filter: Filters.pathMatches('service'),
       validation: Validations.onlyHaveDependenciesFromFolders(
         ['entity', 'repository', 'service'],
       ),
-    ).validate(package);
-  });
+    ),
+  );
 
-  test('Name of classes in "controller" folder should end in "Controller"', () {
+  archTest(
+    'Name of classes in "controller" folder should end in "Controller"',
+    'testing_with_testing',
     ArchRule<DartClass>(
       selector: Selectors.classes,
       filter: Filters.pathMatches('controller'),
       validation: Validations.nameEndsWith('Controller'),
-    ).validate(package);
-  });
+    ),
+  );
 }

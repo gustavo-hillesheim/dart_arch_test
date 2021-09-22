@@ -14,3 +14,4 @@ dev_dependencies:
 dependencies:
   equatable: ^2.0.3
   meta: ^1.7.0
+  test: ^1.17.11
