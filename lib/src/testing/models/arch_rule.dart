@@ -5,12 +5,12 @@ import 'package:arch_test/src/testing/models/element_violations.dart';
 import 'package:arch_test/src/testing/models/filter.dart';
 import 'package:arch_test/src/testing/models/types.dart';
 
-class ArchTest<T extends DartElement> {
+class ArchRule<T extends DartElement> {
   final Selector<T> selector;
   final Filter<T> filter;
   final Validation<T> validation;
 
-  ArchTest({
+  ArchRule({
     required this.selector,
     required this.validation,
     Filter<T>? filter,

@@ -1,6 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/components/dart_element_finder.dart';
-import 'package:arch_test/src/testing/models/arch_test.dart';
+import 'package:arch_test/src/testing/models/arch_rule.dart';
 import 'package:arch_test/src/testing/exception.dart';
 import 'package:arch_test/src/testing/models/element_violations.dart';
 import 'package:arch_test/src/testing/models/filter.dart';
@@ -10,11 +10,11 @@ import '../../../mock/models.dart';
 
 void main() {
   late DartPackage package;
-  late ArchTest<DartClass> allClassesHaveConstConstructorTest;
-  late ArchTest<DartClass> allClassesHaveConstructorTest;
+  late ArchRule<DartClass> allClassesHaveConstConstructorTest;
+  late ArchRule<DartClass> allClassesHaveConstructorTest;
 
   setUp(() {
-    allClassesHaveConstructorTest = ArchTest<DartClass>(
+    allClassesHaveConstructorTest = ArchRule<DartClass>(
       selector: (pkg) => DartElementFinder().findByMatcher(
         source: pkg,
         matcher: (el) => el is DartClass && !el.isEnum,
@@ -28,7 +28,7 @@ void main() {
         }
       },
     );
-    allClassesHaveConstConstructorTest = ArchTest<DartClass>(
+    allClassesHaveConstConstructorTest = ArchRule<DartClass>(
       selector: (pkg) => DartElementFinder().findByMatcher(
         source: pkg,
         matcher: (el) => el is DartClass && !el.isEnum,
