@@ -10,10 +10,10 @@ class Filter<T extends DartElement> {
     return filter(element);
   }
 
-  Filter<T> and(Filter<T> filterToCombine) {
+  Filter<T> and(Filter<T> otherFilter) {
     return Filter(
-      (el) => filter(el) && filterToCombine(el),
-      description: '$description AND ${filterToCombine.description}',
+      (el) => filter(el) && otherFilter(el),
+      description: '$description AND ${otherFilter.description}',
     );
   }
 }

@@ -9,6 +9,16 @@ class Validation<T extends DartElement> {
   void call(T target, DartPackage package, void Function(String) addViolation) {
     return validation(target, package, addViolation);
   }
+
+  Validation<T> and(Validation<T> otherValidation) {
+    return Validation(
+      (target, package, addViolation) {
+        validation(target, package, addViolation);
+        otherValidation(target, package, addViolation);
+      },
+      description: '$description AND ${otherValidation.description}',
+    );
+  }
 }
 
 typedef ValidationFn<T extends DartElement> = void Function(

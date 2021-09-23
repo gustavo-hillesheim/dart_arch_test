@@ -18,7 +18,8 @@ void main() {
   archTest(ArchRule<DartClass>(
     selector: Selectors.classes,
     filter: Filters.pathMatches('repository'),
-    validation: Validations.nameEndsWith('Repository'),
+    validation: Validations.nameEndsWith<DartClass>('Repository')
+        .and(Validations.extendsClass<BaseRepository>()),
   ));
 
   archTest(ArchRule<DartLibrary>(
@@ -27,12 +28,6 @@ void main() {
     validation: Validations.onlyHaveDependenciesFromFolders(
       ['entity', 'repository'],
     ),
-  ));
-
-  archTest(ArchRule<DartClass>(
-    selector: Selectors.classes,
-    filter: Filters.pathMatches('repository'),
-    validation: Validations.extendsClass<BaseRepository>(),
   ));
 
   archTest(ArchRule<DartClass>(
