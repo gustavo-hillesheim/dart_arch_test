@@ -20,8 +20,9 @@ void main() {
           source: pkg,
           matcher: (el) => el is DartClass && !el.isEnum,
         ),
+        description: 'classes',
       ),
-      filter: Filter((_) => true),
+      filter: Filter((_) => true, description: 'exist'),
       validation: Validation(
         (cls, _, addViolation) {
           final hasConstructor = cls.methods
@@ -30,6 +31,7 @@ void main() {
             addViolation('Should have a constructor');
           }
         },
+        description: 'have a constructor',
       ),
     );
     allClassesHaveConstConstructorTest = ArchRule<DartClass>(
@@ -38,8 +40,9 @@ void main() {
           source: pkg,
           matcher: (el) => el is DartClass && !el.isEnum,
         ),
+        description: 'classes',
       ),
-      filter: Filter((_) => true),
+      filter: Filter((_) => true, description: ''),
       validation: Validation(
         (cls, _, addViolation) {
           final hasConstConstructor = cls.methods.any((method) =>
@@ -49,6 +52,7 @@ void main() {
             addViolation('Should have a const constructor');
           }
         },
+        description: 'have a const constructor',
       ),
     );
     package = createSamplePackage();
@@ -88,5 +92,55 @@ void main() {
       ]);
       expect(e.package, package);
     }
+  });
+
+  group('description', () {
+    ArchRule createRule(
+        {String? selector, String? filter, String? validation}) {
+      return ArchRule<DartElement>(
+        selector: Selector((_) => [], description: selector ?? ''),
+        filter: Filter((_) => true, description: filter ?? ''),
+        validation:
+            Validation((_, __, ___) => true, description: validation ?? ''),
+      );
+    }
+
+    test(
+      'should concatenate selector, filter and validation descriptions when all are specified',
+      () {
+        final rule = createRule(
+          selector: 'classes',
+          filter: 'are in the package',
+          validation: 'exist',
+        );
+        expect(
+            rule.description, 'classes THAT are in the package SHOULD exist');
+      },
+    );
+
+    test(
+      'when a description is not provided a default one should be used',
+      () {
+        expect(
+          createRule(filter: 'are filtered', validation: 'be validated')
+              .description,
+          'elements THAT are filtered SHOULD be validated',
+        );
+
+        expect(
+          createRule(selector: 'selected elements', validation: 'be validated')
+              .description,
+          'selected elements THAT exist SHOULD be validated',
+        );
+
+        expect(
+          createRule(selector: 'selected elements', filter: 'are filtered')
+              .description,
+          'selected elements THAT are filtered SHOULD exist',
+        );
+
+        expect(createRule().description, 'elements THAT exist SHOULD exist');
+      },
+    );
   });
 }

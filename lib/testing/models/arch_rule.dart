@@ -17,6 +17,29 @@ class ArchRule<T extends DartElement> {
     Filter<T>? filter,
   }) : filter = filter ?? Filters.id();
 
+  String get description {
+    final selectorDescription = _formatDescription(
+      selector.description,
+      fallback: 'elements',
+    );
+    final filterDescription = _formatDescription(
+      filter.description,
+      fallback: 'exist',
+    );
+    final validationDescription = _formatDescription(
+      validation.description,
+      fallback: 'exist',
+    );
+    return '$selectorDescription THAT $filterDescription SHOULD $validationDescription';
+  }
+
+  String _formatDescription(String description, {required String fallback}) {
+    if (description.trim().isEmpty) {
+      return fallback;
+    }
+    return description.trim();
+  }
+
   void validate(DartPackage package) {
     final violations = getViolations(package);
     if (violations.isNotEmpty) {

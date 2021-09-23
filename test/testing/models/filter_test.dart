@@ -27,11 +27,21 @@ void main() {
   test('Should combine filters on "and" method', () {
     final nameFilter = Filter<DartElement>(
       (el) => el.name.endsWith('Filtered'),
+      description: 'have name ending with "Filtered"',
     );
     final publicFilter = Filter<DartElement>(
       (el) => !el.name.startsWith('_'),
+      description: 'have name starting with "_"',
     );
 
+    expect(
+      nameFilter.and(publicFilter).description,
+      'have name ending with "Filtered" AND have name starting with "_"',
+    );
+    expect(
+      publicFilter.and(nameFilter).description,
+      'have name starting with "_" AND have name ending with "Filtered"',
+    );
     expect(elements.where(nameFilter.and(publicFilter)), [
       DartVariable(
         name: 'myVarFiltered',

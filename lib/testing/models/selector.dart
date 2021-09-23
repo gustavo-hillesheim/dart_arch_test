@@ -2,8 +2,9 @@ import 'package:arch_test/arch_test.dart';
 
 class Selector<T extends DartElement> {
   final SelectorFn<T> selector;
+  final String description;
 
-  Selector(this.selector);
+  Selector(this.selector, {required this.description});
 
   List<T> call(DartPackage package) {
     return selector(package);

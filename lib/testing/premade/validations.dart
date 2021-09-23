@@ -7,14 +7,14 @@ abstract class Validations {
   static Validation<T> nameEndsWith<T extends DartElement>(String str) {
     return _createValidation(
       (el) => el.name.endsWith(str),
-      'Name should end with "$str"',
+      'have name ending with "$str"',
     );
   }
 
   static Validation<T> nameStartsWith<T extends DartElement>(String str) {
     return _createValidation(
       (el) => el.name.startsWith(str),
-      'Name should start with "$str"',
+      'have name starting with "$str"',
     );
   }
 
@@ -24,7 +24,7 @@ abstract class Validations {
       (el) =>
           _matchType(el, type) ||
           el.superInterfaces.any((interface) => _matchType(interface, type)),
-      'Should implement ${C.toString()}',
+      'implement ${C.toString()}',
     );
   }
 
@@ -34,7 +34,7 @@ abstract class Validations {
       (el) =>
           _matchType(el, type) ||
           el.superClass != null && _matchType(el.superClass!, type),
-      'Should extend ${C.toString()}',
+      'extend ${C.toString()}',
     );
   }
 
@@ -83,6 +83,7 @@ abstract class Validations {
           );
         }
       },
+      description: 'not have dependencies matching the regex "$regExp"',
     );
   }
 
@@ -107,6 +108,7 @@ abstract class Validations {
           );
         }
       },
+      description: 'only have dependencies from folders $folders',
     );
   }
 
@@ -118,14 +120,15 @@ abstract class Validations {
 
   static Validation<T> _createValidation<T extends DartElement>(
     bool Function(T el) validation,
-    String violationMessage,
+    String description,
   ) {
     return Validation(
       (el, _, addViolation) {
         if (!validation(el)) {
-          addViolation(violationMessage);
+          addViolation('Should $description');
         }
       },
+      description: description,
     );
   }
 }

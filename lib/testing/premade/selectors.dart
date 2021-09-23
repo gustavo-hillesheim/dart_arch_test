@@ -7,6 +7,7 @@ abstract class Selectors {
 
   static Selector<DartLibrary> libraries = Selector(
     (package) => _finder.findByType<DartLibrary>(source: package),
+    description: 'libraries',
   );
 
   static Selector<DartClass> classes = Selector(
@@ -14,6 +15,7 @@ abstract class Selectors {
       source: package,
       matcher: (el) => el is DartClass && !el.isEnum,
     ),
+    description: 'classes',
   );
 
   static Selector<DartClass> enums = Selector(
@@ -21,9 +23,11 @@ abstract class Selectors {
       matcher: (el) => el is DartClass && el.isEnum,
       source: package,
     ),
+    description: 'enums',
   );
 
   static Selector<DartMethod> methods = Selector(
     (package) => _finder.findByType<DartMethod>(source: package),
+    description: 'methods',
   );
 }

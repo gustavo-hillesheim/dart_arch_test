@@ -24,7 +24,8 @@ void main() {
         addViolationMock,
       );
 
-      verify(() => addViolationMock('Name should end with "Repository"'));
+      verify(
+          () => addViolationMock('Should have name ending with "Repository"'));
     });
 
     test('should not add violation', () {
@@ -48,7 +49,8 @@ void main() {
         addViolationMock,
       );
 
-      verify(() => addViolationMock('Name should start with "Abstract"'));
+      verify(
+          () => addViolationMock('Should have name starting with "Abstract"'));
     });
 
     test('should not add violation', () {
