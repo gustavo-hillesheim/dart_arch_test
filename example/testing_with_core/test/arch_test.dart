@@ -8,8 +8,8 @@ import 'package:testing_with_core/repository/base_repository.dart';
 void main() {
   late DartPackage package;
 
-  setUp(() {
-    package = DartPackageLoader.instance.loadPackage('testing_with_core');
+  setUp(() async {
+    package = await DartPackageLoader.instance.loadCurrentPackage();
   });
 
   DartLibrary? getLibrary(String libraryName) {

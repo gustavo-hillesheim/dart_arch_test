@@ -45,3 +45,15 @@ class UnsupportedMirrorType implements Exception {
   UnsupportedMirrorType(Type mirrorType)
       : message = 'The type ${mirrorType.toString()} is not supported';
 }
+
+class PackageNameNotFoundException implements Exception {
+  final String message;
+
+  PackageNameNotFoundException(this.message);
+}
+
+class PackageNotFoundException implements Exception {
+  final String message;
+
+  PackageNotFoundException(this.message);
+}
