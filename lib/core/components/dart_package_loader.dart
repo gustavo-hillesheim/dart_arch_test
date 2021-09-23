@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:mirrors';
 
 import 'package:arch_test/core/core.dart';
-import 'package:yaml/yaml.dart';
+import 'package:arch_test/src/utils.dart';
 
 class DartPackageLoader {
   static DartPackageLoader? _instance;
@@ -20,35 +20,8 @@ class DartPackageLoader {
   DartPackageLoader(this.mirrorSystem, this.libraryMirrorMapper);
 
   Future<DartPackage> loadCurrentPackage() async {
-    final packageName = await _findNearestPackageName(Directory.current);
+    final packageName = await findNearestPackageName(Directory.current);
     return loadPackage(packageName);
-  }
-
-  Future<String> _findNearestPackageName(Directory directory) async {
-    final pubspecPath = await _findNearestPubspecPath(directory);
-    final pubspec = await File(pubspecPath).readAsString();
-    final packageName = loadYaml(pubspec)['name'];
-    if (!(packageName is String)) {
-      throw PackageNameNotFoundException(
-          'Could not find name of package located at "$pubspecPath"');
-    }
-    return packageName;
-  }
-
-  Future<String> _findNearestPubspecPath(Directory directory) async {
-    var dirToSearch = directory;
-    while (dirToSearch.parent != dirToSearch) {
-      final files = await dirToSearch.list().toList();
-      final pubspecs = files
-          .whereType<File>()
-          .where((file) => file.path.endsWith('pubspec.yaml'));
-      if (pubspecs.isEmpty) {
-        dirToSearch = dirToSearch.parent;
-      }
-      return pubspecs.first.path;
-    }
-    throw PackageNotFoundException(
-        'Could not find any package at "$directory"');
   }
 
   DartPackage loadPackage(String packageName) {
