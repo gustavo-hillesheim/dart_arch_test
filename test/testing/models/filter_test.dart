@@ -23,17 +23,16 @@ void main() {
       type: DartType.from<String>(),
     ),
   ];
+  final nameFilter = Filter<DartElement>(
+    (el) => el.name.endsWith('Filtered'),
+    description: 'have name ending with "Filtered"',
+  );
+  final publicFilter = Filter<DartElement>(
+    (el) => !el.name.startsWith('_'),
+    description: 'have name starting with "_"',
+  );
 
   test('Should combine filters on "and" method', () {
-    final nameFilter = Filter<DartElement>(
-      (el) => el.name.endsWith('Filtered'),
-      description: 'have name ending with "Filtered"',
-    );
-    final publicFilter = Filter<DartElement>(
-      (el) => !el.name.startsWith('_'),
-      description: 'have name starting with "_"',
-    );
-
     expect(
       nameFilter.and(publicFilter).description,
       'have name ending with "Filtered" AND have name starting with "_"',
@@ -45,6 +44,31 @@ void main() {
     expect(elements.where(nameFilter.and(publicFilter)), [
       DartVariable(
         name: 'myVarFiltered',
+        location: ElementLocation.unknown(),
+        parentRef: null,
+        type: DartType.from<String>(),
+      ),
+    ]);
+  });
+
+  test('Should combine filters on "or" method', () {
+    expect(
+      nameFilter.or(publicFilter).description,
+      'have name ending with "Filtered" OR have name starting with "_"',
+    );
+    expect(
+      publicFilter.or(nameFilter).description,
+      'have name starting with "_" OR have name ending with "Filtered"',
+    );
+    expect(elements.where(nameFilter.or(publicFilter)), [
+      DartVariable(
+        name: 'myVarFiltered',
+        location: ElementLocation.unknown(),
+        parentRef: null,
+        type: DartType.from<String>(),
+      ),
+      DartVariable(
+        name: 'nonFilteredVar',
         location: ElementLocation.unknown(),
         parentRef: null,
         type: DartType.from<String>(),
