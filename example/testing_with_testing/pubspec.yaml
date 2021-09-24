@@ -1,4 +1,4 @@
-name: arch_test
+name: testing_with_testing
 description: A simple command-line application.
 version: 1.0.0
 # homepage: https://www.example.com
@@ -6,11 +6,13 @@ version: 1.0.0
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
+# dependencies:
+#   path: ^1.8.0
+
 dev_dependencies:
-  code_coverage: ^1.1.0
-  mocktail: ^0.1.4
   pedantic: ^1.10.0
+  arch_test:
+    path: ../../
+  test: ^1.17.11
 dependencies:
   equatable: ^2.0.3
-  test: ^1.17.11
-  yaml: ^3.1.0

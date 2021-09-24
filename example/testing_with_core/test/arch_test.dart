@@ -8,8 +8,8 @@ import 'package:testing_with_core/repository/base_repository.dart';
 void main() {
   late DartPackage package;
 
-  setUp(() {
-    package = createPackageLoader().loadPackage('testing_with_core');
+  setUp(() async {
+    package = await DartPackageLoader.instance.loadCurrentPackage();
   });
 
   DartLibrary? getLibrary(String libraryName) {
@@ -25,17 +25,15 @@ void main() {
         .toList();
   }
 
-  bool isSameType(DartType one, DartType other, {bool ignoreGenerics = false}) {
+  bool isSameType(DartType one, DartType other) {
     final equals = DeepCollectionEquality();
     final myProps = [
       one.name,
       one.location,
-      ignoreGenerics ? null : one.generics
     ];
     final otherProps = [
       other.name,
       other.location,
-      ignoreGenerics ? null : other.generics
     ];
     return equals.equals(myProps, otherProps);
   }
@@ -123,7 +121,7 @@ void main() {
 
   test('Repository classes should extends from BaseRepository', () {
     final classes = getClassesInFolder('repository');
-    final baseRepositoryType = DartType.from(BaseRepository);
+    final baseRepositoryType = DartType.from<BaseRepository>();
 
     for (final cls in classes) {
       if (isSameType(cls, baseRepositoryType)) {
@@ -134,7 +132,6 @@ void main() {
               isSameType(
                 cls.superClass!,
                 baseRepositoryType,
-                ignoreGenerics: true,
               ),
           true);
     }
