@@ -16,6 +16,13 @@ class Filter<T extends DartElement> {
       description: '$description AND ${otherFilter.description}',
     );
   }
+
+  Filter<T> or(Filter<T> otherFilter) {
+    return Filter(
+      (el) => filter(el) || otherFilter(el),
+      description: '$description OR ${otherFilter.description}',
+    );
+  }
 }
 
 typedef FilterFn<T> = bool Function(T element);
