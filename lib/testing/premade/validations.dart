@@ -38,35 +38,6 @@ abstract class Validations {
     );
   }
 
-  static bool _matchType(DartType typeToMatch, DartType typeMatch) {
-    final matcher = DeepCollectionEquality();
-    final typeToMatchGenerics = [];
-    final typeMatchGenerics = [];
-    for (var i = 0;
-        i < typeMatch.generics.length && i < typeToMatch.generics.length;
-        i++) {
-      // If the generic from typeMatch is dynamic, than any type can be matched,
-      // so we just ignore this index of the generics
-      if (typeMatch.generics[i] != DartType.dynamicType()) {
-        typeToMatchGenerics.add(typeToMatch.generics[i]);
-        typeMatchGenerics.add(typeMatch.generics[i]);
-      }
-    }
-    final typeToMatchProps = [
-      typeToMatch.name,
-      typeToMatch.location,
-      typeToMatch.parentRef,
-      typeToMatchGenerics,
-    ];
-    final typeMatchProps = [
-      typeMatch.name,
-      typeMatch.location,
-      typeMatch.parentRef,
-      typeMatchGenerics,
-    ];
-    return matcher.equals(typeToMatchProps, typeMatchProps);
-  }
-
   static Validation<DartLibrary> noDependencyMatches(
     String regExp, {
     String? description,
@@ -110,6 +81,35 @@ abstract class Validations {
       },
       description: 'only have dependencies from folders $folders',
     );
+  }
+
+  static bool _matchType(DartType typeToMatch, DartType typeMatch) {
+    final matcher = DeepCollectionEquality();
+    final typeToMatchGenerics = [];
+    final typeMatchGenerics = [];
+    for (var i = 0;
+        i < typeMatch.generics.length && i < typeToMatch.generics.length;
+        i++) {
+      // If the generic from typeMatch is dynamic, than any type can be matched,
+      // so we just ignore this index of the generics
+      if (typeMatch.generics[i] != DartType.dynamicType()) {
+        typeToMatchGenerics.add(typeToMatch.generics[i]);
+        typeMatchGenerics.add(typeMatch.generics[i]);
+      }
+    }
+    final typeToMatchProps = [
+      typeToMatch.name,
+      typeToMatch.location,
+      typeToMatch.parentRef,
+      typeToMatchGenerics,
+    ];
+    final typeMatchProps = [
+      typeMatch.name,
+      typeMatch.location,
+      typeMatch.parentRef,
+      typeMatchGenerics,
+    ];
+    return matcher.equals(typeToMatchProps, typeMatchProps);
   }
 
   static String _buildInvalidImports(

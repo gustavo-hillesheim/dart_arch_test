@@ -12,9 +12,21 @@ class OnGoingFilterBuilder<T extends DartElement> {
   ReadyFilterBuilder<T> call(Filter<T> filter) {
     final initialFilter = _initialFilter;
     if (initialFilter != null) {
-      return ReadyFilterBuilder(_selector, initialFilter.and(filter));
+      return ReadyFilterBuilder._(_selector, initialFilter.and(filter));
     }
-    return ReadyFilterBuilder(_selector, filter);
+    return ReadyFilterBuilder._(_selector, filter);
+  }
+
+  ReadyFilterBuilder<T> havePathMatching(String regExp) {
+    return ReadyFilterBuilder._(_selector, Filters.pathMatches(regExp));
+  }
+
+  ReadyFilterBuilder<T> haveNameStartingWith(String str) {
+    return ReadyFilterBuilder._(_selector, Filters.nameStartsWith(str));
+  }
+
+  ReadyFilterBuilder<T> haveNameEndingWith(String str) {
+    return ReadyFilterBuilder._(_selector, Filters.nameEndsWith(str));
   }
 }
 
@@ -23,7 +35,7 @@ class ReadyFilterBuilder<T extends DartElement> {
   final Selector<T> _selector;
   final Filter<T> _filter;
 
-  ReadyFilterBuilder(this._selector, this._filter);
+  ReadyFilterBuilder._(this._selector, this._filter);
 
   OnGoingFilterBuilder<T> get and => OnGoingFilterBuilder._(_selector, _filter);
 
