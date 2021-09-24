@@ -1,5 +1,6 @@
 export 'models/models.dart';
 export 'premade/premade.dart';
+export 'fluent/fluent.dart';
 export 'exception.dart';
 
 import 'package:arch_test/arch_test.dart';

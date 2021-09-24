@@ -107,12 +107,13 @@ class OnGoingValidationBuilder<T extends DartElement> {
 }
 
 /// Represents a validation builder that is valid and ready to be used.
-class ReadyValidationBuilder<T extends DartElement> {
+class ReadyValidationBuilder<T extends DartElement> extends ArchRule<T> {
   final Selector<T> _selector;
   final Filter<T> _filter;
   final Validation<T> _validation;
 
-  ReadyValidationBuilder._(this._selector, this._filter, this._validation);
+  ReadyValidationBuilder._(this._selector, this._filter, this._validation)
+      : super(selector: _selector, filter: _filter, validation: _validation);
 
   OnGoingValidationBuilder get and => OnGoingValidationBuilder._(
         _selector,
