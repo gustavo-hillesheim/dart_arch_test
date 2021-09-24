@@ -4,6 +4,7 @@ import 'package:arch_test/testing/fluent/exception.dart';
 part 'builders/selector_builders.dart';
 part 'builders/filter_builders.dart';
 part 'builders/validation_builders.dart';
+part 'models/join_type.dart';
 
 final methods = ReadySelectorBuilder._(Selectors.methods);
 final classes = ReadySelectorBuilder._(Selectors.classes);

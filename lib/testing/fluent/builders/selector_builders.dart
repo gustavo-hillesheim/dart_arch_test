@@ -8,10 +8,11 @@ class ReadySelectorBuilder<T extends DartElement> {
 
   ReadySelectorBuilder._(this._selector);
 
-  OnGoingFilterBuilder<T> get that => OnGoingFilterBuilder._(_selector);
+  OnGoingFilterBuilder<T> get that =>
+      OnGoingFilterBuilder._(selector: _selector);
 
   OnGoingValidationBuilder<T> get should => OnGoingValidationBuilder._(
-        _selector,
-        Filters.id(),
+        selector: _selector,
+        filter: Filters.id(),
       );
 }

@@ -7,61 +7,47 @@ class OnGoingValidationBuilder<T extends DartElement> {
   final Selector<T> _selector;
   final Filter<T> _filter;
   final Validation<T>? _initialValidation;
+  final _JoinType? _joinType;
 
-  OnGoingValidationBuilder._(
-    this._selector,
-    this._filter, [
-    this._initialValidation,
-  ]);
+  OnGoingValidationBuilder._({
+    required Selector<T> selector,
+    required Filter<T> filter,
+    Validation<T>? initialValidation,
+    _JoinType? joinType,
+  })  : assert(
+            (initialValidation == null && joinType == null) ||
+                (initialValidation != null && joinType != null),
+            'Only specifying initialValidation or joinType is not allowed, '
+            'please provide or omit both parameters'),
+        _selector = selector,
+        _filter = filter,
+        _initialValidation = initialValidation,
+        _joinType = joinType;
 
   ReadyValidationBuilder<T> call(Validation<T> validation) {
-    final initialValidation = _initialValidation;
-    if (initialValidation != null) {
-      return ReadyValidationBuilder._(
-        _selector,
-        _filter,
-        initialValidation.and(validation),
-      );
-    }
-    return ReadyValidationBuilder._(_selector, _filter, validation);
+    return _createReadyBuilder(validation);
   }
 
   ReadyValidationBuilder<T> haveNameStartingWith(String str) {
-    return ReadyValidationBuilder._(
-      _selector,
-      _filter,
-      Validations.nameStartsWith(str),
-    );
+    return _createReadyBuilder(Validations.nameStartsWith(str));
   }
 
   ReadyValidationBuilder<T> haveNameEndingWith(String str) {
-    return ReadyValidationBuilder._(
-      _selector,
-      _filter,
-      Validations.nameEndsWith(str),
-    );
+    return _createReadyBuilder(Validations.nameEndsWith(str));
   }
 
   ReadyValidationBuilder<DartClass> implementClass<C>() {
     if (T is! DartClass) {
       throw _unsupportedElementTypeException<DartClass>('implementClass');
     }
-    return ReadyValidationBuilder._(
-      _selector as Selector<DartClass>,
-      _filter as Filter<DartClass>,
-      Validations.implementsClass<C>(),
-    );
+    return _createReadyBuilder(Validations.implementsClass<C>());
   }
 
   ReadyValidationBuilder<DartClass> extendClass<C>() {
     if (T is! DartClass) {
       throw _unsupportedElementTypeException<DartClass>('extendClass');
     }
-    return ReadyValidationBuilder._(
-      _selector as Selector<DartClass>,
-      _filter as Filter<DartClass>,
-      Validations.extendsClass<C>(),
-    );
+    return _createReadyBuilder(Validations.extendsClass<C>());
   }
 
   ReadyValidationBuilder<DartLibrary> noDependencyMatching(
@@ -73,9 +59,7 @@ class OnGoingValidationBuilder<T extends DartElement> {
         'noDependencyMatching',
       );
     }
-    return ReadyValidationBuilder._(
-      _selector as Selector<DartLibrary>,
-      _filter as Filter<DartLibrary>,
+    return _createReadyBuilder(
       Validations.noDependencyMatches(regExp, description: description),
     );
   }
@@ -88,11 +72,38 @@ class OnGoingValidationBuilder<T extends DartElement> {
         'onlyHaveDependenciesFromFolders',
       );
     }
-    return ReadyValidationBuilder._(
-      _selector as Selector<DartLibrary>,
-      _filter as Filter<DartLibrary>,
+    return _createReadyBuilder(
       Validations.onlyHaveDependenciesFromFolders(folders),
     );
+  }
+
+  ReadyValidationBuilder<S> _createReadyBuilder<S extends DartElement>(
+    Validation<S> validation,
+  ) {
+    return ReadyValidationBuilder._(
+      _selector as Selector<S>,
+      _filter as Filter<S>,
+      _joinValidationsIfNeeded(validation as Validation<T>) as Validation<S>,
+    );
+  }
+
+  Validation<T> _joinValidationsIfNeeded(Validation<T> validation) {
+    final initialValidation = _initialValidation;
+    if (initialValidation == null) {
+      return validation;
+    }
+    if (_joinType == _JoinType.AND) {
+      return initialValidation.and(validation);
+    } else if (_joinType == _JoinType.OR) {
+      return initialValidation.or(validation);
+    } else {
+      // Should never reach this point, since initialValidation and joinType
+      // are verified in the constructor
+      throw Exception(
+        'Could not join validations since initialValidation '
+        'is not null but joinType is null',
+      );
+    }
   }
 
   UnsupportedValidationException
@@ -116,8 +127,16 @@ class ReadyValidationBuilder<T extends DartElement> extends ArchRule<T> {
       : super(selector: _selector, filter: _filter, validation: _validation);
 
   OnGoingValidationBuilder get and => OnGoingValidationBuilder._(
-        _selector,
-        _filter,
-        _validation,
+        selector: _selector,
+        filter: _filter,
+        initialValidation: _validation,
+        joinType: _JoinType.AND,
+      );
+
+  OnGoingValidationBuilder get or => OnGoingValidationBuilder._(
+        selector: _selector,
+        filter: _filter,
+        initialValidation: _validation,
+        joinType: _JoinType.OR,
       );
 }

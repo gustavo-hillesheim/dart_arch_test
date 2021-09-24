@@ -6,27 +6,63 @@ part of '../fluent.dart';
 class OnGoingFilterBuilder<T extends DartElement> {
   final Selector<T> _selector;
   final Filter<T>? _initialFilter;
+  final _JoinType? _joinType;
 
-  OnGoingFilterBuilder._(this._selector, [this._initialFilter]);
+  OnGoingFilterBuilder._({
+    required Selector<T> selector,
+    Filter<T>? initialFilter,
+    _JoinType? joinType,
+  })  : assert(
+            (initialFilter == null && joinType == null) ||
+                (initialFilter != null && joinType != null),
+            'Only specifying initialFilter or joinType is not allowed, '
+            'please provide or omit both parameters'),
+        _selector = selector,
+        _initialFilter = initialFilter,
+        _joinType = joinType;
 
   ReadyFilterBuilder<T> call(Filter<T> filter) {
-    final initialFilter = _initialFilter;
-    if (initialFilter != null) {
-      return ReadyFilterBuilder._(_selector, initialFilter.and(filter));
-    }
-    return ReadyFilterBuilder._(_selector, filter);
+    return _createReadyBuilder(filter);
   }
 
   ReadyFilterBuilder<T> havePathMatching(String regExp) {
-    return ReadyFilterBuilder._(_selector, Filters.pathMatches(regExp));
+    return _createReadyBuilder(Filters.pathMatches(regExp));
   }
 
   ReadyFilterBuilder<T> haveNameStartingWith(String str) {
-    return ReadyFilterBuilder._(_selector, Filters.nameStartsWith(str));
+    return _createReadyBuilder(Filters.nameStartsWith(str));
   }
 
   ReadyFilterBuilder<T> haveNameEndingWith(String str) {
-    return ReadyFilterBuilder._(_selector, Filters.nameEndsWith(str));
+    return _createReadyBuilder(Filters.nameEndsWith(str));
+  }
+
+  ReadyFilterBuilder<S> _createReadyBuilder<S extends DartElement>(
+    Filter<S> filter,
+  ) {
+    return ReadyFilterBuilder._(
+      _selector as Selector<S>,
+      _joinFiltersIfNeeded(filter as Filter<T>) as Filter<S>,
+    );
+  }
+
+  Filter<T> _joinFiltersIfNeeded(Filter<T> filter) {
+    final initialFilter = _initialFilter;
+    if (initialFilter == null) {
+      return filter;
+    }
+    if (_joinType == _JoinType.AND) {
+      return initialFilter.and(filter);
+    } else if (_joinType == _JoinType.OR) {
+      return initialFilter.or(filter);
+    } else {
+      // Should never reach this point, since initialFilter and joinType
+      // are verified in the constructor
+      throw Exception(
+        'Could not join filters since initialFilter '
+        'is not null but joinType is null',
+      );
+    }
   }
 }
 
@@ -37,10 +73,20 @@ class ReadyFilterBuilder<T extends DartElement> {
 
   ReadyFilterBuilder._(this._selector, this._filter);
 
-  OnGoingFilterBuilder<T> get and => OnGoingFilterBuilder._(_selector, _filter);
+  OnGoingFilterBuilder<T> get and => OnGoingFilterBuilder._(
+        selector: _selector,
+        initialFilter: _filter,
+        joinType: _JoinType.AND,
+      );
+
+  OnGoingFilterBuilder<T> get or => OnGoingFilterBuilder._(
+        selector: _selector,
+        initialFilter: _filter,
+        joinType: _JoinType.OR,
+      );
 
   OnGoingValidationBuilder<T> get should => OnGoingValidationBuilder._(
-        _selector,
-        _filter,
+        selector: _selector,
+        filter: _filter,
       );
 }
