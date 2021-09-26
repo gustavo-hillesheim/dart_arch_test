@@ -4,19 +4,19 @@ import 'package:testing_with_fluent/repository/base_repository.dart';
 
 void main() {
   archTest(
-    classes.that.havePathMatching('entity').should.haveNameEndingWith('Entity'),
+    classes.that.areInsideFolder('entity').should.haveNameEndingWith('Entity'),
   );
 
   archTest(
     libraries.that
-        .havePathMatching('entity')
+        .areInsideFolder('entity')
         .should
         .onlyHaveDependenciesFromFolders(['entity']),
   );
 
   archTest(
     classes.that
-        .havePathMatching('repository')
+        .areInsideFolder('repository')
         .should
         .haveNameEndingWith('Repository')
         .and
@@ -25,28 +25,28 @@ void main() {
 
   archTest(
     libraries.that
-        .havePathMatching('repository')
+        .areInsideFolder('repository')
         .should
         .onlyHaveDependenciesFromFolders(['entity', 'repository']),
   );
 
   archTest(
     classes.that
-        .havePathMatching('service')
+        .areInsideFolder('service')
         .should
         .haveNameEndingWith('Service'),
   );
 
   archTest(
     libraries.that
-        .havePathMatching('service')
+        .areInsideFolder('service')
         .should
         .onlyHaveDependenciesFromFolders(['entity', 'repository', 'service']),
   );
 
   archTest(
     classes.that
-        .havePathMatching('controller')
+        .areInsideFolder('controller')
         .should
         .haveNameEndingWith('Controller'),
   );

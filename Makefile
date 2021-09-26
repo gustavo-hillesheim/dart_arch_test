@@ -6,6 +6,7 @@ test_examples:
 	cd example/core_example && dart test
 	cd example/testing_with_core && dart test
 	cd example/testing_with_testing && dart test
+	cd example/testing_with_fluent && dart test
 
 test_all:
 	dart test

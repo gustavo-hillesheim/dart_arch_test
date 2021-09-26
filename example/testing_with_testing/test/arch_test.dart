@@ -5,26 +5,26 @@ import 'package:testing_with_testing/repository/base_repository.dart';
 void main() {
   archTest(ArchRule<DartClass>(
     selector: Selectors.classes,
-    filter: Filters.pathMatches('entity'),
+    filter: Filters.insideFolder('entity'),
     validation: Validations.nameEndsWith('Entity'),
   ));
 
   archTest(ArchRule<DartLibrary>(
     selector: Selectors.libraries,
-    filter: Filters.pathMatches('entity'),
+    filter: Filters.insideFolder('entity'),
     validation: Validations.onlyHaveDependenciesFromFolders(['entity']),
   ));
 
   archTest(ArchRule<DartClass>(
     selector: Selectors.classes,
-    filter: Filters.pathMatches('repository'),
+    filter: Filters.insideFolder('repository'),
     validation: Validations.nameEndsWith<DartClass>('Repository')
         .and(Validations.extendsClass<BaseRepository>()),
   ));
 
   archTest(ArchRule<DartLibrary>(
     selector: Selectors.libraries,
-    filter: Filters.pathMatches('repository'),
+    filter: Filters.insideFolder('repository'),
     validation: Validations.onlyHaveDependenciesFromFolders(
       ['entity', 'repository'],
     ),
@@ -32,13 +32,13 @@ void main() {
 
   archTest(ArchRule<DartClass>(
     selector: Selectors.classes,
-    filter: Filters.pathMatches('service'),
+    filter: Filters.insideFolder('service'),
     validation: Validations.nameEndsWith('Service'),
   ));
 
   archTest(ArchRule<DartLibrary>(
     selector: Selectors.libraries,
-    filter: Filters.pathMatches('service'),
+    filter: Filters.insideFolder('service'),
     validation: Validations.onlyHaveDependenciesFromFolders(
       ['entity', 'repository', 'service'],
     ),
@@ -46,7 +46,7 @@ void main() {
 
   archTest(ArchRule<DartClass>(
     selector: Selectors.classes,
-    filter: Filters.pathMatches('controller'),
+    filter: Filters.insideFolder('controller'),
     validation: Validations.nameEndsWith('Controller'),
   ));
 }
