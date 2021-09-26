@@ -37,16 +37,12 @@ class OnGoingValidationBuilder<T extends DartElement> {
   }
 
   ReadyValidationBuilder<DartClass> implementClass<C>() {
-    if (T is! DartClass) {
-      throw _unsupportedElementTypeException<DartClass>('implementClass');
-    }
+    _ensureElementsTypeIs<DartClass>(methodName: 'implementClass');
     return _createReadyBuilder(Validations.implementsClass<C>());
   }
 
   ReadyValidationBuilder<DartClass> extendClass<C>() {
-    if (T is! DartClass) {
-      throw _unsupportedElementTypeException<DartClass>('extendClass');
-    }
+    _ensureElementsTypeIs<DartClass>(methodName: 'extendClass');
     return _createReadyBuilder(Validations.extendsClass<C>());
   }
 
@@ -54,11 +50,7 @@ class OnGoingValidationBuilder<T extends DartElement> {
     String regExp, {
     String? description,
   }) {
-    if (T is! DartLibrary) {
-      throw _unsupportedElementTypeException<DartLibrary>(
-        'noDependencyMatching',
-      );
-    }
+    _ensureElementsTypeIs<DartLibrary>(methodName: 'noDependencyMatching');
     return _createReadyBuilder(
       Validations.noDependencyMatches(regExp, description: description),
     );
@@ -67,14 +59,18 @@ class OnGoingValidationBuilder<T extends DartElement> {
   ReadyValidationBuilder<DartLibrary> onlyHaveDependenciesFromFolders(
     List<String> folders,
   ) {
-    if (T is! DartLibrary) {
-      throw _unsupportedElementTypeException<DartLibrary>(
-        'onlyHaveDependenciesFromFolders',
-      );
-    }
+    _ensureElementsTypeIs<DartLibrary>(
+        methodName: 'onlyHaveDependenciesFromFolders');
     return _createReadyBuilder(
       Validations.onlyHaveDependenciesFromFolders(folders),
     );
+  }
+
+  void _ensureElementsTypeIs<S extends DartElement>(
+      {required String methodName}) {
+    if (T != S) {
+      throw _unsupportedElementTypeException<S>(methodName);
+    }
   }
 
   ReadyValidationBuilder<S> _createReadyBuilder<S extends DartElement>(
@@ -126,14 +122,14 @@ class ReadyValidationBuilder<T extends DartElement> extends ArchRule<T> {
   ReadyValidationBuilder._(this._selector, this._filter, this._validation)
       : super(selector: _selector, filter: _filter, validation: _validation);
 
-  OnGoingValidationBuilder get and => OnGoingValidationBuilder._(
+  OnGoingValidationBuilder<T> get and => OnGoingValidationBuilder._(
         selector: _selector,
         filter: _filter,
         initialValidation: _validation,
         joinType: _JoinType.AND,
       );
 
-  OnGoingValidationBuilder get or => OnGoingValidationBuilder._(
+  OnGoingValidationBuilder<T> get or => OnGoingValidationBuilder._(
         selector: _selector,
         filter: _filter,
         initialValidation: _validation,

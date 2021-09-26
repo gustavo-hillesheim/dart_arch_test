@@ -1,3 +1,5 @@
+import 'dart:mirrors';
+
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/testing/fluent/exception.dart';
 
