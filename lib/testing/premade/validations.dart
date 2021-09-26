@@ -66,11 +66,11 @@ abstract class Validations {
       (lib, package, addViolation) {
         final invalidDependencies = lib.dependencies.where((dep) {
           final isFromOtherPackage = dep.targetPackage != package.name;
-          return !folders.any((folder) {
-            final isDepFromFolder =
-                dep.targetLibrary.contains('$folder$separator');
-            return isDepFromFolder || isFromOtherPackage;
-          });
+          if (isFromOtherPackage) {
+            return false;
+          }
+          final depFolders = dep.targetLibrary.split('/')..removeLast();
+          return !folders.any((folder) => depFolders.contains(folder));
         });
         if (invalidDependencies.isNotEmpty) {
           addViolation(

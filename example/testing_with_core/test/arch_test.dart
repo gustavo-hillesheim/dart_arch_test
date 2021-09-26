@@ -18,7 +18,7 @@ void main() {
 
   List<DartClass> getClassesInFolder(String folder) {
     return package.libraries
-        .where((lib) => lib.name.split(separator).contains(folder))
+        .where((lib) => lib.name.split('/').contains(folder))
         .map((lib) => lib.classes)
         .fold<List<DartClass>>([], (value, element) => [...value, ...element])
         .where((cls) => !cls.isEnum)

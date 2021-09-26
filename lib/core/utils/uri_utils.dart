@@ -8,10 +8,9 @@ class UriUtils {
   }
 
   static String getPackageNameFromString(String uri) {
-    uri = normalize(uri);
     final path = uri.replaceFirst('package:', '');
-    if (path.contains(separator)) {
-      return path.substring(0, path.indexOf(separator));
+    if (path.contains('/')) {
+      return path.substring(0, path.indexOf('/'));
     }
     return path;
   }
@@ -24,8 +23,7 @@ class UriUtils {
   }
 
   static String getLibraryPath(String uri, [String? package]) {
-    uri = normalize(uri);
     final packageName = package ?? getPackageNameFromString(uri);
-    return uri.replaceFirst('package:$packageName$separator', '');
+    return uri.replaceFirst('package:$packageName/', '');
   }
 }

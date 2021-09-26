@@ -37,6 +37,12 @@ class OnGoingFilterBuilder<T extends DartElement> {
     return _createReadyBuilder(Filters.nameEndsWith(str));
   }
 
+  ReadyFilterBuilder<T> areInsideFolder(String folder,
+      {bool includeNested = true}) {
+    return _createReadyBuilder(
+        Filters.insideFolder(folder, includeNested: includeNested));
+  }
+
   ReadyFilterBuilder<S> _createReadyBuilder<S extends DartElement>(
     Filter<S> filter,
   ) {

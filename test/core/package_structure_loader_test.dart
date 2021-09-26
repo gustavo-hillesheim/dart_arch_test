@@ -30,8 +30,8 @@ void main() {
       'fake_package.dart',
       'component1.dart',
       'component2.dart',
-      'services\\service1.dart',
-      'services\\service2.dart',
+      'services/service1.dart',
+      'services/service2.dart',
     ]);
   });
 }

@@ -121,6 +121,45 @@ void main() {
     });
   });
 
+  group('Validations.onlyHaveDependenciesFromFolders', () {
+    test('Should add violation', () {
+      final condition =
+          Validations.onlyHaveDependenciesFromFolders(['allowed_folder']);
+      final library = FakeDartLibrary(
+        name: 'path/to/lib.dart',
+        importedLibraries: [
+          'package:some_package/forbidden_folder/components.dart'
+        ],
+      );
+
+      condition(
+          library, FakeDartPackage(name: 'some_package'), addViolationMock);
+
+      verify(
+        () => addViolationMock(
+          'Can only have dependencies from folders [allowed_folder].\n'
+          'Invalid imports:\n'
+          '- package:some_package/forbidden_folder/components.dart',
+        ),
+      );
+    });
+    test('Should not add violation', () {
+      final condition =
+          Validations.onlyHaveDependenciesFromFolders(['allowed_folder']);
+      final library = FakeDartLibrary(
+        name: 'path/to/lib.dart',
+        importedLibraries: [
+          'package:some_package/allowed_folder/components.dart'
+        ],
+      );
+
+      condition(
+          library, FakeDartPackage(name: 'some_package'), addViolationMock);
+
+      verifyNever(() => addViolationMock(any()));
+    });
+  });
+
   group('Validations.extendsClass', () {
     test('should add violation', () {
       Validations.extendsClass<AbstractRepository>()(

@@ -36,7 +36,7 @@ void main() {
             line: 1,
           ),
           parentRef: DartElementRef<DartLibrary>(
-            name: 'core\\models\\dart_variable.dart',
+            name: 'core/models/dart_variable.dart',
             location: ElementLocation(
               uri: 'package:arch_test/core/models/dart_variable.dart',
               column: 1,

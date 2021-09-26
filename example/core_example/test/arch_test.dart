@@ -13,7 +13,7 @@ void main() {
         name: 'core_example',
         libraries: [
           DartLibrary(
-            name: 'helper\\text_printer.dart',
+            name: 'helper/text_printer.dart',
             location: ElementLocation(
               uri: 'package:core_example/helper/text_printer.dart',
               line: 1,
@@ -29,7 +29,7 @@ void main() {
                   column: 1,
                 ),
                 parentRef: DartElementRef<DartLibrary>(
-                  name: 'helper\\text_printer.dart',
+                  name: 'helper/text_printer.dart',
                   location: ElementLocation(
                     uri: 'package:core_example/helper/text_printer.dart',
                     line: 1,
@@ -197,7 +197,7 @@ void main() {
             dependencies: [
               DartLibraryDependency(
                 kind: LibraryDependencyKind.IMPORT,
-                path: 'package:core_example\\helper\\text_printer.dart',
+                path: 'package:core_example/helper/text_printer.dart',
                 location: ElementLocation.unknown(),
                 parentRef: DartElementRef<DartLibrary>(
                   name: 'main.dart',

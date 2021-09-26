@@ -1,5 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/testing/models/filter.dart';
+import 'package:test/expect.dart';
 
 abstract class Filters {
   static Filter<T> id<T extends DartElement>() {
@@ -24,6 +25,30 @@ abstract class Filters {
     return Filter(
       (el) => el.name.endsWith(str),
       description: 'have name ending with "$str"',
+    );
+  }
+
+  static Filter<T> insideFolder<T extends DartElement>(
+    String folder, {
+    bool includeNested = true,
+  }) {
+    final description;
+    if (includeNested) {
+      description = 'are inside folder "$folder"';
+    } else {
+      description = 'are directly inside folder "$folder"';
+    }
+    return Filter(
+      (el) {
+        // The last one will be the file name
+        final folders = el.location.library.split('/')..removeLast();
+        if (!includeNested) {
+          return folders.last == folder;
+        } else {
+          return folders.contains(folder);
+        }
+      },
+      description: description,
     );
   }
 }

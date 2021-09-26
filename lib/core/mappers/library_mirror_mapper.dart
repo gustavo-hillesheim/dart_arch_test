@@ -75,7 +75,7 @@ class LibraryMirrorMapper {
     if (!path.startsWith('package:') && !path.startsWith('dart:')) {
       path = join(basePath, path);
     }
-    path = normalize(path);
+    path = normalize(path).replaceAll(separator, '/');
     final kind = mirror.isImport
         ? LibraryDependencyKind.IMPORT
         : LibraryDependencyKind.EXPORT;
