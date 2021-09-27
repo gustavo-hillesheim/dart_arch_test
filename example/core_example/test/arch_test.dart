@@ -151,13 +151,36 @@ void main() {
               line: 1,
               column: 1,
             ),
+            variables: [
+              DartVariable(
+                name: 'myConst',
+                location: ElementLocation(
+                  uri: 'package:core_example/main.dart',
+                  line: 3,
+                  column: 7,
+                ),
+                parentRef: DartElementRef<DartLibrary>(
+                  name: 'main.dart',
+                  location: ElementLocation(
+                    uri: 'package:core_example/main.dart',
+                    line: 1,
+                    column: 1,
+                  ),
+                ),
+                type: DartType.from<int>(),
+                isTopLevel: true,
+                isConst: true,
+                isFinal: true,
+                isStatic: true,
+              ),
+            ],
             methods: [
               DartMethod(
                 name: 'main',
                 isTopLevel: true,
                 location: ElementLocation(
                   uri: 'package:core_example/main.dart',
-                  line: 3,
+                  line: 5,
                   column: 1,
                 ),
                 parentRef: DartElementRef<DartLibrary>(
@@ -179,7 +202,7 @@ void main() {
                       name: 'main',
                       location: ElementLocation(
                         uri: 'package:core_example/main.dart',
-                        line: 3,
+                        line: 5,
                         column: 1,
                       ),
                     ),

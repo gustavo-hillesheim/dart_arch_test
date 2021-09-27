@@ -48,6 +48,13 @@ void main() {
             returnType: stringDartType,
           ),
         ],
+        variables: [
+          DartVariable(
+            name: 'someVariable',
+            location: ElementLocation.unknown(),
+            type: stringDartType,
+          ),
+        ],
         dependencies: [
           DartLibraryDependency(
             kind: LibraryDependencyKind.IMPORT,
@@ -81,6 +88,7 @@ LibraryMirror createLibraryMirror() {
       #FakeClass:
           FakeClassMirror('FakeClass', path: 'package:pkg/library.dart'),
       #utilFunction: FakeMethodMirror('utilFunction', returnType: String),
+      #someVariable: FakeVariableMirror('someVariable', type: String),
     },
     libraryDependencies: dependencies,
   );
