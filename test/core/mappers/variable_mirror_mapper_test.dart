@@ -26,10 +26,8 @@ void main() {
       DartVariable(
         name: 'imAVariable',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType(
           name: 'DartVariable',
-          generics: [],
           location: ElementLocation(
             uri: 'package:arch_test/core/models/dart_variable.dart',
             column: 1,
@@ -63,7 +61,6 @@ void main() {
       DartVariable(
         name: '_variable',
         location: ElementLocation.unknown(),
-        parentRef: null,
         isFinal: true,
         type: doubleDartType,
       ),
@@ -85,7 +82,6 @@ void main() {
       DartVariable(
         name: 'MY_CONST',
         location: ElementLocation.unknown(),
-        parentRef: null,
         isConst: true,
         isStatic: true,
         type: intDartType,

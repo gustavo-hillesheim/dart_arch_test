@@ -22,13 +22,11 @@ void main() {
       dartType,
       DartType(
         name: 'MyType',
-        generics: [],
         location: ElementLocation(
           uri: 'package:pkg/my_type.dart',
           column: 1,
           line: 1,
         ),
-        parentRef: null,
       ),
     );
   });

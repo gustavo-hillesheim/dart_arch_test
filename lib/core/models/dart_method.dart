@@ -18,11 +18,11 @@ class DartMethod extends DartDeclaration {
   DartMethod({
     required String name,
     required ElementLocation location,
-    required this.parentRef,
     required this.returnType,
-    required this.parameters,
-    bool? isTopLevel,
+    this.parameters = const [],
+    this.parentRef,
     this.kind = MethodKind.REGULAR,
+    bool isTopLevel = false,
     this.isAbstract = false,
     this.isStatic = false,
   }) : super(name: name, location: location, isTopLevel: isTopLevel);
@@ -39,9 +39,9 @@ class DartConstructor extends DartMethod {
     required String name,
     required ElementLocation location,
     required DartType returnType,
-    required List<DartParameter> parameters,
-    required DartElementRef? parentRef,
     required this.constructorKind,
+    List<DartParameter> parameters = const [],
+    DartElementRef? parentRef,
   }) : super(
           name: name,
           location: location,

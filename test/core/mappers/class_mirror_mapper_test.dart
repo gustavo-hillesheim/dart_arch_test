@@ -62,8 +62,6 @@ void main() {
           column: 1,
           line: 1,
         ),
-        parentRef: null,
-        generics: [],
         superClass: DartClass(
           name: 'SuperClass',
           location: ElementLocation(
@@ -71,11 +69,6 @@ void main() {
             column: 1,
             line: 1,
           ),
-          parentRef: null,
-          superInterfaces: [],
-          generics: [],
-          methods: [],
-          fields: [],
         ),
         superInterfaces: [
           DartClass(
@@ -85,11 +78,6 @@ void main() {
               column: 1,
               line: 1,
             ),
-            parentRef: null,
-            generics: [],
-            superInterfaces: [],
-            methods: [],
-            fields: [],
           ),
           DartClass(
             name: 'MegaInterface',
@@ -98,24 +86,17 @@ void main() {
               column: 1,
               line: 1,
             ),
-            parentRef: null,
-            methods: [],
-            superInterfaces: [],
-            generics: [],
-            fields: [],
           ),
         ],
         fields: [
           DartVariable(
             name: 'aField',
             location: ElementLocation.unknown(),
-            parentRef: null,
             type: stringDartType,
           ),
           DartVariable(
             name: '_bField',
             location: ElementLocation.unknown(),
-            parentRef: null,
             isFinal: true,
             type: doubleDartType,
           ),
@@ -124,25 +105,19 @@ void main() {
           DartMethod(
             name: 'cMethod',
             location: ElementLocation.unknown(),
-            parentRef: null,
             returnType: stringDartType,
-            parameters: [],
           ),
           DartConstructor(
             name: 'FakeClass',
             location: ElementLocation.unknown(),
-            parentRef: null,
             constructorKind: ConstructorKind.GENERATIVE,
-            parameters: [],
             returnType: DartType(
               name: 'FakeClass',
-              generics: [],
               location: ElementLocation(
                 uri: 'package:pkg/fake_class.dart',
                 column: 1,
                 line: 1,
               ),
-              parentRef: null,
             ),
           ),
         ],
@@ -165,12 +140,7 @@ void main() {
           column: 1,
           line: 1,
         ),
-        parentRef: null,
         isEnum: true,
-        superInterfaces: [],
-        generics: [],
-        methods: [],
-        fields: [],
       ),
     );
   });
@@ -190,12 +160,7 @@ void main() {
           column: 1,
           line: 1,
         ),
-        parentRef: null,
         isAbstract: true,
-        fields: [],
-        methods: [],
-        superInterfaces: [],
-        generics: [],
       ),
     );
   });

@@ -247,7 +247,6 @@ class FakeDartPackage extends DartPackage {
   FakeDartPackage({String? name})
       : super(
           name: name ?? '',
-          libraries: [],
         );
 }
 
@@ -259,16 +258,12 @@ class FakeDartLibrary extends DartLibrary {
                 (lib) => DartLibraryDependency(
                   path: lib,
                   location: ElementLocation(uri: '', column: 1, line: 1),
-                  parentRef: null,
                   kind: LibraryDependencyKind.IMPORT,
                 ),
               )
               .toList(),
           name: name ?? '',
           location: ElementLocation(uri: '', column: 1, line: 1),
-          parentRef: null,
-          methods: [],
-          classes: [],
         );
 }
 

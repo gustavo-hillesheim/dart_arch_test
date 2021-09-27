@@ -76,7 +76,6 @@ final mockPackage = DartPackage(
         column: 1,
         line: 1,
       ),
-      parentRef: null,
       classes: [
         DartClass(
           name: 'SomeClass',
@@ -93,9 +92,6 @@ final mockPackage = DartPackage(
               line: 1,
             ),
           ),
-          superInterfaces: [],
-          generics: [],
-          fields: [],
           methods: [
             DartMethod(
               name: 'doNothing',
@@ -113,7 +109,6 @@ final mockPackage = DartPackage(
                 ),
               ),
               returnType: DartType.voidType(),
-              parameters: [],
             ),
           ],
         ),
@@ -135,10 +130,8 @@ final mockPackage = DartPackage(
             ),
           ),
           returnType: DartType.voidType(),
-          parameters: [],
         ),
       ],
-      dependencies: [],
     ),
   ],
 );

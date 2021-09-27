@@ -12,12 +12,10 @@ DartLibrary createSampleLibrary() {
   return DartLibrary(
     name: 'main.dart',
     location: ElementLocation.unknown(),
-    parentRef: null,
     classes: [
       createTestClass(),
       createMyEnum(),
     ],
-    dependencies: [],
     methods: [
       DartMethod(
         name: 'main',
@@ -27,7 +25,6 @@ DartLibrary createSampleLibrary() {
           name: 'main.dart',
           location: ElementLocation.unknown(),
         ),
-        parameters: [],
       ),
     ],
   );
@@ -42,10 +39,6 @@ DartClass createMyEnum() {
       name: 'main.dart',
       location: ElementLocation.unknown(),
     ),
-    generics: [],
-    superInterfaces: [],
-    fields: [],
-    methods: [],
   );
 }
 
@@ -57,8 +50,6 @@ DartClass createTestClass() {
       name: 'main.dart',
       location: ElementLocation.unknown(),
     ),
-    generics: [],
-    superInterfaces: [],
     fields: [
       DartVariable(
         name: 'id',
@@ -78,10 +69,8 @@ DartClass createTestClass() {
           name: 'TestClass',
           location: ElementLocation.unknown(),
         ),
-        parameters: [],
         returnType: DartType(
           name: 'TestClass',
-          generics: [],
           location: ElementLocation.unknown(),
           parentRef: DartElementRef<DartLibrary>(
             name: 'main.dart',
@@ -93,7 +82,6 @@ DartClass createTestClass() {
       DartMethod(
         name: 'setId',
         returnType: DartType.voidType(),
-        parameters: [],
         location: ElementLocation.unknown(),
         parentRef: DartElementRef<DartClass>(
           name: 'TestClass',

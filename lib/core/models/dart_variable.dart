@@ -16,9 +16,9 @@ class DartVariable extends DartDeclaration {
   DartVariable({
     required String name,
     required ElementLocation location,
-    required this.parentRef,
     required this.type,
-    bool? isTopLevel,
+    this.parentRef,
+    bool isTopLevel = false,
     this.isFinal = false,
     this.isConst = false,
     this.isStatic = false,

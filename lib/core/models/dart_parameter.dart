@@ -17,8 +17,8 @@ class DartParameter extends DartElement {
   DartParameter({
     required String name,
     required ElementLocation location,
-    required this.parentRef,
     required this.type,
+    this.parentRef,
     this.hasDefaultValue = false,
     this.isConst = false,
     this.isFinal = false,

@@ -4,11 +4,10 @@ abstract class DartDeclaration extends DartElement {
   final bool isTopLevel;
 
   DartDeclaration({
-    bool? isTopLevel,
+    this.isTopLevel = false,
     required String name,
     required ElementLocation location,
-  })  : isTopLevel = isTopLevel ?? false,
-        super(
+  }) : super(
           name: name,
           location: location,
         );

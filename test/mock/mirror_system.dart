@@ -49,7 +49,6 @@ Map<Uri, LibraryMirror> createLibraryMirrorMap(List<String> urisStrs) {
 
 final doubleDartType = DartType(
   name: 'double',
-  generics: [],
   location: ElementLocation(uri: 'dart:core/double.dart', line: 1, column: 1),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -60,7 +59,6 @@ final doubleDartType = DartType(
 
 final voidDartType = DartType(
   name: 'Void',
-  generics: [],
   location:
       ElementLocation(uri: 'dart:ffi/native_type.dart', line: 1, column: 1),
   parentRef: DartElementRef<DartLibrary>(
@@ -71,7 +69,6 @@ final voidDartType = DartType(
 
 final intDartType = DartType(
   name: 'int',
-  generics: [],
   location: ElementLocation(uri: 'dart:core/int.dart', line: 1, column: 1),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -82,7 +79,6 @@ final intDartType = DartType(
 
 final stringDartType = DartType(
   name: 'String',
-  generics: [],
   location: ElementLocation(uri: 'dart:core/string.dart', line: 1, column: 1),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',

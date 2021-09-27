@@ -31,7 +31,6 @@ void main() {
       DartLibrary(
         name: 'library.dart',
         location: ElementLocation.unknown(),
-        parentRef: null,
         classes: [
           DartClass(
             name: 'FakeClass',
@@ -40,20 +39,13 @@ void main() {
               column: 1,
               line: 1,
             ),
-            parentRef: null,
-            fields: [],
-            generics: [],
-            superInterfaces: [],
-            methods: [],
           ),
         ],
         methods: [
           DartMethod(
             name: 'utilFunction',
             location: ElementLocation.unknown(),
-            parentRef: null,
             returnType: stringDartType,
-            parameters: [],
           ),
         ],
         dependencies: [

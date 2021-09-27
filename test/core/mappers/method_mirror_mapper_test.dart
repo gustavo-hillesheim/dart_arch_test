@@ -35,11 +35,9 @@ void main() {
             name: 'aParameter',
             type: stringDartType,
             location: ElementLocation.unknown(),
-            parentRef: null,
           ),
         ],
         location: ElementLocation.unknown(),
-        parentRef: null,
       ),
     );
   });
@@ -59,9 +57,7 @@ void main() {
         name: 'aConstructor',
         returnType: stringDartType,
         constructorKind: ConstructorKind.FACTORY,
-        parameters: [],
         location: ElementLocation.unknown(),
-        parentRef: null,
       ),
     );
   });
@@ -80,9 +76,7 @@ void main() {
         name: 'aGetter',
         returnType: stringDartType,
         kind: MethodKind.GETTER,
-        parameters: [],
         location: ElementLocation.unknown(),
-        parentRef: null,
       ),
     );
   });

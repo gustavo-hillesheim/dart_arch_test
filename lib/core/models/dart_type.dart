@@ -15,9 +15,9 @@ class DartType extends DartDeclaration {
   DartType({
     required String name,
     required ElementLocation location,
-    required this.parentRef,
-    required this.generics,
-    bool? isTopLevel,
+    this.parentRef,
+    this.generics = const [],
+    bool isTopLevel = false,
   }) : super(name: name, location: location, isTopLevel: isTopLevel);
 
   factory DartType.voidType() {
@@ -29,22 +29,16 @@ class DartType extends DartDeclaration {
   }
 
   factory DartType._coreType(String name) {
-    final package = DartPackage(name: 'unknown', libraries: []);
+    final package = DartPackage(name: 'unknown');
     final location = ElementLocation.unknown();
     final library = DartLibrary(
       name: 'unknown',
-      classes: [],
-      dependencies: [],
-      methods: [],
       location: location,
-      parentRef: null,
     );
     package.libraries.add(library);
     return DartType(
       name: name,
       location: location,
-      generics: [],
-      parentRef: null,
     );
   }
 

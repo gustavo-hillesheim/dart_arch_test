@@ -19,7 +19,6 @@ void main() {
               line: 1,
               column: 1,
             ),
-            parentRef: null,
             classes: [
               DartClass(
                 name: 'TextPrinter',
@@ -36,8 +35,6 @@ void main() {
                     column: 1,
                   ),
                 ),
-                superInterfaces: [],
-                generics: [],
                 fields: [
                   DartVariable(
                     name: 'arguments',
@@ -146,8 +143,6 @@ void main() {
                 ],
               ),
             ],
-            methods: [],
-            dependencies: [],
           ),
           DartLibrary(
             name: 'main.dart',
@@ -156,8 +151,6 @@ void main() {
               line: 1,
               column: 1,
             ),
-            parentRef: null,
-            classes: [],
             methods: [
               DartMethod(
                 name: 'main',
