@@ -49,6 +49,7 @@ class ClassMirrorMapper {
       location: MirrorUtils.elementLocation(mirror),
       parentRef: MirrorUtils.elementRef<DartLibrary>(mirror.owner),
       generics: generics,
+      isTopLevel: mirror.isTopLevel,
       isAbstract: mirror.isAbstract,
       isEnum: mirror.isEnum,
       fields: fields,

@@ -45,6 +45,7 @@ class MethodMirrorMapper {
       parentRef: MirrorUtils.elementRef(mirror.owner),
       location: location,
       returnType: returnType,
+      isTopLevel: mirror.isTopLevel,
       isAbstract: mirror.isAbstract,
       isStatic: mirror.isStatic,
       parameters: parameters,

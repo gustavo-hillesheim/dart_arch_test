@@ -20,6 +20,7 @@ class DartClass extends DartType implements DartElementsParent {
     required this.fields,
     required this.methods,
     required this.superInterfaces,
+    bool isTopLevel = true,
     this.isAbstract = false,
     this.isEnum = false,
     this.superClass,
@@ -28,6 +29,7 @@ class DartClass extends DartType implements DartElementsParent {
           generics: generics,
           location: location,
           parentRef: parentRef,
+          isTopLevel: isTopLevel,
         );
 
   @override

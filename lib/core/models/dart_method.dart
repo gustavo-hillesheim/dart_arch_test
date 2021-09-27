@@ -1,12 +1,12 @@
 import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/core/models/dart_element.dart';
+import 'package:arch_test/core/models/dart_declaration.dart';
 import 'package:arch_test/core/models/dart_parameter.dart';
 import 'package:arch_test/core/models/dart_type.dart';
 import 'package:arch_test/core/models/element_location.dart';
 import 'package:arch_test/core/models/enums/constructor_kind.dart';
 import 'package:arch_test/core/models/enums/method_kind.dart';
 
-class DartMethod extends DartElement {
+class DartMethod extends DartDeclaration {
   final bool isAbstract;
   final bool isStatic;
   final DartType returnType;
@@ -21,10 +21,11 @@ class DartMethod extends DartElement {
     required this.parentRef,
     required this.returnType,
     required this.parameters,
+    bool? isTopLevel,
     this.kind = MethodKind.REGULAR,
     this.isAbstract = false,
     this.isStatic = false,
-  }) : super(name: name, location: location);
+  }) : super(name: name, location: location, isTopLevel: isTopLevel);
 
   @override
   List<Object?> get props =>
@@ -47,6 +48,7 @@ class DartConstructor extends DartMethod {
           returnType: returnType,
           parameters: parameters,
           kind: MethodKind.CONSTRUCTOR,
+          isTopLevel: false,
           isAbstract: false,
           isStatic: false,
           parentRef: parentRef,

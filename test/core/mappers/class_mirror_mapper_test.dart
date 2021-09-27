@@ -117,7 +117,6 @@ void main() {
             location: ElementLocation.unknown(),
             parentRef: null,
             isFinal: true,
-            isPrivate: true,
             type: doubleDartType,
           ),
         ],

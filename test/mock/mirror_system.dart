@@ -135,12 +135,14 @@ class FakeClassMirror extends Mock implements ClassMirror {
   final List<TypeMirror> typeArguments;
   final bool hasReflectedType;
   final Type reflectedType;
+  final bool isTopLevel;
 
   FakeClassMirror(
     String name, {
     required String path,
     this.isAbstract = false,
     this.isEnum = false,
+    this.isTopLevel = true,
     this.declarations = const {},
     this.superinterfaces = const [],
     this.typeArguments = const [],
@@ -156,6 +158,7 @@ class FakeMethodMirror extends Mock implements MethodMirror {
   final Symbol simpleName;
   final bool isAbstract;
   final bool isStatic;
+  final bool isTopLevel;
   final bool isConstructor;
   final bool isConstConstructor;
   final bool isFactoryConstructor;
@@ -172,6 +175,7 @@ class FakeMethodMirror extends Mock implements MethodMirror {
     String name, {
     this.isAbstract = false,
     this.isStatic = false,
+    this.isTopLevel = false,
     this.isConstructor = false,
     this.isConstConstructor = false,
     this.isFactoryConstructor = false,
@@ -220,12 +224,14 @@ class FakeVariableMirror extends Mock implements VariableMirror {
   final bool isFinal;
   final bool isPrivate;
   final bool isStatic;
+  final bool isTopLevel;
   final TypeMirror type;
 
   FakeVariableMirror(
     String name, {
     required Type type,
     this.isConst = false,
+    this.isTopLevel = false,
     this.isFinal = false,
     this.isPrivate = false,
     this.isStatic = false,

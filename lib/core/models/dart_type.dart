@@ -2,12 +2,12 @@ import 'dart:mirrors';
 
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/core/mappers/mappers.dart';
-import 'package:arch_test/core/models/dart_element.dart';
+import 'package:arch_test/core/models/dart_declaration.dart';
 import 'package:arch_test/core/models/element_location.dart';
 
 /// Representation of a Dart type.
 /// Can be from method return types, or variables types.
-class DartType extends DartElement {
+class DartType extends DartDeclaration {
   final List<DartType> generics;
   @override
   final DartElementRef? parentRef;
@@ -17,7 +17,8 @@ class DartType extends DartElement {
     required ElementLocation location,
     required this.parentRef,
     required this.generics,
-  }) : super(name: name, location: location);
+    bool? isTopLevel,
+  }) : super(name: name, location: location, isTopLevel: isTopLevel);
 
   factory DartType.voidType() {
     return DartType._coreType('void');

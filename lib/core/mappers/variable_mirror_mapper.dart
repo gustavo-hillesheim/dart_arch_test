@@ -21,7 +21,7 @@ class VariableMirrorMapper {
       name: simpleName,
       isConst: mirror.isConst,
       isFinal: mirror.isFinal,
-      isPrivate: mirror.isPrivate,
+      isTopLevel: mirror.isTopLevel,
       isStatic: mirror.isStatic,
       location: MirrorUtils.elementLocation(mirror),
       parentRef: MirrorUtils.elementRef(mirror.owner),

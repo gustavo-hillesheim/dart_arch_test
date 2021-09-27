@@ -73,7 +73,6 @@ void main() {
                       ),
                     ),
                     type: DartType.from<int>(),
-                    isPrivate: true,
                   ),
                 ],
                 methods: [
@@ -162,6 +161,7 @@ void main() {
             methods: [
               DartMethod(
                 name: 'main',
+                isTopLevel: true,
                 location: ElementLocation(
                   uri: 'package:core_example/main.dart',
                   line: 3,
