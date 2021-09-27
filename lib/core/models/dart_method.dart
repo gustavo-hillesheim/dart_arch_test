@@ -1,5 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/core/models/dart_declaration.dart';
+import 'package:arch_test/core/models/dart_metadata.dart';
 import 'package:arch_test/core/models/dart_parameter.dart';
 import 'package:arch_test/core/models/dart_type.dart';
 import 'package:arch_test/core/models/element_location.dart';
@@ -22,10 +23,16 @@ class DartMethod extends DartDeclaration {
     this.parameters = const [],
     this.parentRef,
     this.kind = MethodKind.REGULAR,
-    bool isTopLevel = false,
     this.isAbstract = false,
     this.isStatic = false,
-  }) : super(name: name, location: location, isTopLevel: isTopLevel);
+    bool isTopLevel = false,
+    List<DartMetadata> metadata = const [],
+  }) : super(
+          name: name,
+          location: location,
+          isTopLevel: isTopLevel,
+          metadata: metadata,
+        );
 
   @override
   List<Object?> get props =>
@@ -42,6 +49,7 @@ class DartConstructor extends DartMethod {
     required this.constructorKind,
     List<DartParameter> parameters = const [],
     DartElementRef? parentRef,
+    List<DartMetadata> metadata = const [],
   }) : super(
           name: name,
           location: location,
@@ -52,6 +60,7 @@ class DartConstructor extends DartMethod {
           isAbstract: false,
           isStatic: false,
           parentRef: parentRef,
+          metadata: metadata,
         );
 
   @override

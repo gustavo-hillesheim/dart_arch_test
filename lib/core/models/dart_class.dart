@@ -1,5 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/core/models/dart_declaration.dart';
+import 'package:arch_test/core/models/dart_metadata.dart';
 import 'package:arch_test/core/models/dart_method.dart';
 import 'package:arch_test/core/models/dart_variable.dart';
 import 'package:arch_test/core/models/element_location.dart';
@@ -17,21 +18,23 @@ class DartClass extends DartType
   DartClass({
     required String name,
     required ElementLocation location,
-    List<DartType> generics = const [],
-    DartElementRef<DartLibrary>? parentRef,
     this.fields = const [],
     this.methods = const [],
     this.superInterfaces = const [],
-    bool isTopLevel = true,
     this.isAbstract = false,
     this.isEnum = false,
     this.superClass,
+    DartElementRef<DartLibrary>? parentRef,
+    List<DartType> generics = const [],
+    bool isTopLevel = true,
+    List<DartMetadata> metadata = const [],
   }) : super(
           name: name,
           generics: generics,
           location: location,
           parentRef: parentRef,
           isTopLevel: isTopLevel,
+          metadata: metadata,
         );
 
   @override

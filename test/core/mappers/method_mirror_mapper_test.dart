@@ -34,7 +34,6 @@ void main() {
           DartParameter(
             name: 'aParameter',
             type: stringDartType,
-            location: ElementLocation.unknown(),
           ),
         ],
         location: ElementLocation.unknown(),

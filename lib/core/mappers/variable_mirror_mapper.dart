@@ -26,6 +26,7 @@ class VariableMirrorMapper {
       location: MirrorUtils.elementLocation(mirror),
       parentRef: MirrorUtils.elementRef(mirror.owner),
       type: typeMirrorMapper.toDartType(mirror.type),
+      metadata: MirrorUtils.readMetadata(mirror),
     );
   }
 }

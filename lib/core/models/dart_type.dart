@@ -3,6 +3,7 @@ import 'dart:mirrors';
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/core/mappers/mappers.dart';
 import 'package:arch_test/core/models/dart_declaration.dart';
+import 'package:arch_test/core/models/dart_metadata.dart';
 import 'package:arch_test/core/models/element_location.dart';
 
 /// Representation of a Dart type.
@@ -17,8 +18,14 @@ class DartType extends DartDeclaration {
     required ElementLocation location,
     this.parentRef,
     this.generics = const [],
+    List<DartMetadata> metadata = const [],
     bool isTopLevel = false,
-  }) : super(name: name, location: location, isTopLevel: isTopLevel);
+  }) : super(
+          name: name,
+          location: location,
+          isTopLevel: isTopLevel,
+          metadata: metadata,
+        );
 
   factory DartType.voidType() {
     return DartType._coreType('void');

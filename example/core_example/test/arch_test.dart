@@ -92,7 +92,6 @@ void main() {
                     parameters: [
                       DartParameter(
                         name: 'text',
-                        location: ElementLocation.unknown(),
                         type: DartType.from<String>(),
                         parentRef: DartElementRef<DartMethod>(
                           name: 'printText',
@@ -126,7 +125,6 @@ void main() {
                     parameters: [
                       DartParameter(
                         name: 'arguments',
-                        location: ElementLocation.unknown(),
                         type: DartType.from<List<String>>(),
                         parentRef: DartElementRef<DartConstructor>(
                           name: 'TextPrinter',
@@ -196,7 +194,6 @@ void main() {
                 parameters: [
                   DartParameter(
                     name: 'arguments',
-                    location: ElementLocation.unknown(),
                     type: DartType.from<List<String>>(),
                     parentRef: DartElementRef<DartMethod>(
                       name: 'main',

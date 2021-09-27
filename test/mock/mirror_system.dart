@@ -132,6 +132,7 @@ class FakeClassMirror extends Mock implements ClassMirror {
   final bool hasReflectedType;
   final Type reflectedType;
   final bool isTopLevel;
+  final List<InstanceMirror> metadata;
 
   FakeClassMirror(
     String name, {
@@ -142,6 +143,7 @@ class FakeClassMirror extends Mock implements ClassMirror {
     this.declarations = const {},
     this.superinterfaces = const [],
     this.typeArguments = const [],
+    this.metadata = const [],
     this.superclass,
     Type? reflectedType,
   })  : simpleName = Symbol(name),
@@ -166,6 +168,7 @@ class FakeMethodMirror extends Mock implements MethodMirror {
   final bool isRegularMethod;
   final TypeMirror returnType;
   final List<ParameterMirror> parameters;
+  final List<InstanceMirror> metadata;
 
   FakeMethodMirror(
     String name, {
@@ -182,6 +185,7 @@ class FakeMethodMirror extends Mock implements MethodMirror {
     this.isOperator = false,
     this.isRegularMethod = true,
     this.parameters = const [],
+    this.metadata = const [],
     Type returnType = Void,
     TypeMirror? returnTypeMirror,
   })  : simpleName = Symbol(name),
@@ -222,6 +226,7 @@ class FakeVariableMirror extends Mock implements VariableMirror {
   final bool isStatic;
   final bool isTopLevel;
   final TypeMirror type;
+  final List<InstanceMirror> metadata;
 
   FakeVariableMirror(
     String name, {
@@ -231,6 +236,7 @@ class FakeVariableMirror extends Mock implements VariableMirror {
     this.isFinal = false,
     this.isPrivate = false,
     this.isStatic = false,
+    this.metadata = const [],
   })  : simpleName = Symbol(name),
         type = FakeTypeMirror.fromType(type);
 }
@@ -242,6 +248,7 @@ class FakeTypeMirror extends Mock implements TypeMirror {
   final bool hasReflectedType;
   final Type reflectedType;
   final DeclarationMirror? owner;
+  final List<InstanceMirror> metadata;
 
   FakeTypeMirror(
     String name,
@@ -249,6 +256,7 @@ class FakeTypeMirror extends Mock implements TypeMirror {
     List<TypeMirror>? typeArguments,
     Type? reflectedType,
     DeclarationMirror? owner,
+    this.metadata = const [],
   })  : simpleName = Symbol(name),
         location = FakeSourceLocation(sourcePath),
         typeArguments = typeArguments ?? [],
@@ -282,6 +290,7 @@ class FakeParameterMirror extends Mock implements ParameterMirror {
   final bool isConst;
   final bool hasDefaultValue;
   final TypeMirror type;
+  final List<InstanceMirror> metadata;
 
   FakeParameterMirror(
     String name, {
@@ -291,6 +300,7 @@ class FakeParameterMirror extends Mock implements ParameterMirror {
     this.isFinal = false,
     this.isConst = false,
     this.hasDefaultValue = false,
+    this.metadata = const [],
   })  : simpleName = Symbol(name),
         type = FakeTypeMirror.fromType(type);
 }

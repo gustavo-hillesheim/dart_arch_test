@@ -37,6 +37,7 @@ class MethodMirrorMapper {
         returnType: returnType,
         parameters: parameters,
         constructorKind: constructorKindFromMirror(mirror),
+        metadata: MirrorUtils.readMetadata(mirror),
       );
     }
     return DartMethod(
@@ -49,6 +50,7 @@ class MethodMirrorMapper {
       isAbstract: mirror.isAbstract,
       isStatic: mirror.isStatic,
       parameters: parameters,
+      metadata: MirrorUtils.readMetadata(mirror),
     );
   }
 }

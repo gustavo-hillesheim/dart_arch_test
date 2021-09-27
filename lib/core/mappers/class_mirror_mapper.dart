@@ -56,6 +56,7 @@ class ClassMirrorMapper {
       methods: methods,
       superClass: superClass,
       superInterfaces: superInterfaces,
+      metadata: MirrorUtils.readMetadata(mirror),
     );
   }
 }
