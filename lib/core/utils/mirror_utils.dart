@@ -11,6 +11,12 @@ class MirrorUtils {
   static List<DartMetadata> readMetadata(DeclarationMirror mirror) {
     return mirror.metadata
         .where((m) => m.hasReflectee)
+        .where((m) {
+          final name = MirrorSystem.getName(m.type.simpleName);
+          // Default metadata added by Dart
+          final forbiddenMetadata = ['_Patch', 'pragma'];
+          return !forbiddenMetadata.contains(name);
+        })
         .map((m) => DartMetadata(metadata: m.reflectee))
         .toList();
   }

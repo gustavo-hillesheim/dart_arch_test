@@ -1,7 +1,5 @@
 import 'dart:mirrors';
 
-import 'package:path/path.dart';
-
 class UriUtils {
   static String getPackageName(Uri uri) {
     return getPackageNameFromString(uri.toString());
