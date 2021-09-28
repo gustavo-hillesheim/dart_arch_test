@@ -33,5 +33,5 @@ class DartLibrary extends DartElement
       super.props + [classes, methods, variables, dependencies];
 
   @override
-  List<DartDeclaration> get children => [...classes, ...methods];
+  List<DartDeclaration> get children => [...classes, ...methods, ...variables];
 }
