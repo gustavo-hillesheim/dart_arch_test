@@ -19,7 +19,6 @@ void main() {
               line: 1,
               column: 1,
             ),
-            parentRef: null,
             classes: [
               DartClass(
                 name: 'TextPrinter',
@@ -36,8 +35,6 @@ void main() {
                     column: 1,
                   ),
                 ),
-                superInterfaces: [],
-                generics: [],
                 fields: [
                   DartVariable(
                     name: 'arguments',
@@ -73,7 +70,6 @@ void main() {
                       ),
                     ),
                     type: DartType.from<int>(),
-                    isPrivate: true,
                   ),
                 ],
                 methods: [
@@ -96,7 +92,6 @@ void main() {
                     parameters: [
                       DartParameter(
                         name: 'text',
-                        location: ElementLocation.unknown(),
                         type: DartType.from<String>(),
                         parentRef: DartElementRef<DartMethod>(
                           name: 'printText',
@@ -130,7 +125,6 @@ void main() {
                     parameters: [
                       DartParameter(
                         name: 'arguments',
-                        location: ElementLocation.unknown(),
                         type: DartType.from<List<String>>(),
                         parentRef: DartElementRef<DartConstructor>(
                           name: 'TextPrinter',
@@ -147,8 +141,6 @@ void main() {
                 ],
               ),
             ],
-            methods: [],
-            dependencies: [],
           ),
           DartLibrary(
             name: 'main.dart',
@@ -157,14 +149,36 @@ void main() {
               line: 1,
               column: 1,
             ),
-            parentRef: null,
-            classes: [],
-            methods: [
-              DartMethod(
-                name: 'main',
+            variables: [
+              DartVariable(
+                name: 'myConst',
                 location: ElementLocation(
                   uri: 'package:core_example/main.dart',
                   line: 3,
+                  column: 7,
+                ),
+                parentRef: DartElementRef<DartLibrary>(
+                  name: 'main.dart',
+                  location: ElementLocation(
+                    uri: 'package:core_example/main.dart',
+                    line: 1,
+                    column: 1,
+                  ),
+                ),
+                type: DartType.from<int>(),
+                isTopLevel: true,
+                isConst: true,
+                isFinal: true,
+                isStatic: true,
+              ),
+            ],
+            methods: [
+              DartMethod(
+                name: 'main',
+                isTopLevel: true,
+                location: ElementLocation(
+                  uri: 'package:core_example/main.dart',
+                  line: 5,
                   column: 1,
                 ),
                 parentRef: DartElementRef<DartLibrary>(
@@ -180,13 +194,12 @@ void main() {
                 parameters: [
                   DartParameter(
                     name: 'arguments',
-                    location: ElementLocation.unknown(),
                     type: DartType.from<List<String>>(),
                     parentRef: DartElementRef<DartMethod>(
                       name: 'main',
                       location: ElementLocation(
                         uri: 'package:core_example/main.dart',
-                        line: 3,
+                        line: 5,
                         column: 1,
                       ),
                     ),

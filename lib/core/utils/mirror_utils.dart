@@ -1,11 +1,26 @@
 import 'dart:mirrors';
 
 import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/core/core.dart';
+import 'package:arch_test/core/models/dart_metadata.dart';
 import 'package:arch_test/core/models/element_location.dart';
 import 'package:arch_test/core/utils/uri_utils.dart';
 import 'package:arch_test/core/exception.dart';
 
 class MirrorUtils {
+  static List<DartMetadata> readMetadata(DeclarationMirror mirror) {
+    return mirror.metadata
+        .where((m) => m.hasReflectee)
+        .where((m) {
+          final name = MirrorSystem.getName(m.type.simpleName);
+          // Default metadata added by Dart
+          final forbiddenMetadata = ['_Patch', 'pragma'];
+          return !forbiddenMetadata.contains(name);
+        })
+        .map((m) => DartMetadata(metadata: m.reflectee))
+        .toList();
+  }
+
   static DartElementRef<T>? elementRef<T extends DartElement>(
       DeclarationMirror? mirror) {
     if (mirror == null) {

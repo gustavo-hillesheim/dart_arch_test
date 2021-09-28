@@ -21,13 +21,13 @@ class ParameterMirrorMapper {
     final simpleName = MirrorSystem.getName(mirror.simpleName);
     return DartParameter(
       name: simpleName,
-      location: MirrorUtils.elementLocation(mirror),
       parentRef: MirrorUtils.elementRef<DartMethod>(mirror.owner),
       type: typeMirrorMapper.toDartType(mirror.type),
       isFinal: mirror.isFinal,
       isConst: mirror.isConst,
       hasDefaultValue: mirror.hasDefaultValue,
       kind: parameterKindFromMirror(mirror),
+      metadata: MirrorUtils.readMetadata(mirror),
     );
   }
 }

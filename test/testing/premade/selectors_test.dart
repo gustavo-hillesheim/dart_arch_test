@@ -34,10 +34,8 @@ void main() {
           name: 'TestClass',
           location: ElementLocation.unknown(),
         ),
-        parameters: [],
         returnType: DartType(
           name: 'TestClass',
-          generics: [],
           location: ElementLocation.unknown(),
           parentRef: DartElementRef<DartLibrary>(
             name: 'main.dart',
@@ -49,7 +47,6 @@ void main() {
       DartMethod(
         name: 'setId',
         returnType: DartType.voidType(),
-        parameters: [],
         location: ElementLocation.unknown(),
         parentRef: DartElementRef<DartClass>(
           name: 'TestClass',
@@ -64,7 +61,6 @@ void main() {
           name: 'main.dart',
           location: ElementLocation.unknown(),
         ),
-        parameters: [],
       ),
     ]);
   });

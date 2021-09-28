@@ -7,19 +7,16 @@ void main() {
     DartVariable(
       name: 'myVarFiltered',
       location: ElementLocation.unknown(),
-      parentRef: null,
       type: DartType.from<String>(),
     ),
     DartVariable(
       name: 'nonFilteredVar',
       location: ElementLocation.unknown(),
-      parentRef: null,
       type: DartType.from<String>(),
     ),
     DartVariable(
       name: '_anotherNonFilteredVar',
       location: ElementLocation.unknown(),
-      parentRef: null,
       type: DartType.from<String>(),
     ),
   ];
@@ -45,7 +42,6 @@ void main() {
       DartVariable(
         name: 'myVarFiltered',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType.from<String>(),
       ),
     ]);
@@ -64,13 +60,11 @@ void main() {
       DartVariable(
         name: 'myVarFiltered',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType.from<String>(),
       ),
       DartVariable(
         name: 'nonFilteredVar',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType.from<String>(),
       ),
     ]);

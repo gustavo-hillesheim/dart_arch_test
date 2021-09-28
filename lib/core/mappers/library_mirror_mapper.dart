@@ -1,5 +1,6 @@
 import 'dart:mirrors';
 
+import 'package:arch_test/core/core.dart';
 import 'package:arch_test/core/mappers/class_mirror_mapper.dart';
 import 'package:arch_test/core/mappers/method_mirror_mapper.dart';
 import 'package:arch_test/core/models/models.dart';
@@ -13,14 +14,20 @@ class LibraryMirrorMapper {
     _instance ??= LibraryMirrorMapper(
       ClassMirrorMapper.instance,
       MethodMirrorMapper.instance,
+      VariableMirrorMapper.instance,
     );
     return _instance!;
   }
 
   final ClassMirrorMapper classMirrorMapper;
   final MethodMirrorMapper methodMirrorMapper;
+  final VariableMirrorMapper variableMirrorMapper;
 
-  LibraryMirrorMapper(this.classMirrorMapper, this.methodMirrorMapper);
+  LibraryMirrorMapper(
+    this.classMirrorMapper,
+    this.methodMirrorMapper,
+    this.variableMirrorMapper,
+  );
 
   DartLibrary toDartLibrary(LibraryMirror mirror) {
     final path = mirror.uri.toString();
@@ -30,9 +37,9 @@ class LibraryMirrorMapper {
     return DartLibrary(
       name: name,
       location: MirrorUtils.elementLocation(mirror),
-      parentRef: null,
       classes: _getClasses(mirror),
       methods: _getMethods(mirror),
+      variables: _getVariables(mirror),
       dependencies: _getDependencies(mirror, dirname(path)),
     );
   }
@@ -48,6 +55,13 @@ class LibraryMirrorMapper {
     return mirror.declarations.values
         .whereType<MethodMirror>()
         .map(methodMirrorMapper.toDartMethod)
+        .toList(growable: false);
+  }
+
+  List<DartVariable> _getVariables(LibraryMirror mirror) {
+    return mirror.declarations.values
+        .whereType<VariableMirror>()
+        .map(variableMirrorMapper.toDartVariable)
         .toList(growable: false);
   }
 
