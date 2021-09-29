@@ -8,15 +8,11 @@ import 'package:arch_test/core/models/dart_library.dart';
 import 'package:arch_test/core/utils/mirror_utils.dart';
 
 class ClassMirrorMapper {
-  static ClassMirrorMapper? _instance;
-  static ClassMirrorMapper get instance {
-    _instance ??= ClassMirrorMapper(
-      VariableMirrorMapper.instance,
-      MethodMirrorMapper.instance,
-      TypeMirrorMapper.instance,
-    );
-    return _instance!;
-  }
+  static late ClassMirrorMapper instance = ClassMirrorMapper(
+    VariableMirrorMapper.instance,
+    MethodMirrorMapper.instance,
+    TypeMirrorMapper.instance,
+  );
 
   final VariableMirrorMapper variableMirrorMapper;
   final MethodMirrorMapper methodMirrorMapper;

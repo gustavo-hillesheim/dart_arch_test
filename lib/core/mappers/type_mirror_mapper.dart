@@ -4,11 +4,7 @@ import 'package:arch_test/core/models/dart_type.dart';
 import 'package:arch_test/core/utils/mirror_utils.dart';
 
 class TypeMirrorMapper {
-  static TypeMirrorMapper? _instance;
-  static TypeMirrorMapper get instance {
-    _instance ??= TypeMirrorMapper();
-    return _instance!;
-  }
+  static late TypeMirrorMapper instance = TypeMirrorMapper();
 
   const TypeMirrorMapper();
 

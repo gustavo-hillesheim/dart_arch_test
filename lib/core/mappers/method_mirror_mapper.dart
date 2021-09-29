@@ -8,14 +8,10 @@ import 'package:arch_test/core/models/enums/method_kind.dart';
 import 'package:arch_test/core/utils/mirror_utils.dart';
 
 class MethodMirrorMapper {
-  static MethodMirrorMapper? _instance;
-  static MethodMirrorMapper get instance {
-    _instance ??= MethodMirrorMapper(
-      TypeMirrorMapper.instance,
-      ParameterMirrorMapper.instance,
-    );
-    return _instance!;
-  }
+  static late MethodMirrorMapper instance = MethodMirrorMapper(
+    TypeMirrorMapper.instance,
+    ParameterMirrorMapper.instance,
+  );
 
   final TypeMirrorMapper typeMirrorMapper;
   final ParameterMirrorMapper parameterMirrorMapper;

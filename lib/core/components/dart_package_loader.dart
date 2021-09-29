@@ -5,14 +5,10 @@ import 'package:arch_test/core/core.dart';
 import 'package:arch_test/src/utils.dart';
 
 class DartPackageLoader {
-  static DartPackageLoader? _instance;
-  static DartPackageLoader get instance {
-    _instance ??= DartPackageLoader(
-      currentMirrorSystem(),
-      LibraryMirrorMapper.instance,
-    );
-    return _instance!;
-  }
+  static late DartPackageLoader instance = DartPackageLoader(
+    currentMirrorSystem(),
+    LibraryMirrorMapper.instance,
+  );
 
   final MirrorSystem mirrorSystem;
   final LibraryMirrorMapper libraryMirrorMapper;

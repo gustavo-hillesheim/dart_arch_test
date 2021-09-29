@@ -8,14 +8,10 @@ import 'package:arch_test/core/utils/uri_utils.dart';
 import 'package:path/path.dart';
 
 class LibraryMirrorMapper {
-  static LibraryMirrorMapper? _instance;
-  static LibraryMirrorMapper get instance {
-    _instance ??= LibraryMirrorMapper(
-      ClassMirrorMapper.instance,
-      MethodMirrorMapper.instance,
-    );
-    return _instance!;
-  }
+  static late LibraryMirrorMapper instance = LibraryMirrorMapper(
+    ClassMirrorMapper.instance,
+    MethodMirrorMapper.instance,
+  );
 
   final ClassMirrorMapper classMirrorMapper;
   final MethodMirrorMapper methodMirrorMapper;

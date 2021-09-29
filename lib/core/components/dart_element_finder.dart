@@ -3,11 +3,7 @@ import 'package:arch_test/core/models/dart_element_ref.dart';
 import 'package:arch_test/core/exception.dart';
 
 class DartElementFinder {
-  static DartElementFinder? _instance;
-  static DartElementFinder get instance {
-    _instance ??= DartElementFinder();
-    return _instance!;
-  }
+  static late DartElementFinder instance = DartElementFinder();
 
   T? findByRef<T extends DartElement>(
     DartElementRef<T> ref, {

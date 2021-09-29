@@ -7,11 +7,8 @@ import 'package:arch_test/core/models/enums/parameter_kind.dart';
 import 'package:arch_test/core/utils/mirror_utils.dart';
 
 class ParameterMirrorMapper {
-  static ParameterMirrorMapper? _instance;
-  static ParameterMirrorMapper get instance {
-    _instance ??= ParameterMirrorMapper(TypeMirrorMapper.instance);
-    return _instance!;
-  }
+  static late ParameterMirrorMapper instance =
+      ParameterMirrorMapper(TypeMirrorMapper.instance);
 
   final TypeMirrorMapper typeMirrorMapper;
 
