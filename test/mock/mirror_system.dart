@@ -1,10 +1,7 @@
 import 'dart:ffi';
 import 'dart:mirrors';
 
-import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/core/models/dart_type.dart';
-import 'package:arch_test/core/models/element_location.dart';
-import 'package:arch_test/core/models/enums/constructor_kind.dart';
+import 'package:arch_test/core.dart';
 import 'package:mocktail/mocktail.dart';
 
 final Map<Uri, LibraryMirror> mockLibraries =
