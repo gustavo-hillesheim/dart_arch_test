@@ -6,8 +6,11 @@ class ElementLocation extends Equatable {
   final int column;
   final int line;
 
-  ElementLocation(
-      {required this.uri, required this.column, required this.line});
+  ElementLocation({
+    required this.uri,
+    required this.column,
+    required this.line,
+  });
 
   /// Useful when a Mirror does not have a SourceLocation, or representing
   /// types that don't have a class (void, dynamic, etc)

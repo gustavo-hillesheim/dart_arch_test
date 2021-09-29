@@ -26,7 +26,6 @@ void main() {
       DartVariable(
         name: 'someVar',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType.from<String>(),
       ),
       DartPackage(name: ''),
@@ -47,7 +46,6 @@ void main() {
       DartVariable(
         name: 'someClass',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType.from<String>(),
       ),
       DartPackage(name: ''),
@@ -63,7 +61,6 @@ void main() {
       DartVariable(
         name: 'someVar',
         location: ElementLocation.unknown(),
-        parentRef: null,
         type: DartType.from<String>(),
       ),
       DartPackage(name: ''),

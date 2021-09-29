@@ -16,6 +16,7 @@ class TypeMirrorMapper {
       generics: generics,
       location: MirrorUtils.elementLocation(mirror),
       parentRef: MirrorUtils.elementRef(mirror.owner),
+      metadata: MirrorUtils.readMetadata(mirror),
     );
   }
 }

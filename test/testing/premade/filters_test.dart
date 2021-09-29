@@ -64,7 +64,6 @@ final v1 = DartVariable(
   name: 'v1',
   location: ElementLocation(
       uri: 'package:pkg/variables/values.dart', column: 1, line: 1),
-  parentRef: null,
   type: DartType.from<String>(),
 );
 final v2 = DartVariable(
@@ -74,14 +73,12 @@ final v2 = DartVariable(
     column: 1,
     line: 1,
   ),
-  parentRef: null,
   type: DartType.from<String>(),
 );
 final v3 = DartVariable(
   name: 'v3',
   location: ElementLocation(
       uri: 'package:pkg/variables/nested/values.dart', column: 1, line: 1),
-  parentRef: null,
   type: DartType.from<String>(),
 );
 final elements = [v1, v2, v3];

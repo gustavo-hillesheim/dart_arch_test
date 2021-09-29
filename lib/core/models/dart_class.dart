@@ -1,10 +1,13 @@
 import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/core/models/dart_declaration.dart';
+import 'package:arch_test/core/models/dart_metadata.dart';
 import 'package:arch_test/core/models/dart_method.dart';
 import 'package:arch_test/core/models/dart_variable.dart';
 import 'package:arch_test/core/models/element_location.dart';
 
 /// Representation of a Dart class
-class DartClass extends DartType implements DartElementsParent {
+class DartClass extends DartType
+    implements DartElementsParent<DartDeclaration> {
   final bool isAbstract;
   final bool isEnum;
   final List<DartVariable> fields;
@@ -15,19 +18,23 @@ class DartClass extends DartType implements DartElementsParent {
   DartClass({
     required String name,
     required ElementLocation location,
-    required List<DartType> generics,
-    required DartElementRef<DartLibrary>? parentRef,
-    required this.fields,
-    required this.methods,
-    required this.superInterfaces,
+    this.fields = const [],
+    this.methods = const [],
+    this.superInterfaces = const [],
     this.isAbstract = false,
     this.isEnum = false,
     this.superClass,
+    DartElementRef<DartLibrary>? parentRef,
+    List<DartType> generics = const [],
+    bool isTopLevel = true,
+    List<DartMetadata> metadata = const [],
   }) : super(
           name: name,
           generics: generics,
           location: location,
           parentRef: parentRef,
+          isTopLevel: isTopLevel,
+          metadata: metadata,
         );
 
   @override
@@ -36,5 +43,5 @@ class DartClass extends DartType implements DartElementsParent {
       [isAbstract, isEnum, fields, methods, superClass, superInterfaces];
 
   @override
-  List<DartElement> get children => [...methods, ...fields];
+  List<DartDeclaration> get children => [...methods, ...fields];
 }

@@ -23,8 +23,6 @@ void main() {
       dartParameter,
       DartParameter(
         name: 'aParameter',
-        location: ElementLocation.unknown(),
-        parentRef: null,
         type: stringDartType,
       ),
     );
@@ -43,8 +41,6 @@ void main() {
       dartParameter,
       DartParameter(
         name: 'aParameter',
-        location: ElementLocation.unknown(),
-        parentRef: null,
         type: stringDartType,
         isFinal: true,
       ),
@@ -64,8 +60,6 @@ void main() {
       dartParameter,
       DartParameter(
         name: 'aParameter',
-        location: ElementLocation.unknown(),
-        parentRef: null,
         type: stringDartType,
         isConst: true,
       ),
@@ -86,8 +80,6 @@ void main() {
       dartParameter,
       DartParameter(
         name: 'aParameter',
-        location: ElementLocation.unknown(),
-        parentRef: null,
         type: stringDartType,
         hasDefaultValue: true,
       ),
@@ -107,8 +99,6 @@ void main() {
       dartParameter,
       DartParameter(
         name: 'aParameter',
-        location: ElementLocation.unknown(),
-        parentRef: null,
         type: stringDartType,
         kind: ParameterKind.POSITIONAL,
       ),
@@ -129,8 +119,6 @@ void main() {
       dartParameter,
       DartParameter(
         name: 'aParameter',
-        location: ElementLocation.unknown(),
-        parentRef: null,
         type: stringDartType,
         kind: ParameterKind.NAMED,
       ),

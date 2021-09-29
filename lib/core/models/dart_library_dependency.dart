@@ -13,8 +13,8 @@ class DartLibraryDependency extends DartElement {
   DartLibraryDependency({
     required String path,
     required ElementLocation location,
-    required this.parentRef,
     required this.kind,
+    this.parentRef,
   }) : super(name: path, location: location);
 
   String get path => name;
