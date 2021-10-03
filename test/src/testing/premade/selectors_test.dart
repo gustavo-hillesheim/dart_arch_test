@@ -70,4 +70,86 @@ void main() {
       [createSampleLibrary()],
     );
   });
+
+  test('should return all variables in the package', () {
+    expect(
+      Selectors.variables(createSamplePackage()),
+      [
+        DartVariable(
+          name: 'id',
+          type: DartType.from<int>(),
+          location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartClass>(
+            name: 'TestClass',
+            location: ElementLocation.unknown(),
+          ),
+        ),
+        DartVariable(
+          name: 'someVar',
+          location: ElementLocation.unknown(),
+          type: DartType.from<String>(),
+        ),
+      ],
+    );
+  });
+
+  test('should return all variables in the package', () {
+    expect(
+      Selectors.elements(createSamplePackage()),
+      [
+        createSampleLibrary(),
+        createTestClass(),
+        DartConstructor(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartClass>(
+            name: 'TestClass',
+            location: ElementLocation.unknown(),
+          ),
+          returnType: DartType(
+            name: 'TestClass',
+            location: ElementLocation.unknown(),
+            parentRef: DartElementRef<DartLibrary>(
+              name: 'main.dart',
+              location: ElementLocation.unknown(),
+            ),
+          ),
+          constructorKind: ConstructorKind.GENERATIVE,
+        ),
+        DartMethod(
+          name: 'setId',
+          returnType: DartType.voidType(),
+          location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartClass>(
+            name: 'TestClass',
+            location: ElementLocation.unknown(),
+          ),
+        ),
+        DartVariable(
+          name: 'id',
+          type: DartType.from<int>(),
+          location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartClass>(
+            name: 'TestClass',
+            location: ElementLocation.unknown(),
+          ),
+        ),
+        createMyEnum(),
+        DartMethod(
+          name: 'main',
+          returnType: DartType.voidType(),
+          location: ElementLocation.unknown(),
+          parentRef: DartElementRef<DartLibrary>(
+            name: 'main.dart',
+            location: ElementLocation.unknown(),
+          ),
+        ),
+        DartVariable(
+          name: 'someVar',
+          location: ElementLocation.unknown(),
+          type: DartType.from<String>(),
+        ),
+      ],
+    );
+  });
 }

@@ -5,6 +5,16 @@ import '../models/models.dart';
 abstract class Selectors {
   static final _finder = DartElementFinder();
 
+  static Selector<DartElement> elements = Selector(
+    (package) => _finder.findByType<DartElement>(source: package),
+    description: 'elements',
+  );
+
+  static Selector<DartVariable> variables = Selector(
+    (package) => _finder.findByType<DartVariable>(source: package),
+    description: 'variables',
+  );
+
   static Selector<DartLibrary> libraries = Selector(
     (package) => _finder.findByType<DartLibrary>(source: package),
     description: 'libraries',

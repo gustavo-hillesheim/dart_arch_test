@@ -26,6 +26,13 @@ DartLibrary createSampleLibrary() {
         ),
       ),
     ],
+    variables: [
+      DartVariable(
+        name: 'someVar',
+        location: ElementLocation.unknown(),
+        type: DartType.from<String>(),
+      ),
+    ],
   );
 }
 
