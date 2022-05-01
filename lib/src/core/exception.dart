@@ -16,6 +16,11 @@ class MultipleElementsFoundException implements Exception {
       : message =
             'Found more than one element on source $source with matcher $matcher.'
                 'Total elements found: ${elementsFound.length}';
+
+  @override
+  String toString() {
+    return message;
+  }
 }
 
 class MethodIsNotConstructorException implements Exception {
@@ -23,6 +28,11 @@ class MethodIsNotConstructorException implements Exception {
   final MethodMirror methodMirror;
 
   MethodIsNotConstructorException({required this.methodMirror});
+
+  @override
+  String toString() {
+    return message;
+  }
 }
 
 class UnknownConstructorTypeException implements Exception {
@@ -30,6 +40,11 @@ class UnknownConstructorTypeException implements Exception {
   final MethodMirror methodMirror;
 
   UnknownConstructorTypeException({required this.methodMirror});
+
+  @override
+  String toString() {
+    return message;
+  }
 }
 
 class UnknownMethodTypeException implements Exception {
@@ -37,6 +52,11 @@ class UnknownMethodTypeException implements Exception {
   final MethodMirror methodMirror;
 
   UnknownMethodTypeException({required this.methodMirror});
+
+  @override
+  String toString() {
+    return message;
+  }
 }
 
 class UnsupportedMirrorType implements Exception {
@@ -44,16 +64,31 @@ class UnsupportedMirrorType implements Exception {
 
   UnsupportedMirrorType(Type mirrorType)
       : message = 'The type ${mirrorType.toString()} is not supported';
+
+  @override
+  String toString() {
+    return message;
+  }
 }
 
 class PackageNameNotFoundException implements Exception {
   final String message;
 
   PackageNameNotFoundException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
 }
 
 class PackageNotFoundException implements Exception {
   final String message;
 
   PackageNotFoundException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
 }

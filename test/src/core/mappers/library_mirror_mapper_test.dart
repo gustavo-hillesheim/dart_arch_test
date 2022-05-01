@@ -8,10 +8,10 @@ import 'package:test/scaffolding.dart';
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late LibraryMirrorMapper mapper;
+  late DartLibraryMapper mapper;
 
   setUp(() {
-    mapper = LibraryMirrorMapper.instance;
+    mapper = DartLibraryMapper.instance;
   });
 
   test('should create DartLibrary from LibraryMirror', () {

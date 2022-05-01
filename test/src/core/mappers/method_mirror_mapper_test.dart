@@ -1,15 +1,15 @@
 import 'package:arch_test/core.dart';
-import 'package:arch_test/src/core/mappers/method_mirror_mapper.dart';
+import 'package:arch_test/src/core/mappers/dart_method_mapper.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late MethodMirrorMapper mapper;
+  late DartMethodMapper mapper;
 
   setUp(() {
-    mapper = MethodMirrorMapper.instance;
+    mapper = DartMethodMapper.instance;
   });
 
   test('should create DartMethod from MethodMirror', () {

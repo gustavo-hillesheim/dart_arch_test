@@ -1,30 +1,39 @@
 import 'dart:io';
 
 import 'package:arch_test/src/exception.dart';
+import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
-Future<String> findNearestPackageName(Directory directory) async {
-  final pubspecPath = await _findNearestPubspecPath(directory);
-  final pubspec = await File(pubspecPath).readAsString();
-  final packageName = loadYaml(pubspec)['name'];
-  if (!(packageName is String)) {
-    throw PackageNameNotFoundException(
-        'Could not find name of package located at "$pubspecPath"');
-  }
-  return packageName;
-}
-
-Future<String> _findNearestPubspecPath(Directory directory) async {
+Future<Directory> findNearestPackageDirectory(Directory directory) async {
   var dirToSearch = directory;
   while (dirToSearch.parent != dirToSearch) {
-    final files = await dirToSearch.list().toList();
-    final pubspecs = files
-        .whereType<File>()
-        .where((file) => file.path.endsWith('pubspec.yaml'));
-    if (pubspecs.isEmpty) {
-      dirToSearch = dirToSearch.parent;
+    if (await _hasPubspecFile(dirToSearch)) {
+      return dirToSearch;
     }
-    return pubspecs.first.path;
+    dirToSearch = dirToSearch.parent;
   }
   throw PackageNotFoundException('Could not find any package at "$directory"');
+}
+
+Future<String> findPackageName(Directory directory) async {
+  final pubspecPath = '${directory.path}${separator}pubspec.yaml';
+  final file = File(pubspecPath);
+  final content = await file.readAsString();
+  final parsedContent = loadYaml(content);
+  return parsedContent['name'];
+}
+
+Future<bool> _hasPubspecFile(Directory directory) async {
+  final files = await directory.list().toList();
+  final pubspecs = files
+      .whereType<File>()
+      .where((file) => file.path.endsWith('pubspec.yaml'));
+  return pubspecs.isNotEmpty;
+}
+
+class NearestPackage {
+  final String name;
+  final Directory directory;
+
+  NearestPackage({required this.name, required this.directory});
 }

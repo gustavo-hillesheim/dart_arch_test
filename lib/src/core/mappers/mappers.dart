@@ -1,6 +1,6 @@
-export 'class_mirror_mapper.dart';
-export 'library_mirror_mapper.dart';
-export 'method_mirror_mapper.dart';
-export 'paremeter_mirror_mapper.dart';
-export 'type_mirror_mapper.dart';
-export 'variable_mirror_mapper.dart';
+export 'dart_class_mapper.dart';
+export 'dart_library_mapper.dart';
+export 'dart_method_mapper.dart';
+export 'dart_paremeter_mapper.dart';
+export 'dart_type_mapper.dart';
+export 'dart_variable_mapper.dart';

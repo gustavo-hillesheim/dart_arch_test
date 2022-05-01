@@ -1,15 +1,15 @@
 import 'package:arch_test/core.dart';
-import 'package:arch_test/src/core/mappers/paremeter_mirror_mapper.dart';
+import 'package:arch_test/src/core/mappers/dart_paremeter_mapper.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late ParameterMirrorMapper mapper;
+  late DartParameterMapper mapper;
 
   setUp(() {
-    mapper = ParameterMirrorMapper.instance;
+    mapper = DartParameterMapper.instance;
   });
 
   test('should create DartParameter from ParameterMirror', () {

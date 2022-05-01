@@ -1,14 +1,14 @@
 import 'package:arch_test/core.dart';
-import 'package:arch_test/src/core/mappers/variable_mirror_mapper.dart';
+import 'package:arch_test/src/core/mappers/dart_variable_mapper.dart';
 import 'package:test/test.dart';
 
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late VariableMirrorMapper mapper;
+  late DartVariableMapper mapper;
 
   setUp(() {
-    mapper = VariableMirrorMapper.instance;
+    mapper = DartVariableMapper.instance;
   });
 
   test('should create DartVariable from VariableMirror', () {

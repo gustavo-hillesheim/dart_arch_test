@@ -11,6 +11,7 @@ dev_dependencies:
   mocktail: ^0.1.4
   pedantic: ^1.10.0
 dependencies:
+  analyzer: ^4.0.0
   collection: ^1.15.0
   equatable: ^2.0.3
   path: ^1.8.0

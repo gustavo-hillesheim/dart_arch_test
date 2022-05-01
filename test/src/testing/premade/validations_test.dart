@@ -8,11 +8,11 @@ import 'package:test/test.dart';
 
 void main() {
   late AddViolationMock addViolationMock;
-  late ClassMirrorMapper classMirrorMapper;
+  late DartClassMapper classMirrorMapper;
 
   setUp(() {
     addViolationMock = AddViolationMock();
-    classMirrorMapper = ClassMirrorMapper.instance;
+    classMirrorMapper = DartClassMapper.instance;
   });
 
   group('Validations.nameEndsWith', () {

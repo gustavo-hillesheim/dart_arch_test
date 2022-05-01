@@ -1,15 +1,14 @@
 import 'package:arch_test/core.dart';
-import 'package:arch_test/src/core/mappers/type_mirror_mapper.dart';
-import 'package:test/scaffolding.dart';
+import 'package:arch_test/src/core/mappers/dart_type_mapper.dart';
 import 'package:test/test.dart';
 
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late TypeMirrorMapper mapper;
+  late DartTypeMapper mapper;
 
   setUp(() {
-    mapper = TypeMirrorMapper.instance;
+    mapper = DartTypeMapper.instance;
   });
 
   test('should create DartType from TypeMirror', () {

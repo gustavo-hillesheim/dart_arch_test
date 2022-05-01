@@ -1,11 +1,10 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:core_example/helper/text_printer.dart';
-import 'package:core_example/main.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('should create DartPackage correctly', () {
-    final dartPackage = DartPackageLoader.instance.loadPackage('core_example');
+  test('should create DartPackage correctly', () async {
+    final dartPackage = await DartPackageLoader.instance.loadCurrentPackage();
 
     expect(
       dartPackage,

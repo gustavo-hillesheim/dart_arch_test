@@ -6,10 +6,10 @@ import 'package:test/test.dart';
 import '../../../mock/mirror_system.dart';
 
 void main() {
-  late ClassMirrorMapper mapper;
+  late DartClassMapper mapper;
 
   setUp(() {
-    mapper = ClassMirrorMapper.instance;
+    mapper = DartClassMapper.instance;
   });
 
   test('should create DartClass from ClassMirror', () {
