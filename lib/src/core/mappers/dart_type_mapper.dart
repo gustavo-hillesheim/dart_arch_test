@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart' as analyzer;
 
 import '../utils/element_utils.dart';
@@ -9,15 +10,15 @@ class DartTypeMapper {
   const DartTypeMapper();
 
   DartType fromTypeElement(analyzer.DartType typeElement) {
-    final name = typeElement.getDisplayString(withNullability: false);
     final generics = typeElement is analyzer.ParameterizedType
         ? typeElement.typeArguments.map(fromTypeElement).toList()
         : <DartType>[];
     return DartType(
-      name: name,
+      name: typeElement.element?.name ??
+          typeElement.getDisplayString(withNullability: false),
       generics: generics,
       location: ElementUtils.elementLocation(typeElement.element),
-      parentRef: ElementUtils.elementRef(typeElement.element?.enclosingElement),
+      parentRef: ElementUtils.parentRef(typeElement.element),
       metadata: ElementUtils.readMetadata(typeElement.element),
     );
   }

@@ -17,7 +17,7 @@ class ViolationsException implements Exception {
   String _createDescription(ElementViolations violations) {
     final location = violations.element.location;
     final header =
-        'Violations of ${violations.element.name} (located at ${location.uri}:${location.line}:${location.column}):';
+        'Violations of ${violations.element.name} (located at ${location.uri}):';
     final body = violations.violations.map((v) => '- $v').join('\n');
     return '$header\n$body';
   }

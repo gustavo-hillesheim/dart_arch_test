@@ -5,7 +5,7 @@ class DartMethod extends DartDeclaration {
   final bool isStatic;
   final DartType returnType;
   final MethodKind kind;
-  final List<DartParameter> parameters;
+  final List<DartParameter<DartMethod>> parameters;
   @override
   final DartElementRef? parentRef;
 
@@ -30,32 +30,9 @@ class DartMethod extends DartDeclaration {
   @override
   List<Object?> get props =>
       super.props + [isAbstract, isStatic, returnType, kind, parameters];
-}
-
-class DartConstructor extends DartMethod {
-  final ConstructorKind constructorKind;
-
-  DartConstructor({
-    required String name,
-    required ElementLocation location,
-    required DartType returnType,
-    required this.constructorKind,
-    List<DartParameter> parameters = const [],
-    DartElementRef? parentRef,
-    List<DartMetadata> metadata = const [],
-  }) : super(
-          name: name,
-          location: location,
-          returnType: returnType,
-          parameters: parameters,
-          kind: MethodKind.CONSTRUCTOR,
-          isTopLevel: false,
-          isAbstract: false,
-          isStatic: false,
-          parentRef: parentRef,
-          metadata: metadata,
-        );
 
   @override
-  List<Object?> get props => super.props + [constructorKind];
+  String toString() {
+    return 'DartMethod(name: $name, location: $location, returnType: $returnType, parameters: $parameters, kind: $kind, isAbstract: $isAbstract, isStatic: $isStatic, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+  }
 }

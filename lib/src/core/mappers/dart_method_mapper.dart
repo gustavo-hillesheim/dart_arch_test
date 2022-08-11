@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:arch_test/arch_test.dart';
 
 import 'dart_paremeter_mapper.dart';
 import 'dart_type_mapper.dart';
@@ -19,12 +20,13 @@ class DartMethodMapper {
 
   DartMethod fromMethodElement(MethodElement methodElement) {
     final parameters = methodElement.parameters
-        .map(dartParameterMapper.fromParameterElement)
+        .map<DartParameter<DartMethod>>(
+            dartParameterMapper.fromParameterElement)
         .toList(growable: false);
     return DartMethod(
       name: methodElement.name,
       kind: MethodKind.REGULAR,
-      parentRef: ElementUtils.elementRef(methodElement.enclosingElement),
+      parentRef: ElementUtils.parentRef(methodElement),
       location: ElementUtils.elementLocation(methodElement),
       returnType: dartTypeMapper.fromTypeElement(methodElement.returnType),
       isTopLevel: false,
@@ -37,12 +39,13 @@ class DartMethodMapper {
 
   DartMethod fromFunctionElement(FunctionElement functionElement) {
     final parameters = functionElement.parameters
-        .map(dartParameterMapper.fromParameterElement)
+        .map<DartParameter<DartMethod>>(
+            dartParameterMapper.fromParameterElement)
         .toList(growable: false);
     return DartMethod(
       name: functionElement.name,
       kind: MethodKind.REGULAR,
-      parentRef: ElementUtils.elementRef(functionElement.enclosingElement),
+      parentRef: ElementUtils.parentRef(functionElement),
       location: ElementUtils.elementLocation(functionElement),
       returnType: dartTypeMapper.fromTypeElement(functionElement.returnType),
       isTopLevel: true,

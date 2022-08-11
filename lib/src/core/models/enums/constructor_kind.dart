@@ -1,24 +1,23 @@
 import 'dart:mirrors';
 
+import 'package:analyzer/dart/element/element.dart';
+
 import '../../exception.dart';
 
 enum ConstructorKind { CONST, FACTORY, GENERATIVE, REDIRECTING }
 
-ConstructorKind constructorKindFromMirror(MethodMirror methodMirror) {
-  if (!methodMirror.isConstructor) {
-    throw MethodIsNotConstructorException(methodMirror: methodMirror);
-  }
-  if (methodMirror.isConstConstructor) {
+ConstructorKind constructorKindFromElement(ConstructorElement element) {
+  if (element.isConst) {
     return ConstructorKind.CONST;
   }
-  if (methodMirror.isFactoryConstructor) {
+  if (element.isFactory) {
     return ConstructorKind.FACTORY;
   }
-  if (methodMirror.isGenerativeConstructor) {
+  if (element.isGenerative) {
     return ConstructorKind.GENERATIVE;
   }
-  if (methodMirror.isRedirectingConstructor) {
+  if (element.redirectedConstructor != null) {
     return ConstructorKind.REDIRECTING;
   }
-  throw UnknownConstructorTypeException(methodMirror: methodMirror);
+  throw UnknownConstructorTypeException(constructorElement: element);
 }

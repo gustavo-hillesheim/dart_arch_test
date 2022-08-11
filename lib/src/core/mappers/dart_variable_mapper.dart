@@ -23,7 +23,7 @@ class DartVariableMapper {
       type: dartTypeMapper.fromTypeElement(variableElement.type),
       metadata: ElementUtils.readMetadata(variableElement),
       location: ElementUtils.elementLocation(variableElement),
-      parentRef: ElementUtils.elementRef(variableElement.enclosingElement),
+      parentRef: ElementUtils.parentRef(variableElement),
     );
   }
 }

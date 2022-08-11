@@ -65,4 +65,9 @@ class DartType extends DartDeclaration {
 
   @override
   List<Object?> get props => super.props + [generics];
+
+  @override
+  String toString() {
+    return 'DartType(name: $name, location: $location, generics: $generics, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+  }
 }

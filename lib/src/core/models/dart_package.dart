@@ -14,4 +14,9 @@ class DartPackage extends Equatable implements DartElementsParent {
 
   @override
   List<DartElement> get children => libraries;
+
+  @override
+  String toString() {
+    return 'DartPackage(name: $name, libraries: $libraries)';
+  }
 }

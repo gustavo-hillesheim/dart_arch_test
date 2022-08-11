@@ -15,23 +15,17 @@ void main() {
             name: 'helper/text_printer.dart',
             location: ElementLocation(
               uri: 'package:core_example/helper/text_printer.dart',
-              line: 1,
-              column: 1,
             ),
             classes: [
               DartClass(
                 name: 'TextPrinter',
                 location: ElementLocation(
                   uri: 'package:core_example/helper/text_printer.dart',
-                  line: 1,
-                  column: 1,
                 ),
                 parentRef: DartElementRef<DartLibrary>(
                   name: 'helper/text_printer.dart',
                   location: ElementLocation(
                     uri: 'package:core_example/helper/text_printer.dart',
-                    line: 1,
-                    column: 1,
                   ),
                 ),
                 fields: [
@@ -39,15 +33,11 @@ void main() {
                     name: 'arguments',
                     location: ElementLocation(
                       uri: 'package:core_example/helper/text_printer.dart',
-                      line: 2,
-                      column: 22,
                     ),
                     parentRef: DartElementRef<DartClass>(
                       name: 'TextPrinter',
                       location: ElementLocation(
                         uri: 'package:core_example/helper/text_printer.dart',
-                        line: 1,
-                        column: 1,
                       ),
                     ),
                     type: DartType.from<List<String>>(),
@@ -57,66 +47,26 @@ void main() {
                     name: '_argIndex',
                     location: ElementLocation(
                       uri: 'package:core_example/helper/text_printer.dart',
-                      line: 3,
-                      column: 7,
                     ),
                     parentRef: DartElementRef<DartClass>(
                       name: 'TextPrinter',
                       location: ElementLocation(
                         uri: 'package:core_example/helper/text_printer.dart',
-                        line: 1,
-                        column: 1,
                       ),
                     ),
                     type: DartType.from<int>(),
                   ),
                 ],
-                methods: [
-                  DartMethod(
-                    name: 'printText',
-                    location: ElementLocation(
-                      uri: 'package:core_example/helper/text_printer.dart',
-                      line: 7,
-                      column: 3,
-                    ),
-                    parentRef: DartElementRef<DartClass>(
-                      name: 'TextPrinter',
-                      location: ElementLocation(
-                        uri: 'package:core_example/helper/text_printer.dart',
-                        line: 1,
-                        column: 1,
-                      ),
-                    ),
-                    returnType: DartType.voidType(),
-                    parameters: [
-                      DartParameter(
-                        name: 'text',
-                        type: DartType.from<String>(),
-                        parentRef: DartElementRef<DartMethod>(
-                          name: 'printText',
-                          location: ElementLocation(
-                            uri:
-                                'package:core_example/helper/text_printer.dart',
-                            line: 7,
-                            column: 3,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                constructors: [
                   DartConstructor(
-                    name: 'TextPrinter',
+                    name: '',
                     location: ElementLocation(
                       uri: 'package:core_example/helper/text_printer.dart',
-                      line: 5,
-                      column: 3,
                     ),
                     parentRef: DartElementRef<DartClass>(
                       name: 'TextPrinter',
                       location: ElementLocation(
                         uri: 'package:core_example/helper/text_printer.dart',
-                        line: 1,
-                        column: 1,
                       ),
                     ),
                     returnType: DartType.from<TextPrinter>(),
@@ -124,14 +74,47 @@ void main() {
                     parameters: [
                       DartParameter(
                         name: 'arguments',
+                        location: ElementLocation(
+                          uri: 'package:core_example/helper/text_printer.dart',
+                        ),
+                        isFinal: true,
                         type: DartType.from<List<String>>(),
                         parentRef: DartElementRef<DartConstructor>(
-                          name: 'TextPrinter',
+                          name: '',
                           location: ElementLocation(
                             uri:
                                 'package:core_example/helper/text_printer.dart',
-                            line: 5,
-                            column: 3,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+                methods: [
+                  DartMethod(
+                    name: 'printText',
+                    location: ElementLocation(
+                      uri: 'package:core_example/helper/text_printer.dart',
+                    ),
+                    parentRef: DartElementRef<DartClass>(
+                      name: 'TextPrinter',
+                      location: ElementLocation(
+                        uri: 'package:core_example/helper/text_printer.dart',
+                      ),
+                    ),
+                    returnType: DartType.voidType(),
+                    parameters: [
+                      DartParameter(
+                        name: 'text',
+                        location: ElementLocation(
+                          uri: 'package:core_example/helper/text_printer.dart',
+                        ),
+                        type: DartType.from<String>(),
+                        parentRef: DartElementRef<DartMethod>(
+                          name: 'printText',
+                          location: ElementLocation(
+                            uri:
+                                'package:core_example/helper/text_printer.dart',
                           ),
                         ),
                       ),
@@ -145,29 +128,23 @@ void main() {
             name: 'main.dart',
             location: ElementLocation(
               uri: 'package:core_example/main.dart',
-              line: 1,
-              column: 1,
             ),
             variables: [
               DartVariable(
                 name: 'myConst',
                 location: ElementLocation(
                   uri: 'package:core_example/main.dart',
-                  line: 3,
-                  column: 7,
                 ),
                 parentRef: DartElementRef<DartLibrary>(
                   name: 'main.dart',
                   location: ElementLocation(
                     uri: 'package:core_example/main.dart',
-                    line: 1,
-                    column: 1,
                   ),
                 ),
                 type: DartType.from<int>(),
                 isTopLevel: true,
                 isConst: true,
-                isFinal: true,
+                isFinal: false,
                 isStatic: true,
               ),
             ],
@@ -177,15 +154,11 @@ void main() {
                 isTopLevel: true,
                 location: ElementLocation(
                   uri: 'package:core_example/main.dart',
-                  line: 5,
-                  column: 1,
                 ),
                 parentRef: DartElementRef<DartLibrary>(
                   name: 'main.dart',
                   location: ElementLocation(
                     uri: 'package:core_example/main.dart',
-                    line: 1,
-                    column: 1,
                   ),
                 ),
                 isStatic: true,
@@ -193,13 +166,14 @@ void main() {
                 parameters: [
                   DartParameter(
                     name: 'arguments',
+                    location: ElementLocation(
+                      uri: 'package:core_example/main.dart',
+                    ),
                     type: DartType.from<List<String>>(),
                     parentRef: DartElementRef<DartMethod>(
                       name: 'main',
                       location: ElementLocation(
                         uri: 'package:core_example/main.dart',
-                        line: 5,
-                        column: 1,
                       ),
                     ),
                   ),
@@ -210,13 +184,12 @@ void main() {
               DartLibraryDependency(
                 kind: LibraryDependencyKind.IMPORT,
                 path: 'package:core_example/helper/text_printer.dart',
-                location: ElementLocation.unknown(),
+                location:
+                    ElementLocation(uri: 'package:core_example/main.dart'),
                 parentRef: DartElementRef<DartLibrary>(
                   name: 'main.dart',
                   location: ElementLocation(
                     uri: 'package:core_example/main.dart',
-                    line: 1,
-                    column: 1,
                   ),
                 ),
               ),

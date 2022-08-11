@@ -7,4 +7,9 @@ class DartMetadata extends Equatable {
 
   @override
   List<Object?> get props => [metadata];
+
+  @override
+  String toString() {
+    return 'DartMetadata(metadata: $metadata)';
+  }
 }

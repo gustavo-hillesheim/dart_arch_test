@@ -62,20 +62,33 @@ class DartLibraryMapper {
 
   List<DartLibraryDependency> _getDependencies(
       ResolvedLibraryResult resolvedLibrary, String basePath) {
-    final imports = resolvedLibrary.element.importedLibraries
+    final imports = resolvedLibrary.element.imports
         .where(librarySchemeFilter)
-        .map((dep) => _createLibraryDependency(
-            dep, basePath, LibraryDependencyKind.IMPORT, resolvedLibrary))
+        .where((i) => !i.isSynthetic)
+        .map((i) => _createLibraryDependency(
+              i,
+              i.importedLibrary!,
+              basePath,
+              LibraryDependencyKind.IMPORT,
+              resolvedLibrary,
+            ))
         .toList(growable: false);
-    final exports = resolvedLibrary.element.exportedLibraries
+    final exports = resolvedLibrary.element.exports
         .where(librarySchemeFilter)
-        .map((dep) => _createLibraryDependency(
-            dep, basePath, LibraryDependencyKind.EXPORT, resolvedLibrary))
+        .where((e) => !e.isSynthetic)
+        .map((e) => _createLibraryDependency(
+              e,
+              e.exportedLibrary!,
+              basePath,
+              LibraryDependencyKind.EXPORT,
+              resolvedLibrary,
+            ))
         .toList(growable: false);
     return [...imports, ...exports];
   }
 
   DartLibraryDependency _createLibraryDependency(
+    UriReferencedElement importOrExport,
     LibraryElement library,
     String basePath,
     LibraryDependencyKind kind,
@@ -90,16 +103,12 @@ class DartLibraryMapper {
     return DartLibraryDependency(
       kind: kind,
       path: path,
-      location: ElementLocation(
-        uri: library.location!.encoding,
-        line: 1,
-        column: 1,
-      ),
+      location: ElementUtils.elementLocation(importOrExport),
       parentRef: ElementUtils.elementRef(parent.element),
     );
   }
 
-  bool librarySchemeFilter(LibraryElement lib) {
+  bool librarySchemeFilter(UriReferencedElement lib) {
     if (lib.librarySource.uri.isScheme('file')) {
       print(
           'WARNING: Library dependencies using "file" scheme are not supported. Encountered in file "${lib.librarySource.uri}"');

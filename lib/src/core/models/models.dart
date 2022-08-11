@@ -9,6 +9,7 @@ export 'dart_library_dependency.dart';
 export 'dart_element.dart';
 export 'dart_metadata.dart';
 export 'dart_declaration.dart';
+export 'dart_constructor.dart';
 export 'element_location.dart';
 export 'dart_element_ref.dart';
 export 'dart_elements_parent.dart';

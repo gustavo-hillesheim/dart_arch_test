@@ -27,4 +27,9 @@ class DartLibrary extends DartElement
 
   @override
   List<DartDeclaration> get children => [...classes, ...methods, ...variables];
+
+  @override
+  String toString() {
+    return 'DartLibrary(name: $name, location: $location, dependencies: $dependencies, variables: $variables, methods: $methods, classes: $classes, parentRef: $parentRef)';
+  }
 }

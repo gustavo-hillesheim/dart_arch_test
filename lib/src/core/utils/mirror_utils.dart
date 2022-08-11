@@ -72,6 +72,9 @@ class MirrorUtils {
 
   static ElementLocation elementLocation(DeclarationMirror mirror) {
     try {
+      if (mirror is LibraryMirror) {
+        return ElementLocation(uri: mirror.uri.toString());
+      }
       return _elementLocation(mirror.location);
     } on UnsupportedError {
       return ElementLocation.unknown();
@@ -83,10 +86,6 @@ class MirrorUtils {
       return ElementLocation.unknown();
     }
 
-    return ElementLocation(
-      uri: sourceLocation.sourceUri.toString(),
-      column: sourceLocation.column,
-      line: sourceLocation.line,
-    );
+    return ElementLocation(uri: sourceLocation.sourceUri.toString());
   }
 }

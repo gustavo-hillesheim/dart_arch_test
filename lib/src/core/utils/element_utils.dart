@@ -1,4 +1,6 @@
 import 'package:analyzer/dart/element/element.dart' hide ElementLocation;
+import 'package:analyzer/dart/element/type.dart' as analyzer;
+import 'package:analyzer/source/line_info.dart';
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/src/core/utils/uri_utils.dart';
 
@@ -22,22 +24,45 @@ class ElementUtils {
     if (element == null) {
       return ElementLocation.unknown();
     }
-    final lineInfo =
-        element is CompilationUnitElement ? element.lineInfo : null;
-    final startLocation = lineInfo?.getLocation(0);
+    final isDynamic =
+        element.location?.components.first == 'dynamic' ? true : false;
     return ElementLocation(
-      uri: element.location!.encoding,
-      line: startLocation?.lineNumber ?? 1,
-      column: startLocation?.columnNumber ?? 1,
+      uri: isDynamic
+          ? element.location!.toString()
+          : element.source!.uri.toString(),
     );
+  }
+
+  static DartElementRef<T>? parentRef<T extends DartElement>(Element? element) {
+    final parent = element?.enclosingElement;
+    if (parent is CompilationUnitElement) {
+      return elementRef(parent.enclosingElement);
+    } else {
+      return elementRef(parent);
+    }
   }
 
   static DartElementRef<T>? elementRef<T extends DartElement>(
       Element? element) {
     if (element == null) {
       return null;
+    } else if (element is ClassElement) {
+      return _createElementRef<DartClass>(element) as DartElementRef<T>;
+    } else if (element is MethodElement) {
+      return _createElementRef<DartMethod>(element) as DartElementRef<T>;
+    } else if (element is FunctionElement) {
+      return _createElementRef<DartMethod>(element) as DartElementRef<T>;
+    } else if (element is LibraryElement) {
+      return _createElementRef<DartLibrary>(element) as DartElementRef<T>;
+    } else if (element is VariableElement) {
+      return _createElementRef<DartVariable>(element) as DartElementRef<T>;
+    } else if (element is ParameterElement) {
+      return _createElementRef<DartParameter>(element) as DartElementRef<T>;
+    } else if (element is analyzer.DartType) {
+      return _createElementRef<DartType>(element) as DartElementRef<T>;
+    } else {
+      return _createElementRef<T>(element);
     }
-    return _createElementRef<T>(element);
   }
 
   static DartElementRef<T> _createElementRef<T extends DartElement>(

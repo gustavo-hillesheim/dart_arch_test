@@ -4,3 +4,4 @@ export 'dart_method_mapper.dart';
 export 'dart_paremeter_mapper.dart';
 export 'dart_type_mapper.dart';
 export 'dart_variable_mapper.dart';
+export 'dart_constructor_mapper.dart';

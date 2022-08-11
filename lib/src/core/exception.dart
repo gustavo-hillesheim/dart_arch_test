@@ -1,5 +1,7 @@
 import 'dart:mirrors';
 
+import 'package:analyzer/dart/element/element.dart';
+
 import 'components/dart_element_finder.dart';
 import 'models/models.dart';
 
@@ -37,9 +39,9 @@ class MethodIsNotConstructorException implements Exception {
 
 class UnknownConstructorTypeException implements Exception {
   final message = 'Unknown constructor type';
-  final MethodMirror methodMirror;
+  final ConstructorElement constructorElement;
 
-  UnknownConstructorTypeException({required this.methodMirror});
+  UnknownConstructorTypeException({required this.constructorElement});
 
   @override
   String toString() {

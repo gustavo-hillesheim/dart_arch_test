@@ -19,4 +19,9 @@ class DartElementRef<T extends DartElement> extends Equatable {
 
   @override
   List<Object?> get props => [T, name, location];
+
+  @override
+  String toString() {
+    return 'DartElementRef<$T>(name: $name, location: $location)';
+  }
 }

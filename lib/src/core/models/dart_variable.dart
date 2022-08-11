@@ -29,4 +29,9 @@ class DartVariable extends DartDeclaration {
 
   @override
   List<Object?> get props => super.props + [isFinal, isConst, isStatic, type];
+
+  @override
+  String toString() {
+    return 'DartVariable(name: $name, location: $location, type: $type, isFinal: $isFinal, isConst: $isConst, isStatic: $isStatic, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+  }
 }

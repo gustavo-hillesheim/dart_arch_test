@@ -7,6 +7,7 @@ class DartClass extends DartType
   final bool isEnum;
   final List<DartVariable> fields;
   final List<DartMethod> methods;
+  final List<DartConstructor> constructors;
   final DartClass? superClass;
   final List<DartClass> superInterfaces;
 
@@ -15,6 +16,7 @@ class DartClass extends DartType
     required ElementLocation location,
     this.fields = const [],
     this.methods = const [],
+    this.constructors = const [],
     this.superInterfaces = const [],
     this.isAbstract = false,
     this.isEnum = false,
@@ -35,8 +37,22 @@ class DartClass extends DartType
   @override
   List<Object?> get props =>
       super.props +
-      [isAbstract, isEnum, fields, methods, superClass, superInterfaces];
+      [
+        isAbstract,
+        isEnum,
+        fields,
+        constructors,
+        methods,
+        superClass,
+        superInterfaces
+      ];
 
   @override
-  List<DartDeclaration> get children => [...methods, ...fields];
+  List<DartDeclaration> get children =>
+      [...constructors, ...methods, ...fields];
+
+  @override
+  String toString() {
+    return 'DartClass(name: $name, location: $location, fields: $fields, methods: $methods, constructors: $constructors, generics: $generics, superClass: $superClass, superInterfaces: $superInterfaces, isAbstract: $isAbstract, isEnum: $isEnum, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+  }
 }

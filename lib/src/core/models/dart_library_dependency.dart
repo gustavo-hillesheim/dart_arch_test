@@ -21,4 +21,9 @@ class DartLibraryDependency extends DartElement {
 
   @override
   List<Object?> get props => super.props + [kind];
+
+  @override
+  String toString() {
+    return 'DartLibraryDependency(path: $path, location: $location, kind: $kind, parentRef: $parentRef)';
+  }
 }
