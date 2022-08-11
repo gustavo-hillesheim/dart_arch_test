@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:mirrors';
 
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
@@ -11,14 +10,12 @@ import '../../utils.dart';
 
 class DartPackageLoader {
   static late DartPackageLoader instance = DartPackageLoader(
-    currentMirrorSystem(),
     DartLibraryMapper.instance,
   );
 
-  final MirrorSystem mirrorSystem;
   final DartLibraryMapper dartLibraryMapper;
 
-  DartPackageLoader(this.mirrorSystem, this.dartLibraryMapper);
+  DartPackageLoader(this.dartLibraryMapper);
 
   Future<DartPackage> loadCurrentPackage() async {
     final nearestPackageDirectory =

@@ -1,5 +1,3 @@
-import 'dart:mirrors';
-
 import 'package:analyzer/dart/element/element.dart';
 
 import 'components/dart_element_finder.dart';
@@ -25,35 +23,11 @@ class MultipleElementsFoundException implements Exception {
   }
 }
 
-class MethodIsNotConstructorException implements Exception {
-  final message = 'MethodMirror does not belong to a constructor';
-  final MethodMirror methodMirror;
-
-  MethodIsNotConstructorException({required this.methodMirror});
-
-  @override
-  String toString() {
-    return message;
-  }
-}
-
 class UnknownConstructorTypeException implements Exception {
   final message = 'Unknown constructor type';
   final ConstructorElement constructorElement;
 
   UnknownConstructorTypeException({required this.constructorElement});
-
-  @override
-  String toString() {
-    return message;
-  }
-}
-
-class UnknownMethodTypeException implements Exception {
-  final message = 'Unknown method type';
-  final MethodMirror methodMirror;
-
-  UnknownMethodTypeException({required this.methodMirror});
 
   @override
   String toString() {

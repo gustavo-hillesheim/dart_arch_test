@@ -1,5 +1,3 @@
-import 'dart:mirrors';
-
 import 'package:analyzer/dart/element/element.dart';
 
 import '../../exception.dart';
