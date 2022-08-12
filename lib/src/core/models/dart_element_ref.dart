@@ -8,7 +8,7 @@ class DartElementRef<T extends DartElement> extends Equatable {
   final String name;
   final ElementLocation location;
 
-  DartElementRef({
+  const DartElementRef({
     required this.name,
     required this.location,
   });
@@ -22,6 +22,6 @@ class DartElementRef<T extends DartElement> extends Equatable {
 
   @override
   String toString() {
-    return 'DartElementRef<$T>(name: $name, location: $location)';
+    return 'DartElementRef<$T>(name: "$name", location: $location)';
   }
 }

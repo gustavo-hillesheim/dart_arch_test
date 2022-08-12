@@ -4,7 +4,7 @@ abstract class DartDeclaration extends DartElement {
   final bool isTopLevel;
   final List<DartMetadata> metadata;
 
-  DartDeclaration({
+  const DartDeclaration({
     required String name,
     required ElementLocation location,
     this.isTopLevel = false,

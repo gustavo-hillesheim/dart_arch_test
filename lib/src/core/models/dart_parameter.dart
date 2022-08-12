@@ -29,6 +29,6 @@ class DartParameter<T extends DartElement> extends DartElement {
 
   @override
   String toString() {
-    return 'DartParameter<$T>(name: $name, location: $location, type: $type, kind: $kind, hasDefaultValue: $hasDefaultValue, isConst: $isConst, isFinal: $isFinal, parentRef: $parentRef)';
+    return 'DartParameter<$T>(name: "$name", location: $location, type: $type, kind: $kind, hasDefaultValue: $hasDefaultValue, isConst: $isConst, isFinal: $isFinal, parentRef: $parentRef)';
   }
 }

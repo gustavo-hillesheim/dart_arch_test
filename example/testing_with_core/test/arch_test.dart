@@ -1,7 +1,6 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:test/test.dart';
 import 'package:path/path.dart';
-import 'package:testing_with_core/main.dart';
 import 'package:collection/collection.dart';
 import 'package:testing_with_core/repository/base_repository.dart';
 
@@ -121,7 +120,8 @@ void main() {
 
   test('Repository classes should extends from BaseRepository', () {
     final classes = getClassesInFolder('repository');
-    final baseRepositoryType = DartType.from<BaseRepository>();
+    final baseRepositoryType =
+        DartType.from<BaseRepository>(name: 'BaseRepository').resolve(package);
 
     for (final cls in classes) {
       if (isSameType(cls, baseRepositoryType)) {

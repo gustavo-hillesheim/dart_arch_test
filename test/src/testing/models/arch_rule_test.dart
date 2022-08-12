@@ -41,9 +41,8 @@ void main() {
       filter: Filter((_) => true, description: ''),
       validation: Validation(
         (cls, _, addViolation) {
-          final hasConstConstructor = cls.methods.any((method) =>
-              method is DartConstructor &&
-              method.constructorKind == ConstructorKind.CONST);
+          final hasConstConstructor = cls.constructors.any((constructor) =>
+              constructor.constructorKind == ConstructorKind.CONST);
           if (!hasConstConstructor) {
             addViolation('Should have a const constructor');
           }

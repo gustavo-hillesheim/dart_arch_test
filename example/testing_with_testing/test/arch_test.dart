@@ -1,5 +1,4 @@
 import 'package:arch_test/arch_test.dart';
-import 'package:testing_with_testing/main.dart';
 import 'package:testing_with_testing/repository/base_repository.dart';
 
 void main() {
@@ -19,7 +18,7 @@ void main() {
     selector: Selectors.classes,
     filter: Filters.insideFolder('repository'),
     validation: Validations.nameEndsWith<DartClass>('Repository')
-        .and(Validations.extendsClass<BaseRepository>()),
+        .and(Validations.extendsClass<BaseRepository>(name: 'BaseRepository')),
   ));
 
   archTest(ArchRule<DartLibrary>(

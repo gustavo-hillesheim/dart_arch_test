@@ -257,13 +257,13 @@ class FakeDartLibrary extends DartLibrary {
               .map(
                 (lib) => DartLibraryDependency(
                   path: lib,
-                  location: ElementLocation(uri: '', column: 1, line: 1),
+                  location: ElementLocation(uri: ''),
                   kind: LibraryDependencyKind.IMPORT,
                 ),
               )
               .toList(),
           name: name ?? '',
-          location: ElementLocation(uri: '', column: 1, line: 1),
+          location: ElementLocation(uri: ''),
         );
 }
 
@@ -275,7 +275,7 @@ class FakeDartElement extends DartElement {
       : parentRef = null,
         super(
           name: name,
-          location: ElementLocation(uri: '', column: 1, line: 1),
+          location: ElementLocation(uri: ''),
         );
 }
 

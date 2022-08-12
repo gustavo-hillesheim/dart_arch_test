@@ -52,35 +52,19 @@ void main() {
       dartClass,
       DartClass(
         name: 'FakeClass',
-        location: ElementLocation(
-          uri: 'package:pkg/fake_class.dart',
-          column: 1,
-          line: 1,
-        ),
+        location: ElementLocation(uri: 'package:pkg/fake_class.dart'),
         superClass: DartClass(
           name: 'SuperClass',
-          location: ElementLocation(
-            uri: 'package:pkg/super_class.dart',
-            column: 1,
-            line: 1,
-          ),
+          location: ElementLocation(uri: 'package:pkg/super_class.dart'),
         ),
         superInterfaces: [
           DartClass(
             name: 'SuperInterface',
-            location: ElementLocation(
-              uri: 'package:pkg/super_interface.dart',
-              column: 1,
-              line: 1,
-            ),
+            location: ElementLocation(uri: 'package:pkg/super_interface.dart'),
           ),
           DartClass(
             name: 'MegaInterface',
-            location: ElementLocation(
-              uri: 'package:pkg/mega_interface.dart',
-              column: 1,
-              line: 1,
-            ),
+            location: ElementLocation(uri: 'package:pkg/mega_interface.dart'),
           ),
         ],
         fields: [
@@ -102,17 +86,15 @@ void main() {
             location: ElementLocation.unknown(),
             returnType: stringDartType,
           ),
+        ],
+        constructors: [
           DartConstructor(
             name: 'FakeClass',
             location: ElementLocation.unknown(),
             constructorKind: ConstructorKind.GENERATIVE,
             returnType: DartType(
               name: 'FakeClass',
-              location: ElementLocation(
-                uri: 'package:pkg/fake_class.dart',
-                column: 1,
-                line: 1,
-              ),
+              location: ElementLocation(uri: 'package:pkg/fake_class.dart'),
             ),
           ),
         ],
@@ -130,11 +112,7 @@ void main() {
       dartClass,
       DartClass(
         name: 'MyEnum',
-        location: ElementLocation(
-          uri: 'package:pkg/fake_enum.dart',
-          column: 1,
-          line: 1,
-        ),
+        location: ElementLocation(uri: 'package:pkg/fake_enum.dart'),
         isEnum: true,
       ),
     );
@@ -150,11 +128,7 @@ void main() {
       dartClass,
       DartClass(
         name: 'MyAbstractClass',
-        location: ElementLocation(
-          uri: 'package:pkg/fake_abstract_class.dart',
-          column: 1,
-          line: 1,
-        ),
+        location: ElementLocation(uri: 'package:pkg/fake_abstract_class.dart'),
         isAbstract: true,
       ),
     );

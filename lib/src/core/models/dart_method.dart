@@ -33,6 +33,6 @@ class DartMethod extends DartDeclaration {
 
   @override
   String toString() {
-    return 'DartMethod(name: $name, location: $location, returnType: $returnType, parameters: $parameters, kind: $kind, isAbstract: $isAbstract, isStatic: $isStatic, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+    return 'DartMethod(name: "$name", location: $location, returnType: $returnType, parameters: $parameters, kind: $kind, isAbstract: $isAbstract, isStatic: $isStatic, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
   }
 }

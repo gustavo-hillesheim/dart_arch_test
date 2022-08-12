@@ -27,17 +27,11 @@ void main() {
         type: DartType(
           name: 'DartVariable',
           location: ElementLocation(
-            uri: 'package:arch_test/src/core/models/dart_variable.dart',
-            column: 1,
-            line: 1,
-          ),
+              uri: 'package:arch_test/src/core/models/dart_variable.dart'),
           parentRef: DartElementRef<DartLibrary>(
             name: 'src/core/models/dart_variable.dart',
             location: ElementLocation(
-              uri: 'package:arch_test/src/core/models/dart_variable.dart',
-              column: 1,
-              line: 1,
-            ),
+                uri: 'package:arch_test/src/core/models/dart_variable.dart'),
           ),
         ),
       ),

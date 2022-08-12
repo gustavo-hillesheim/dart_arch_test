@@ -28,6 +28,6 @@ class DartConstructor extends DartDeclaration {
 
   @override
   String toString() {
-    return 'DartConstructor(name: $name, location: $location, returnType: $returnType, constructorKind: $constructorKind, parameters: $parameters, metadata: $metadata, isTopLevel: $isTopLevel, parentRef: $parentRef)';
+    return 'DartConstructor(name: "$name", location: $location, returnType: $returnType, constructorKind: $constructorKind, parameters: $parameters, metadata: $metadata, isTopLevel: $isTopLevel, parentRef: $parentRef)';
   }
 }

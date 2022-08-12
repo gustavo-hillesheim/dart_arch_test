@@ -6,7 +6,7 @@ abstract class DartElement extends Equatable {
   final ElementLocation location;
   DartElementRef? get parentRef;
 
-  DartElement({
+  const DartElement({
     required this.name,
     required this.location,
   });

@@ -32,6 +32,6 @@ class DartVariable extends DartDeclaration {
 
   @override
   String toString() {
-    return 'DartVariable(name: $name, location: $location, type: $type, isFinal: $isFinal, isConst: $isConst, isStatic: $isStatic, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+    return 'DartVariable(name: "$name", location: $location, type: $type, isFinal: $isFinal, isConst: $isConst, isStatic: $isStatic, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
   }
 }

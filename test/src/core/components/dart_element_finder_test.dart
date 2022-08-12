@@ -11,11 +11,7 @@ void main() {
   test('Should find class by ref', () {
     final ref = DartElementRef<DartClass>(
       name: 'SomeClass',
-      location: ElementLocation(
-        uri: 'package:pkg/some_class.dart',
-        column: 1,
-        line: 5,
-      ),
+      location: ElementLocation(uri: 'package:pkg/some_class.dart'),
     );
 
     final dartClass = finder.findByRef<DartClass>(ref, source: mockPackage);
@@ -42,11 +38,7 @@ void main() {
   test('Should return null if element does not exist', () {
     final ref = DartElementRef<DartClass>(
       name: 'NonexistingClass',
-      location: ElementLocation(
-        uri: 'package:pkg/non_existing_class.dart',
-        column: 1,
-        line: 1,
-      ),
+      location: ElementLocation(uri: 'package:pkg/non_existing_class.dart'),
     );
 
     final dartClass = finder.findByRef<DartClass>(ref, source: mockPackage);
@@ -69,42 +61,22 @@ final mockPackage = DartPackage(
   libraries: [
     DartLibrary(
       name: 'some_class.dart',
-      location: ElementLocation(
-        uri: 'package:pkg/some_class.dart',
-        column: 1,
-        line: 1,
-      ),
+      location: ElementLocation(uri: 'package:pkg/some_class.dart'),
       classes: [
         DartClass(
           name: 'SomeClass',
-          location: ElementLocation(
-            uri: 'package:pkg/some_class.dart',
-            column: 1,
-            line: 5,
-          ),
+          location: ElementLocation(uri: 'package:pkg/some_class.dart'),
           parentRef: DartElementRef<DartLibrary>(
             name: 'package:pkg/some_class.dart',
-            location: ElementLocation(
-              uri: 'package:pkg/some_class.dart',
-              column: 1,
-              line: 1,
-            ),
+            location: ElementLocation(uri: 'package:pkg/some_class.dart'),
           ),
           methods: [
             DartMethod(
               name: 'doNothing',
-              location: ElementLocation(
-                uri: 'package:pkg/some_class.dart',
-                column: 3,
-                line: 2,
-              ),
+              location: ElementLocation(uri: 'package:pkg/some_class.dart'),
               parentRef: DartElementRef<DartClass>(
                 name: 'package:pkg/some_class.dart',
-                location: ElementLocation(
-                  uri: 'package:pkg/some_class.dart',
-                  column: 1,
-                  line: 5,
-                ),
+                location: ElementLocation(uri: 'package:pkg/some_class.dart'),
               ),
               returnType: DartType.voidType(),
             ),
@@ -114,18 +86,10 @@ final mockPackage = DartPackage(
       methods: [
         DartMethod(
           name: 'main',
-          location: ElementLocation(
-            uri: 'package:pkg/some_class.dart',
-            column: 1,
-            line: 5,
-          ),
+          location: ElementLocation(uri: 'package:pkg/some_class.dart'),
           parentRef: DartElementRef<DartLibrary>(
             name: 'package:pkg/some_class.dart',
-            location: ElementLocation(
-              uri: 'package:pkg/some_class.dart',
-              column: 1,
-              line: 1,
-            ),
+            location: ElementLocation(uri: 'package:pkg/some_class.dart'),
           ),
           returnType: DartType.voidType(),
         ),

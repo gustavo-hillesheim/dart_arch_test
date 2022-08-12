@@ -68,6 +68,17 @@ DartClass createTestClass() {
       ),
     ],
     methods: [
+      DartMethod(
+        name: 'setId',
+        returnType: DartType.voidType(),
+        location: ElementLocation.unknown(),
+        parentRef: DartElementRef<DartClass>(
+          name: 'TestClass',
+          location: ElementLocation.unknown(),
+        ),
+      ),
+    ],
+    constructors: [
       DartConstructor(
         name: 'TestClass',
         location: ElementLocation.unknown(),
@@ -84,15 +95,6 @@ DartClass createTestClass() {
           ),
         ),
         constructorKind: ConstructorKind.GENERATIVE,
-      ),
-      DartMethod(
-        name: 'setId',
-        returnType: DartType.voidType(),
-        location: ElementLocation.unknown(),
-        parentRef: DartElementRef<DartClass>(
-          name: 'TestClass',
-          location: ElementLocation.unknown(),
-        ),
       ),
     ],
   );

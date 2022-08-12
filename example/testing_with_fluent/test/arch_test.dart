@@ -1,5 +1,4 @@
 import 'package:arch_test/arch_test.dart';
-import 'package:testing_with_fluent/main.dart';
 import 'package:testing_with_fluent/repository/base_repository.dart';
 
 void main() {
@@ -20,7 +19,7 @@ void main() {
         .should
         .haveNameEndingWith('Repository')
         .and
-        .extendClass<BaseRepository>(),
+        .extendClass<BaseRepository>(name: 'BaseRepository'),
   );
 
   archTest(

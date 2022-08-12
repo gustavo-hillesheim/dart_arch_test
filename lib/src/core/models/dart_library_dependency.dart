@@ -24,6 +24,6 @@ class DartLibraryDependency extends DartElement {
 
   @override
   String toString() {
-    return 'DartLibraryDependency(path: $path, location: $location, kind: $kind, parentRef: $parentRef)';
+    return 'DartLibraryDependency(path: "$path", location: $location, kind: $kind, parentRef: $parentRef)';
   }
 }

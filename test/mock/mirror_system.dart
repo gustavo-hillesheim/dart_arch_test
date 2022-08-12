@@ -46,41 +46,37 @@ Map<Uri, LibraryMirror> createLibraryMirrorMap(List<String> urisStrs) {
 
 final doubleDartType = DartType(
   name: 'double',
-  location: ElementLocation(uri: 'dart:core/double.dart', line: 1, column: 1),
+  location: ElementLocation(uri: 'dart:core/double.dart'),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
-    location: ElementLocation(
-        uri: 'dart:core-patch/string_buffer_patch.dart', line: 1, column: 1),
+    location: ElementLocation(uri: 'dart:core-patch/string_buffer_patch.dart'),
   ),
 );
 
 final voidDartType = DartType(
   name: 'Void',
-  location:
-      ElementLocation(uri: 'dart:ffi/native_type.dart', line: 1, column: 1),
+  location: ElementLocation(uri: 'dart:ffi/native_type.dart'),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:ffi',
-    location: ElementLocation(uri: 'dart:ffi/union.dart', line: 1, column: 1),
+    location: ElementLocation(uri: 'dart:ffi/union.dart'),
   ),
 );
 
 final intDartType = DartType(
   name: 'int',
-  location: ElementLocation(uri: 'dart:core/int.dart', line: 1, column: 1),
+  location: ElementLocation(uri: 'dart:core/int.dart'),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
-    location: ElementLocation(
-        uri: 'dart:core-patch/string_buffer_patch.dart', line: 1, column: 1),
+    location: ElementLocation(uri: 'dart:core-patch/string_buffer_patch.dart'),
   ),
 );
 
 final stringDartType = DartType(
   name: 'String',
-  location: ElementLocation(uri: 'dart:core/string.dart', line: 1, column: 1),
+  location: ElementLocation(uri: 'dart:core/string.dart'),
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
-    location: ElementLocation(
-        uri: 'dart:core-patch/string_buffer_patch.dart', line: 1, column: 1),
+    location: ElementLocation(uri: 'dart:core-patch/string_buffer_patch.dart'),
   ),
 );
 

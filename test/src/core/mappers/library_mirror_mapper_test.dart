@@ -29,11 +29,7 @@ void main() {
         classes: [
           DartClass(
             name: 'FakeClass',
-            location: ElementLocation(
-              uri: 'package:pkg/library.dart',
-              column: 1,
-              line: 1,
-            ),
+            location: ElementLocation(uri: 'package:pkg/library.dart'),
           ),
         ],
         methods: [

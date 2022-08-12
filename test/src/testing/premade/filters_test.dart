@@ -61,23 +61,17 @@ void main() {
 
 final v1 = DartVariable(
   name: 'v1',
-  location: ElementLocation(
-      uri: 'package:pkg/variables/values.dart', column: 1, line: 1),
+  location: ElementLocation(uri: 'package:pkg/variables/values.dart'),
   type: DartType.from<String>(),
 );
 final v2 = DartVariable(
   name: 'v2',
-  location: ElementLocation(
-    uri: 'package:pkg/constants/values.dart',
-    column: 1,
-    line: 1,
-  ),
+  location: ElementLocation(uri: 'package:pkg/constants/values.dart'),
   type: DartType.from<String>(),
 );
 final v3 = DartVariable(
   name: 'v3',
-  location: ElementLocation(
-      uri: 'package:pkg/variables/nested/values.dart', column: 1, line: 1),
+  location: ElementLocation(uri: 'package:pkg/variables/nested/values.dart'),
   type: DartType.from<String>(),
 );
 final elements = [v1, v2, v3];

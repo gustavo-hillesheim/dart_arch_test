@@ -20,11 +20,7 @@ void main() {
       dartType,
       DartType(
         name: 'MyType',
-        location: ElementLocation(
-          uri: 'package:pkg/my_type.dart',
-          column: 1,
-          line: 1,
-        ),
+        location: ElementLocation(uri: 'package:pkg/my_type.dart'),
       ),
     );
   });
@@ -38,19 +34,12 @@ void main() {
       dartType,
       DartType(
         name: 'List',
-        location: ElementLocation(
-          uri: 'dart:core/list.dart',
-          column: 1,
-          line: 1,
-        ),
+        location: ElementLocation(uri: 'dart:core/list.dart'),
         generics: [stringDartType],
         parentRef: DartElementRef<DartLibrary>(
           name: 'dart:core',
-          location: ElementLocation(
-            uri: 'dart:core-patch/string_buffer_patch.dart',
-            column: 1,
-            line: 1,
-          ),
+          location:
+              ElementLocation(uri: 'dart:core-patch/string_buffer_patch.dart'),
         ),
       ),
     );

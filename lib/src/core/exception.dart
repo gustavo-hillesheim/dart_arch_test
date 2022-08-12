@@ -68,3 +68,36 @@ class PackageNotFoundException implements Exception {
     return message;
   }
 }
+
+class DartTypeNotFoundException implements Exception {
+  final String name;
+  final String? package;
+  final String? library;
+  final String message;
+
+  DartTypeNotFoundException({
+    required this.name,
+    this.package,
+    this.library,
+  }) : message = _createMessage(name: name, package: package, library: library);
+
+  static String _createMessage({
+    required String name,
+    String? package,
+    String? library,
+  }) {
+    var message = 'Could not find type "$name"';
+    if (package != null) {
+      message += ' at package "$package"';
+    }
+    if (library != null) {
+      message += ' in library "$library"';
+    }
+    return message;
+  }
+
+  @override
+  String toString() {
+    return message;
+  }
+}

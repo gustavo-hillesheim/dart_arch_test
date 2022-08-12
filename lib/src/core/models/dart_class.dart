@@ -53,6 +53,6 @@ class DartClass extends DartType
 
   @override
   String toString() {
-    return 'DartClass(name: $name, location: $location, fields: $fields, methods: $methods, constructors: $constructors, generics: $generics, superClass: $superClass, superInterfaces: $superInterfaces, isAbstract: $isAbstract, isEnum: $isEnum, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
+    return 'DartClass(name: "$name", location: $location, fields: $fields, methods: $methods, constructors: $constructors, generics: $generics, superClass: $superClass, superInterfaces: $superInterfaces, isAbstract: $isAbstract, isEnum: $isEnum, isTopLevel: $isTopLevel, metadata: $metadata, parentRef: $parentRef)';
   }
 }

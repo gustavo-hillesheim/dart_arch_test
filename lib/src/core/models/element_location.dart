@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class ElementLocation extends Equatable {
   final String uri;
 
-  ElementLocation({required this.uri});
+  const ElementLocation({required this.uri});
 
   /// Useful when a Mirror does not have a SourceLocation, or representing
   /// types that don't have a class (void, dynamic, etc)
@@ -20,6 +20,6 @@ class ElementLocation extends Equatable {
 
   @override
   String toString() {
-    return 'ElementLocation(uri: $uri)';
+    return 'ElementLocation(uri: "$uri")';
   }
 }

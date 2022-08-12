@@ -36,14 +36,30 @@ class OnGoingValidationBuilder<T extends DartElement> {
     return _createReadyBuilder(Validations.nameEndsWith(str));
   }
 
-  ReadyValidationBuilder<DartClass> implementClass<C>() {
+  ReadyValidationBuilder<DartClass> implementClass<C>({
+    String? name,
+    String? package,
+    String? library,
+  }) {
     _ensureElementsTypeIs<DartClass>(methodName: 'implementClass');
-    return _createReadyBuilder(Validations.implementsClass<C>());
+    return _createReadyBuilder(Validations.implementsClass<C>(
+      name: name,
+      package: package,
+      library: library,
+    ));
   }
 
-  ReadyValidationBuilder<DartClass> extendClass<C>() {
+  ReadyValidationBuilder<DartClass> extendClass<C>({
+    String? name,
+    String? package,
+    String? library,
+  }) {
     _ensureElementsTypeIs<DartClass>(methodName: 'extendClass');
-    return _createReadyBuilder(Validations.extendsClass<C>());
+    return _createReadyBuilder(Validations.extendsClass<C>(
+      name: name,
+      package: package,
+      library: library,
+    ));
   }
 
   ReadyValidationBuilder<DartLibrary> noDependencyMatching(

@@ -17,23 +17,43 @@ abstract class Validations {
     );
   }
 
-  static Validation<DartClass> implementsClass<C>() {
-    final type = DartType.from<C>();
-    return _createValidation(
-      (el) =>
-          _matchType(el, type) ||
-          el.superInterfaces.any((interface) => _matchType(interface, type)),
-      'implement ${C.toString()}',
+  static Validation<DartClass> implementsClass<C>({
+    String? name,
+    String? package,
+    String? library,
+  }) {
+    final type =
+        DartType.from<C>(name: name, package: package, library: library);
+    return Validation(
+      (el, package, addViolation) {
+        final resolvedType = type.resolve(package);
+        if (!(_matchType(el, resolvedType) ||
+            el.superInterfaces
+                .any((interface) => _matchType(interface, resolvedType)))) {
+          addViolation('Should implement ${C.toString()}');
+        }
+      },
+      description: 'implement ${C.toString()}',
     );
   }
 
-  static Validation<DartClass> extendsClass<C>() {
-    final type = DartType.from<C>();
-    return _createValidation(
-      (el) =>
-          _matchType(el, type) ||
-          el.superClass != null && _matchType(el.superClass!, type),
-      'extend ${C.toString()}',
+  static Validation<DartClass> extendsClass<C>({
+    String? name,
+    String? package,
+    String? library,
+  }) {
+    final type =
+        DartType.from<C>(name: name, package: package, library: library);
+    return Validation(
+      (el, package, addViolation) {
+        final resolvedType = type.resolve(package);
+        if (!(_matchType(el, resolvedType) ||
+            el.superClass != null &&
+                _matchType(el.superClass!, resolvedType))) {
+          addViolation('Should extend ${C.toString()}');
+        }
+      },
+      description: 'extend ${C.toString()}',
     );
   }
 
@@ -91,7 +111,7 @@ abstract class Validations {
         i++) {
       // If the generic from typeMatch is dynamic, than any type can be matched,
       // so we just ignore this index of the generics
-      if (typeMatch.generics[i] != DartType.dynamicType()) {
+      if (typeMatch.generics[i] != DartType.dynamicType) {
         typeToMatchGenerics.add(typeToMatch.generics[i]);
         typeMatchGenerics.add(typeMatch.generics[i]);
       }
