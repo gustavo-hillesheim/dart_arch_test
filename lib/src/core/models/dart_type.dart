@@ -3,7 +3,6 @@ import 'package:arch_test/arch_test.dart';
 /// Representation of a Dart type.
 /// Can be from method return types, or variables types.
 class DartType extends DartDeclaration {
-  // TODO: Adicionar possibilidade de tipos genéricos
   static const futureType = _futureType;
   static const futureOrType = _futureOrType;
   static const streamType = _streamType;
@@ -34,11 +33,10 @@ class DartType extends DartDeclaration {
     this.parentRef,
     this.generics = const [],
     List<DartMetadata> metadata = const [],
-    bool isTopLevel = false,
   }) : super(
           name: name,
           location: location,
-          isTopLevel: isTopLevel,
+          isTopLevel: true,
           metadata: metadata,
         );
 
@@ -52,6 +50,20 @@ class DartType extends DartDeclaration {
       name: name ?? T.toString(),
       package: package,
       library: library,
+    );
+  }
+
+  DartType call(List<DartType> generics) {
+    return copyWith(generics: generics);
+  }
+
+  DartType copyWith({List<DartType>? generics}) {
+    return DartType(
+      name: name,
+      location: location,
+      parentRef: parentRef,
+      generics: generics ?? this.generics,
+      metadata: metadata,
     );
   }
 
@@ -92,7 +104,7 @@ class ResolvableDartType {
         library: library,
       );
     }
-    return dartType;
+    return dartType.copyWith();
   }
 }
 
@@ -104,12 +116,10 @@ const _futureType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:async',
@@ -125,12 +135,10 @@ const _futureOrType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:async',
@@ -146,12 +154,10 @@ const _streamType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:async',
@@ -163,7 +169,6 @@ const _boolType = DartType(
   name: 'bool',
   location: ElementLocation(uri: 'dart:core/bool.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -175,7 +180,6 @@ const _doubleType = DartType(
   name: 'double',
   location: ElementLocation(uri: 'dart:core/double.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -187,7 +191,6 @@ const _intType = DartType(
   name: 'int',
   location: ElementLocation(uri: 'dart:core/int.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -199,7 +202,6 @@ const _numType = DartType(
   name: 'num',
   location: ElementLocation(uri: 'dart:core/num.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -211,7 +213,6 @@ const _enumType = DartType(
   name: 'Enum',
   location: ElementLocation(uri: 'dart:core/enum.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [
     DartMetadata(metadata: 'Since (version = String (\'2.14\'))'),
   ],
@@ -225,7 +226,6 @@ const _functionType = DartType(
   name: 'Function',
   location: ElementLocation(uri: 'dart:core/function.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -241,12 +241,10 @@ const _iterableType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -262,12 +260,10 @@ const _listType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -283,7 +279,6 @@ const _mapType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
@@ -291,12 +286,10 @@ const _mapType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -308,7 +301,6 @@ const _nullType = DartType(
   name: 'Null',
   location: ElementLocation(uri: 'dart:core/null.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -320,7 +312,6 @@ const _objectType = DartType(
   name: 'Object',
   location: ElementLocation(uri: 'dart:core/object.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -336,12 +327,10 @@ const _setType = DartType(
       name: 'dynamic',
       location: ElementLocation(uri: 'dynamic'),
       generics: [],
-      isTopLevel: false,
       metadata: [],
       parentRef: null,
     ),
   ],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -353,7 +342,6 @@ const _stringType = DartType(
   name: 'String',
   location: ElementLocation(uri: 'dart:core/string.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -365,7 +353,6 @@ const _symbolType = DartType(
   name: 'Symbol',
   location: ElementLocation(uri: 'dart:core/symbol.dart'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: DartElementRef<DartLibrary>(
     name: 'dart:core',
@@ -377,7 +364,6 @@ const _dynamicType = DartType(
   name: 'dynamic',
   location: ElementLocation(uri: 'dynamic'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: null,
 );
@@ -386,7 +372,6 @@ const _voidType = DartType(
   name: 'void',
   location: ElementLocation(uri: 'unknown'),
   generics: [],
-  isTopLevel: false,
   metadata: [],
   parentRef: null,
 );

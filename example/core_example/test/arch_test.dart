@@ -40,7 +40,7 @@ void main() {
                         uri: 'package:core_example/helper/text_printer.dart',
                       ),
                     ),
-                    type: DartType.listType,
+                    type: DartType.listType([DartType.stringType]),
                     isFinal: true,
                   ),
                   DartVariable(
@@ -79,7 +79,7 @@ void main() {
                           uri: 'package:core_example/helper/text_printer.dart',
                         ),
                         isFinal: true,
-                        type: DartType.listType,
+                        type: DartType.listType([DartType.stringType]),
                         parentRef: DartElementRef<DartConstructor>(
                           name: '',
                           location: ElementLocation(
@@ -170,7 +170,7 @@ void main() {
                     location: ElementLocation(
                       uri: 'package:core_example/main.dart',
                     ),
-                    type: DartType.listType,
+                    type: DartType.listType([DartType.stringType]),
                     parentRef: DartElementRef<DartMethod>(
                       name: 'main',
                       location: ElementLocation(

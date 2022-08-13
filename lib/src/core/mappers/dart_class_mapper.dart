@@ -31,7 +31,6 @@ class DartClassMapper {
       location: ElementUtils.elementLocation(classElement),
       parentRef: ElementUtils.parentRef(classElement),
       generics: _getGenerics(classElement),
-      isTopLevel: true,
       isAbstract: classElement.isAbstract,
       isEnum: classElement.isEnum,
       fields: _getFields(classElement),

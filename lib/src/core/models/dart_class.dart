@@ -23,14 +23,12 @@ class DartClass extends DartType
     this.superClass,
     DartElementRef<DartLibrary>? parentRef,
     List<DartType> generics = const [],
-    bool isTopLevel = true,
     List<DartMetadata> metadata = const [],
   }) : super(
           name: name,
           generics: generics,
           location: location,
           parentRef: parentRef,
-          isTopLevel: isTopLevel,
           metadata: metadata,
         );
 
