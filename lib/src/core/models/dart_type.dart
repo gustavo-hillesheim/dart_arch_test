@@ -44,13 +44,34 @@ class DartType extends DartDeclaration {
     String? name,
     String? package,
     String? library,
+    // TODO: Add support for specifying generics
   }) {
-    // TODO: Melhorar resolução de tipos com generics para considerar os generics também
+    name ??= T.toString();
     return ResolvableDartType(
-      name: name ?? T.toString(),
+      name: _getNameWithoutGenerics(name),
       package: package,
       library: library,
+      generics: _getGenerics(name),
     );
+  }
+
+  static String _getNameWithoutGenerics(String typeName) {
+    if (typeName.contains('<')) {
+      return typeName.substring(0, typeName.indexOf('<'));
+    }
+    return typeName;
+  }
+
+  static List<ResolvableDartType>? _getGenerics(String typeName) {
+    if (!typeName.contains('<') || !typeName.contains('>')) {
+      return null;
+    }
+    final generics = typeName
+        .substring(typeName.indexOf('<') + 1, typeName.length - 1)
+        .split(', ');
+    return generics
+        .map((genericName) => ResolvableDartType(name: genericName))
+        .toList();
   }
 
   DartType call(List<DartType> generics) {
@@ -80,21 +101,41 @@ class ResolvableDartType {
   final String name;
   final String? package;
   final String? library;
+  final List<ResolvableDartType>? generics;
 
   const ResolvableDartType({
     required this.name,
     this.package,
     this.library,
+    this.generics,
   });
 
   DartType resolve(DartPackage package) {
+    bool matcher(DartElement element, ResolvableDartType resolvableDartType) {
+      if (element is! DartType) {
+        return false;
+      }
+      var matches = element.name == resolvableDartType.name &&
+          (resolvableDartType.package == null ||
+              element.package == resolvableDartType.package) &&
+          (resolvableDartType.library == null ||
+              element.library == resolvableDartType.library);
+      final genericsToMatch = resolvableDartType.generics;
+      if (matches && genericsToMatch != null) {
+        if (genericsToMatch.length != element.generics.length) {
+          return false;
+        }
+        for (var i = 0; i < genericsToMatch.length; i++) {
+          if (!matcher(element.generics[i], genericsToMatch[i])) {
+            return false;
+          }
+        }
+      }
+      return matches;
+    }
+
     final dartType = DartElementFinder.instance.findOneByMatcher<DartType>(
-      matcher: (el) {
-        return el is DartType &&
-            el.name == name &&
-            (this.package == null || el.package == this.package) &&
-            (library == null || el.library == library);
-      },
+      matcher: (el) => matcher(el, this),
       source: package,
     );
     if (dartType == null) {

@@ -120,8 +120,7 @@ void main() {
 
   test('Repository classes should extends from BaseRepository', () {
     final classes = getClassesInFolder('repository');
-    final baseRepositoryType =
-        DartType.from<BaseRepository>(name: 'BaseRepository').resolve(package);
+    final baseRepositoryType = DartType.from<BaseRepository>().resolve(package);
 
     for (final cls in classes) {
       if (isSameType(cls, baseRepositoryType)) {

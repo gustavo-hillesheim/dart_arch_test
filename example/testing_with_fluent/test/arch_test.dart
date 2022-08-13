@@ -19,7 +19,7 @@ void main() {
         .should
         .haveNameEndingWith('Repository')
         .and
-        .extendClass<BaseRepository>(name: 'BaseRepository'),
+        .extendClass<BaseRepository>(),
   );
 
   archTest(

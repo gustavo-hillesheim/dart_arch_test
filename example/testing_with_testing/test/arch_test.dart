@@ -18,7 +18,7 @@ void main() {
     selector: Selectors.classes,
     filter: Filters.insideFolder('repository'),
     validation: Validations.nameEndsWith<DartClass>('Repository')
-        .and(Validations.extendsClass<BaseRepository>(name: 'BaseRepository')),
+        .and(Validations.extendsClass<BaseRepository>()),
   ));
 
   archTest(ArchRule<DartLibrary>(
