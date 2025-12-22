@@ -7,6 +7,8 @@ class ArchTestDeclarator {
 
   final _rules = <ArchRule>[];
 
+  List<ArchRule> get declaredRules => List.unmodifiable(_rules);
+
   void addTestFor(ArchRule rule) {
     _rules.add(rule);
   }

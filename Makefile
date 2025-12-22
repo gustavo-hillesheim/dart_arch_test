@@ -14,3 +14,14 @@ test_all:
 
 coverage:
 	dart run code_coverage
+
+install_local:
+	- rm -rf .dart_tool
+	- fvm dart pub get
+	- fvm dart pub global deactivate arch_test
+	- rm ~/.pub-cache/bin/arch_test
+	- dart pub global activate --overwrite --source path .
+
+test_example:
+	- make install_local
+	- cd example && arch_test
