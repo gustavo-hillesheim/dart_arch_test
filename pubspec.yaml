@@ -13,6 +13,7 @@ dev_dependencies:
   test: ^1.25.6
 
 dependencies:
+  analyzer: ^9.0.0
   collection: ^1.15.0
   equatable: ^2.0.3
   path: ^1.8.0
