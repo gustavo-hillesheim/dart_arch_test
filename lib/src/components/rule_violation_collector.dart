@@ -3,7 +3,7 @@ import 'package:analyzer/dart/element/element.dart';
 import '../models/models.dart';
 
 class RuleViolationCollector {
-  final List<RuleViolation> _violations = [];
+  final _violations = <RuleViolation>[];
 
   void warn<E extends Element>(E element, String message) {
     _violations.add(RuleViolation(
