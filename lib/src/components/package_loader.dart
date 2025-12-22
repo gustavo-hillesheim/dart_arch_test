@@ -3,12 +3,17 @@ import 'dart:io';
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:path/path.dart';
 
 class PackageLoader {
   Future<List<LibraryElement>> loadLibraries(Directory directory) async {
     final context = _createAnalysisContextCollection(directory);
     final libraryElements = await _getLibraryElements(context);
-    return libraryElements;
+    final packagePrefix = 'package:${directory.path.split(separator).last}';
+    final packageLibraries = libraryElements
+        .where((l) => l.identifier.startsWith(packagePrefix))
+        .toList();
+    return packageLibraries;
   }
 
   Future<List<LibraryElement>> _getLibraryElements(
