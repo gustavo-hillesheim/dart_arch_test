@@ -8,6 +8,19 @@ ResideInDirectoryMatcher<E> resideInDirectory<E extends Element>(
   return ResideInDirectoryMatcher<E>(directory);
 }
 
+extension ElementMatcherExtension<E extends Element> on ElementMatcher<E> {
+  ElementMatcher<E> that(ElementMatcher<E> filter) {
+    return FilteringElementMatcher<E>(this, filter);
+  }
+
+  ArchRule should(RuleChecker<E> ruleChecker) {
+    return ArchRule<E>(
+      elementMatcher: this,
+      checker: ruleChecker,
+    );
+  }
+}
+
 class TypeElementMatcher<E extends Element> extends ElementMatcher<E> {
   const TypeElementMatcher();
 
@@ -26,5 +39,17 @@ class ResideInDirectoryMatcher<E extends Element> extends ElementMatcher<E> {
   bool matches(E item) {
     final fileUri = item.firstFragment.libraryFragment?.source.uri;
     return fileUri?.path.contains(directory) ?? false;
+  }
+}
+
+class FilteringElementMatcher<E extends Element> extends ElementMatcher<E> {
+  final ElementMatcher<E> source;
+  final ElementMatcher<E> filter;
+
+  FilteringElementMatcher(this.source, this.filter);
+
+  @override
+  bool matches(E item) {
+    return source.matches(item) && filter.matches(item);
   }
 }
