@@ -7,13 +7,17 @@ class RuleViolationCollector {
 
   void warn<E extends Element>(E element, String message) {
     _violations.add(RuleViolation(
-        element: element,
-        message: message,
-        severity: ViolationSeverity.warning));
+      element: element,
+      message: message,
+      severity: ViolationSeverity.warning,
+    ));
   }
 
   void error<E extends Element>(E element, String message) {
     _violations.add(RuleViolation(
-        element: element, message: message, severity: ViolationSeverity.error));
+      element: element,
+      message: message,
+      severity: ViolationSeverity.error,
+    ));
   }
 }
