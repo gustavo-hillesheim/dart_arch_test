@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:arch_test/src/exception.dart';
+import 'exception.dart';
 import 'package:yaml/yaml.dart';
 
 Future<String> findNearestPackageName(Directory directory) async {
