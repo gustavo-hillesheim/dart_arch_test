@@ -34,48 +34,14 @@ void main() async {
   await archTestRunnerFile.delete();
 }
 
-const _archTestRunnerFileContent = '''import 'dart:io';
-import 'dart:isolate';
-
-import 'package:analyzer/dart/element/element.dart';
-import 'package:arch_test/arch_test.dart';
+const _archTestRunnerFileContent = '''import 'package:arch_test/arch_test.dart';
 
 import 'arch_test.dart' as tests;
 
 void main() async {
-  print('Loading package libraries...');
-
-  final packageLoader = PackageLoader();
-  final packageLibraries = await packageLoader.loadLibraries(Directory.current);
-
-  print('Package libraries loaded!');
-  print('Registering architecture rules...');
-
   tests.main();
 
-  print('Architecture rules registered!');
-  print('Checking architecture rules...');
-
-  final ruleViolations = _checkRules(packageLibraries);
-
-  print('Architecture rules checked!');
-
-  if (ruleViolations.isEmpty) {
-    print('No architecture violations found. 🎉');
-  } else {
-    print('Architecture violations found:');
-    for (final violation in ruleViolations) {
-      print('- [\${violation.severity}] \${violation.message} (Element: \${violation.element.name})');
-    }
-  }
-}
-
-List<RuleViolation> _checkRules(List<LibraryElement> packageLibraries) {
-  final testsRunner = ArchTestsRunner(
-    declaredRules: ArchTestDeclarator.instance.declaredRules,
-    packageLibraries: packageLibraries,
-  );
-  return testsRunner.checkRules();
+  await runArchTests();
 }
 
 ''';
