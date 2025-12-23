@@ -1,12 +1,10 @@
 library;
 
-import 'src/models/models.dart';
-import 'src/components/components.dart';
+import 'src/core/core.dart';
 
-export 'src/components/components.dart';
+export 'src/assertions/assertions.dart';
+export 'src/core/core.dart';
 export 'src/matchers/matchers.dart';
-export 'src/models/models.dart';
-export 'src/rule_assertions/rule_assertions.dart';
 
 void archTest(ArchRule rule) {
   ArchTestDeclarator.instance.addTestFor(rule);

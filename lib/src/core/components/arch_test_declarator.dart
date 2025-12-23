@@ -1,4 +1,4 @@
-import 'package:arch_test/src/models/arch_rule.dart';
+import 'package:arch_test/src/core/models/arch_rule.dart';
 
 class ArchTestDeclarator {
   ArchTestDeclarator._();
