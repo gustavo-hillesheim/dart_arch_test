@@ -64,19 +64,34 @@ void main(List<String> args, SendPort sendPort) async {
   channel.send(PrintIsolateMessage(message: 'Architecture rules registered!'));
   channel.send(PrintIsolateMessage(message: 'Checking architecture rules...'));
 
-  await _checkRules(packageLibraries);
+  final ruleViolations = _checkRules(packageLibraries);
 
   channel.send(PrintIsolateMessage(message: 'Architecture rules checked!'));
+
+  if (ruleViolations.isEmpty) {
+    channel.send(PrintIsolateMessage(
+      message: 'No architecture violations found. 🎉',
+    ));
+  } else {
+    channel.send(PrintIsolateMessage(
+      message: 'Architecture violations found:',
+    ));
+    for (final violation in ruleViolations) {
+      channel.send(PrintIsolateMessage(
+        message: '- [\${violation.severity}] \${violation.message} (Element: \${violation.element.name})',
+      ));
+    }
+  }
 
   channel.send(const ProcessFinishedIsolateMessage());
 }
 
-Future<void> _checkRules(List<LibraryElement> packageLibraries) async {
+List<RuleViolation> _checkRules(List<LibraryElement> packageLibraries) {
   final testsRunner = ArchTestsRunner(
     declaredRules: ArchTestDeclarator.instance.declaredRules,
     packageLibraries: packageLibraries,
   );
-  testsRunner.checkRules();
+  return testsRunner.checkRules();
 }
 
 ''';

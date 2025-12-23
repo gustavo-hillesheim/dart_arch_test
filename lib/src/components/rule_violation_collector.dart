@@ -5,6 +5,8 @@ import '../models/models.dart';
 class RuleViolationCollector {
   final _violations = <RuleViolation>[];
 
+  List<RuleViolation> get allViolations => List.unmodifiable(_violations);
+
   void warn<E extends Element>(E element, String message) {
     _violations.add(RuleViolation(
       element: element,

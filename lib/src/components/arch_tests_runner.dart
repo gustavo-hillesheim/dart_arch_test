@@ -10,7 +10,7 @@ class ArchTestsRunner {
   final List<ArchRule> declaredRules;
   final List<LibraryElement> packageLibraries;
 
-  void checkRules() {
+  List<RuleViolation> checkRules() {
     final violationsCollector = RuleViolationCollector();
     final allLibrariesAndTopLevelElements = packageLibraries
         .expand((library) => [
@@ -25,6 +25,7 @@ class ArchTestsRunner {
         violationsCollector,
       );
     }
+    return violationsCollector.allViolations;
   }
 
   void _checkRule(
