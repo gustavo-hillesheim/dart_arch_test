@@ -1,47 +1,37 @@
 import 'dart:io';
 
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
+
+final _packageDirectory = Directory.current;
 
 void main() async {
-  final packageDirectory = Directory.current;
+  final archTestFile = _getArchTestFile();
+  await _verifyFileExists(archTestFile);
+  await _runFile(archTestFile);
+}
+
+File _getArchTestFile() {
   final archTestFile = File(
-    join(packageDirectory.path, 'test', 'arch_test.dart'),
+    path.join(_packageDirectory.path, 'test', 'arch_test.dart'),
   );
-  if (!await archTestFile.exists()) {
+  return archTestFile;
+}
+
+Future<void> _verifyFileExists(File file) async {
+  if (!await file.exists()) {
     print(
-      'arch_test.dart file not found in test/ directory of the package.',
+      '${path.basename(file.path)} file not found in package\'s ${path.basename(file.parent.path)}/ directory.',
     );
     exit(1);
   }
+}
 
-  final archTestRunnerFile = File(
-    join(archTestFile.parent.path, '.arch_test_runner.dart'),
-  );
-  await archTestRunnerFile.create();
-  await archTestRunnerFile.writeAsString(
-    _archTestRunnerFileContent,
-    flush: true,
-  );
-
+Future<void> _runFile(File file) async {
   final process = await Process.start(
     Platform.resolvedExecutable,
-    ['run', archTestRunnerFile.path],
-    workingDirectory: packageDirectory.path,
+    ['run', file.path],
+    workingDirectory: _packageDirectory.path,
     mode: ProcessStartMode.inheritStdio,
   );
   await process.exitCode;
-
-  await archTestRunnerFile.delete();
 }
-
-const _archTestRunnerFileContent = '''import 'package:arch_test/arch_test.dart';
-
-import 'arch_test.dart' as tests;
-
-void main() async {
-  tests.main();
-
-  await runArchTests();
-}
-
-''';

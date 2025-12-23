@@ -6,4 +6,6 @@ void main() {
         .that(resideInDirectory('src/domain/entities'))
         .should(haveNameEndingWith('Entity')),
   );
+
+  runArchTests();
 }
