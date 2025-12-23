@@ -1,15 +1,15 @@
-import 'package:arch_test/src/core/models/arch_rule.dart';
+import 'package:arch_test/src/core/models/arch_test.dart';
 
 class ArchTestDeclarator {
   ArchTestDeclarator._();
 
   static final ArchTestDeclarator instance = ArchTestDeclarator._();
 
-  final _rules = <ArchRule>[];
+  final _tests = <ArchTest>[];
 
-  List<ArchRule> get declaredRules => List.unmodifiable(_rules);
+  List<ArchTest> get declaredTests => List.unmodifiable(_tests);
 
-  void addTestFor(ArchRule rule) {
-    _rules.add(rule);
+  void add(ArchTest test) {
+    _tests.add(test);
   }
 }

@@ -3,14 +3,14 @@ import 'package:arch_test/arch_test.dart';
 
 class ArchTestsRunner {
   const ArchTestsRunner({
-    required this.declaredRules,
+    required this.tests,
     required this.packageLibraries,
   });
 
-  final List<ArchRule> declaredRules;
+  final List<ArchTest> tests;
   final List<LibraryElement> packageLibraries;
 
-  List<RuleViolation> checkRules() {
+  List<RuleViolation> runTests() {
     final violationsCollector = RuleViolationCollector();
     final allLibrariesAndTopLevelElements = packageLibraries
         .expand((library) => [
@@ -18,9 +18,9 @@ class ArchTestsRunner {
               ...library.children,
             ])
         .toList();
-    for (final rule in declaredRules) {
-      _checkRule(
-        rule,
+    for (final test in tests) {
+      _runTest(
+        test,
         allLibrariesAndTopLevelElements,
         violationsCollector,
       );
@@ -28,15 +28,15 @@ class ArchTestsRunner {
     return violationsCollector.allViolations;
   }
 
-  void _checkRule(
-    ArchRule rule,
+  void _runTest(
+    ArchTest test,
     List<Element> packageElements,
     RuleViolationCollector violationsCollector,
   ) {
     final candidateElements =
-        rule.elementMatcher.findMatchingElementsIn(packageElements);
+        test.elementMatcher.findMatchingElementsIn(packageElements);
     for (final element in candidateElements) {
-      rule.assertion.check(element, violationsCollector);
+      test.assertion.check(element, violationsCollector);
     }
   }
 }

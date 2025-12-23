@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 
 import 'models.dart';
 
-class ArchRule<E extends Element> extends Equatable {
-  const ArchRule({
+class ArchTest<E extends Element> extends Equatable {
+  const ArchTest({
     required this.elementMatcher,
     required this.assertion,
   });

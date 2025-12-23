@@ -13,8 +13,8 @@ extension ElementMatcherExtension<E extends Element> on ElementMatcher<E> {
     return FilteringElementMatcher<E>(this, filter);
   }
 
-  ArchRule should(RuleAssertion<E> ruleChecker) {
-    return ArchRule<E>(
+  ArchTest should(RuleAssertion<E> ruleChecker) {
+    return ArchTest<E>(
       elementMatcher: this,
       assertion: ruleChecker,
     );

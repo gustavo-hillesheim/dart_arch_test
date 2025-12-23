@@ -1,4 +1,4 @@
-export 'arch_rule.dart';
+export 'arch_test.dart';
 export 'element_matcher.dart';
 export 'rule_assertion.dart';
 export 'rule_violation.dart';

@@ -2,8 +2,6 @@ library;
 
 import 'dart:io';
 
-import 'package:analyzer/dart/element/element.dart';
-
 import 'src/core/core.dart';
 
 export 'src/assertions/assertions.dart';
@@ -11,8 +9,8 @@ export 'src/core/core.dart'
     hide PackageLoader, ArchTestsRunner, ArchTestDeclarator;
 export 'src/matchers/matchers.dart';
 
-void archTest(ArchRule rule) {
-  ArchTestDeclarator.instance.addTestFor(rule);
+void archTest(ArchTest test) {
+  ArchTestDeclarator.instance.add(test);
 }
 
 Future<void> runArchTests() async {
@@ -21,15 +19,16 @@ Future<void> runArchTests() async {
   final packageLoader = PackageLoader();
   final packageLibraries = await packageLoader.loadLibraries(Directory.current);
 
-  print('Package libraries loaded!');
-  print('Registering architecture rules...');
+  print('Architecture tests registered!');
+  print('Running architecture tests...');
 
-  print('Architecture rules registered!');
-  print('Checking architecture rules...');
+  final testsRunner = ArchTestsRunner(
+    tests: ArchTestDeclarator.instance.declaredTests,
+    packageLibraries: packageLibraries,
+  );
+  final ruleViolations = testsRunner.runTests();
 
-  final ruleViolations = _checkRules(packageLibraries);
-
-  print('Architecture rules checked!');
+  print('Architecture tests run!');
 
   if (ruleViolations.isEmpty) {
     print('No architecture violations found. 🎉');
@@ -40,12 +39,4 @@ Future<void> runArchTests() async {
           '- [${violation.severity}] ${violation.message} (Element: ${violation.element.name})');
     }
   }
-}
-
-List<RuleViolation> _checkRules(List<LibraryElement> packageLibraries) {
-  final testsRunner = ArchTestsRunner(
-    declaredRules: ArchTestDeclarator.instance.declaredRules,
-    packageLibraries: packageLibraries,
-  );
-  return testsRunner.checkRules();
 }
