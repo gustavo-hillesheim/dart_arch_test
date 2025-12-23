@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'dart:isolate';
 
-import 'package:arch_test/isolate_channel.dart';
 import 'package:path/path.dart';
 
 void main() async {
@@ -25,18 +23,15 @@ void main() async {
     flush: true,
   );
 
-  final channel = IsolateChannel();
+  final process = await Process.start(
+    Platform.resolvedExecutable,
+    ['run', archTestRunnerFile.path],
+    workingDirectory: packageDirectory.path,
+    mode: ProcessStartMode.inheritStdio,
+  );
+  await process.exitCode;
 
-  channel.messages.listen((message) async {
-    if (message is PrintIsolateMessage) {
-      print(message.message);
-    } else if (message is ProcessFinishedIsolateMessage) {
-      await archTestRunnerFile.delete();
-      channel.close();
-    }
-  });
-
-  await Isolate.spawnUri(archTestRunnerFile.uri, [], channel.sendPort);
+  await archTestRunnerFile.delete();
 }
 
 const _archTestRunnerFileContent = '''import 'dart:io';
@@ -44,46 +39,35 @@ import 'dart:isolate';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:arch_test/arch_test.dart';
-import 'package:arch_test/isolate_channel.dart';
 
 import 'arch_test.dart' as tests;
 
-void main(List<String> args, SendPort sendPort) async {
-  final channel = IsolateChannel.fromSendPort(sendPort);
-
-  channel.send(PrintIsolateMessage(message: 'Loading package libraries...'));
+void main() async {
+  print('Loading package libraries...');
 
   final packageLoader = PackageLoader();
   final packageLibraries = await packageLoader.loadLibraries(Directory.current);
 
-  channel.send(PrintIsolateMessage(message: 'Package libraries loaded!'));
-  channel.send(PrintIsolateMessage(message: 'Registering architecture rules...'));
+  print('Package libraries loaded!');
+  print('Registering architecture rules...');
 
   tests.main();
 
-  channel.send(PrintIsolateMessage(message: 'Architecture rules registered!'));
-  channel.send(PrintIsolateMessage(message: 'Checking architecture rules...'));
+  print('Architecture rules registered!');
+  print('Checking architecture rules...');
 
   final ruleViolations = _checkRules(packageLibraries);
 
-  channel.send(PrintIsolateMessage(message: 'Architecture rules checked!'));
+  print('Architecture rules checked!');
 
   if (ruleViolations.isEmpty) {
-    channel.send(PrintIsolateMessage(
-      message: 'No architecture violations found. 🎉',
-    ));
+    print('No architecture violations found. 🎉');
   } else {
-    channel.send(PrintIsolateMessage(
-      message: 'Architecture violations found:',
-    ));
+    print('Architecture violations found:');
     for (final violation in ruleViolations) {
-      channel.send(PrintIsolateMessage(
-        message: '- [\${violation.severity}] \${violation.message} (Element: \${violation.element.name})',
-      ));
+      print('- [\${violation.severity}] \${violation.message} (Element: \${violation.element.name})');
     }
   }
-
-  channel.send(const ProcessFinishedIsolateMessage());
 }
 
 List<RuleViolation> _checkRules(List<LibraryElement> packageLibraries) {
