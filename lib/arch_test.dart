@@ -7,7 +7,7 @@ import 'src/core/core.dart';
 export 'src/assertions/assertions.dart';
 export 'src/core/core.dart'
     hide PackageLoader, ArchTestsRunner, ArchTestDeclarator;
-export 'src/matchers/matchers.dart';
+export 'src/selectors/selectors.dart';
 
 void archTest(ArchTest test) {
   ArchTestDeclarator.instance.add(test);

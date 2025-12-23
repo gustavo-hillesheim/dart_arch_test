@@ -33,9 +33,8 @@ class ArchTestsRunner {
     List<Element> packageElements,
     RuleViolationCollector violationsCollector,
   ) {
-    final candidateElements =
-        test.elementMatcher.findMatchingElementsIn(packageElements);
-    for (final element in candidateElements) {
+    final elements = test.selector.select(packageElements);
+    for (final element in elements) {
       test.assertion.check(element, violationsCollector);
     }
   }

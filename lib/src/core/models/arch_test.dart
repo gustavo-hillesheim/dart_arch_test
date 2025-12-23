@@ -5,17 +5,17 @@ import 'models.dart';
 
 class ArchTest<E extends Element> extends Equatable {
   const ArchTest({
-    required this.elementMatcher,
+    required this.selector,
     required this.assertion,
   });
 
-  final ElementMatcher<E> elementMatcher;
+  final ElementSelector<Element, E> selector;
   final RuleAssertion<E> assertion;
 
   String describe() {
-    return '${elementMatcher.describe()} should ${assertion.describe()}';
+    return '${selector.describe()} should ${assertion.describe()}';
   }
 
   @override
-  List<Object?> get props => [elementMatcher, assertion];
+  List<Object?> get props => [selector, assertion];
 }
