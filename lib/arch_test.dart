@@ -7,7 +7,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'src/core/core.dart';
 
 export 'src/assertions/assertions.dart';
-export 'src/core/core.dart';
+export 'src/core/core.dart'
+    hide PackageLoader, ArchTestsRunner, ArchTestDeclarator;
 export 'src/matchers/matchers.dart';
 
 void archTest(ArchRule rule) {

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/src/core/core.dart';
 import 'package:test/test.dart';
 
 void main() {
