@@ -6,16 +6,16 @@ import 'models.dart';
 class ArchRule<E extends Element> extends Equatable {
   const ArchRule({
     required this.elementMatcher,
-    required this.checker,
+    required this.assertion,
   });
 
   final ElementMatcher<E> elementMatcher;
-  final RuleChecker<E> checker;
+  final RuleAssertion<E> assertion;
 
   String describe() {
-    return '${elementMatcher.describe()} should ${checker.describe()}';
+    return '${elementMatcher.describe()} should ${assertion.describe()}';
   }
 
   @override
-  List<Object?> get props => [elementMatcher, checker];
+  List<Object?> get props => [elementMatcher, assertion];
 }

@@ -36,7 +36,7 @@ class ArchTestsRunner {
     final candidateElements =
         rule.elementMatcher.findMatchingElementsIn(packageElements);
     for (final element in candidateElements) {
-      rule.checker.check(element, violationsCollector);
+      rule.assertion.check(element, violationsCollector);
     }
   }
 }

@@ -13,10 +13,10 @@ extension ElementMatcherExtension<E extends Element> on ElementMatcher<E> {
     return FilteringElementMatcher<E>(this, filter);
   }
 
-  ArchRule should(RuleChecker<E> ruleChecker) {
+  ArchRule should(RuleAssertion<E> ruleChecker) {
     return ArchRule<E>(
       elementMatcher: this,
-      checker: ruleChecker,
+      assertion: ruleChecker,
     );
   }
 }

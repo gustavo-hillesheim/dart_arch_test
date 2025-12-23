@@ -1,15 +1,16 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:arch_test/arch_test.dart';
 
-HaveNameEndingWithRuleChecker<E> haveNameEndingWith<E extends Element>(
+HaveNameEndingWithRuleAssertion<E> haveNameEndingWith<E extends Element>(
     String suffix) {
-  return HaveNameEndingWithRuleChecker<E>(suffix);
+  return HaveNameEndingWithRuleAssertion<E>(suffix);
 }
 
-class HaveNameEndingWithRuleChecker<E extends Element> extends RuleChecker<E> {
+class HaveNameEndingWithRuleAssertion<E extends Element>
+    extends RuleAssertion<E> {
   final String suffix;
 
-  HaveNameEndingWithRuleChecker(this.suffix);
+  HaveNameEndingWithRuleAssertion(this.suffix);
 
   @override
   String describe() {
