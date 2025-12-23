@@ -15,10 +15,10 @@ extension ElementSelectorExtension<E extends Element, O extends Element>
     return FilteringElementSelector<E, O, O2>(this, filter);
   }
 
-  ArchTest should(RuleAssertion<O> ruleChecker) {
+  ArchTest should(ArchRule<O> rule) {
     return ArchTest<O>(
       selector: this,
-      assertion: ruleChecker,
+      rule: rule,
     );
   }
 }

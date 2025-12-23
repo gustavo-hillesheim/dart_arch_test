@@ -2,8 +2,8 @@ import 'package:analyzer/dart/element/element.dart';
 
 import '../components/components.dart';
 
-abstract class RuleAssertion<E extends Element> {
+abstract class ArchRule<E extends Element> {
   String describe();
 
-  void check(E element, RuleViolationCollector collector);
+  void check(E element, ArchRuleViolationsCollector collector);
 }

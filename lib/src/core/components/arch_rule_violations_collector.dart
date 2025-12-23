@@ -2,13 +2,13 @@ import 'package:analyzer/dart/element/element.dart';
 
 import '../models/models.dart';
 
-class RuleViolationCollector {
-  final _violations = <RuleViolation>[];
+class ArchRuleViolationsCollector {
+  final _violations = <ArchRuleViolation>[];
 
-  List<RuleViolation> get allViolations => List.unmodifiable(_violations);
+  List<ArchRuleViolation> get allViolations => List.unmodifiable(_violations);
 
   void warn<E extends Element>(E element, String message) {
-    _violations.add(RuleViolation(
+    _violations.add(ArchRuleViolation(
       element: element,
       message: message,
       severity: ViolationSeverity.warning,
@@ -16,7 +16,7 @@ class RuleViolationCollector {
   }
 
   void error<E extends Element>(E element, String message) {
-    _violations.add(RuleViolation(
+    _violations.add(ArchRuleViolation(
       element: element,
       message: message,
       severity: ViolationSeverity.error,

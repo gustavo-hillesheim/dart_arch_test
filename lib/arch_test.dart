@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'src/core/core.dart';
 
-export 'src/assertions/assertions.dart';
+export 'src/rules/rules.dart';
 export 'src/core/core.dart'
     hide PackageLoader, ArchTestsRunner, ArchTestDeclarator;
 export 'src/selectors/selectors.dart';

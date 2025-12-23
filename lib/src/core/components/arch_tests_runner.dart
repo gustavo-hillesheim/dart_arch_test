@@ -10,8 +10,8 @@ class ArchTestsRunner {
   final List<ArchTest> tests;
   final List<LibraryElement> packageLibraries;
 
-  List<RuleViolation> runTests() {
-    final violationsCollector = RuleViolationCollector();
+  List<ArchRuleViolation> runTests() {
+    final violationsCollector = ArchRuleViolationsCollector();
     final allLibrariesAndTopLevelElements = packageLibraries
         .expand((library) => [
               library,
@@ -31,11 +31,11 @@ class ArchTestsRunner {
   void _runTest(
     ArchTest test,
     List<Element> packageElements,
-    RuleViolationCollector violationsCollector,
+    ArchRuleViolationsCollector violationsCollector,
   ) {
     final elements = test.selector.select(packageElements);
     for (final element in elements) {
-      test.assertion.check(element, violationsCollector);
+      test.rule.check(element, violationsCollector);
     }
   }
 }

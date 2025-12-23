@@ -1,16 +1,16 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:arch_test/arch_test.dart';
 
-HaveNameEndingWithRuleAssertion<E> haveNameEndingWith<E extends Element>(
-    String suffix) {
-  return HaveNameEndingWithRuleAssertion<E>(suffix);
+HaveNameEndingWithArchRule<E> haveNameEndingWith<E extends Element>(
+  String suffix,
+) {
+  return HaveNameEndingWithArchRule<E>(suffix);
 }
 
-class HaveNameEndingWithRuleAssertion<E extends Element>
-    extends RuleAssertion<E> {
+class HaveNameEndingWithArchRule<E extends Element> extends ArchRule<E> {
   final String suffix;
 
-  HaveNameEndingWithRuleAssertion(this.suffix);
+  HaveNameEndingWithArchRule(this.suffix);
 
   @override
   String describe() {
@@ -18,7 +18,7 @@ class HaveNameEndingWithRuleAssertion<E extends Element>
   }
 
   @override
-  void check(Element element, RuleViolationCollector violationCollector) {
+  void check(Element element, ArchRuleViolationsCollector violationCollector) {
     final name = element.name;
     if (name == null || !name.endsWith(suffix)) {
       violationCollector.error(

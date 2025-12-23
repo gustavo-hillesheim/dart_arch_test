@@ -1,8 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:equatable/equatable.dart';
 
-class RuleViolation<E extends Element> extends Equatable {
-  const RuleViolation({
+class ArchRuleViolation<E extends Element> extends Equatable {
+  const ArchRuleViolation({
     required this.element,
     required this.message,
     required this.severity,
