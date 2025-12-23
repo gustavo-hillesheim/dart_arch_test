@@ -5,6 +5,8 @@ import 'matcher.dart';
 abstract class ElementMatcher<E extends Element> extends Matcher<E> {
   const ElementMatcher();
 
+  String describe();
+
   List<E> findMatchingElementsIn(List<Element> elements) {
     return elements.whereType<E>().where(matches).toList();
   }

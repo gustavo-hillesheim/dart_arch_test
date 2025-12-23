@@ -12,6 +12,11 @@ class HaveNameEndingWithRuleChecker<E extends Element> extends RuleChecker<E> {
   HaveNameEndingWithRuleChecker(this.suffix);
 
   @override
+  String describe() {
+    return 'have name ending with "$suffix"';
+  }
+
+  @override
   void check(Element element, RuleViolationCollector violationCollector) {
     final name = element.name;
     if (name == null || !name.endsWith(suffix)) {

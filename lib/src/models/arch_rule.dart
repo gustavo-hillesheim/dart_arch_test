@@ -12,6 +12,10 @@ class ArchRule<E extends Element> extends Equatable {
   final ElementMatcher<E> elementMatcher;
   final RuleChecker<E> checker;
 
+  String describe() {
+    return '${elementMatcher.describe()} should ${checker.describe()}';
+  }
+
   @override
   List<Object?> get props => [elementMatcher, checker];
 }

@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:arch_test/arch_test.dart';
 
-const classes = TypeElementMatcher<ClassElement>();
+const classes = TypeElementMatcher<ClassElement>(description: 'classes');
 
 ResideInDirectoryMatcher<E> resideInDirectory<E extends Element>(
     String directory) {
@@ -22,7 +22,14 @@ extension ElementMatcherExtension<E extends Element> on ElementMatcher<E> {
 }
 
 class TypeElementMatcher<E extends Element> extends ElementMatcher<E> {
-  const TypeElementMatcher();
+  const TypeElementMatcher({this.description});
+
+  final String? description;
+
+  @override
+  String describe() {
+    return description ?? 'Elements of type $E';
+  }
 
   @override
   bool matches(E item) {
@@ -36,6 +43,11 @@ class ResideInDirectoryMatcher<E extends Element> extends ElementMatcher<E> {
   ResideInDirectoryMatcher(this.directory);
 
   @override
+  String describe() {
+    return 'reside in directory "$directory"';
+  }
+
+  @override
   bool matches(E item) {
     final fileUri = item.firstFragment.libraryFragment?.source.uri;
     return fileUri?.path.contains(directory) ?? false;
@@ -47,6 +59,11 @@ class FilteringElementMatcher<E extends Element> extends ElementMatcher<E> {
   final ElementMatcher<E> filter;
 
   FilteringElementMatcher(this.source, this.filter);
+
+  @override
+  String describe() {
+    return '${source.describe()} that ${filter.describe()}';
+  }
 
   @override
   bool matches(E item) {
