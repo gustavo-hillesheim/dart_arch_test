@@ -19,7 +19,7 @@ Future<void> runArchTests() async {
   final packageLoader = PackageLoader();
   final packageLibraries = await packageLoader.loadLibraries(Directory.current);
 
-  print('Architecture tests registered!');
+  print('Package libraries loaded!');
   print('Running architecture tests...');
 
   final testsRunner = ArchTestsRunner(

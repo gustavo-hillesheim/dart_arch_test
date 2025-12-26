@@ -3,9 +3,16 @@ import 'package:arch_test/arch_test.dart';
 
 extension ElementPredicateExtension<E extends Element> on ElementPredicate<E> {
   ArchTest should(ElementPredicate<E> predicate) {
-    return ArchTest<E>(
-      selector: ElementPredicateToSelectorAdapter<E>(this),
-      rule: ElementPredicateToArchRuleAdapter<E>(predicate),
+    final selector = this is ElementSelector
+        ? this as ElementSelector
+        : ElementPredicateToSelectorAdapter<E>(this);
+    final rule = predicate is ArchRule?
+        ? predicate as ArchRule
+        : ElementPredicateToArchRuleAdapter<E>(predicate);
+
+    return ArchTest(
+      selector: selector,
+      rule: rule,
     );
   }
 }
