@@ -10,16 +10,8 @@ ResideInDirectorySelector<E> resideInDirectory<E extends Element>(
 
 extension ElementSelectorExtension<E extends Element, O extends Element>
     on ElementSelector<E, O> {
-  ElementSelector<E, O2> that<O2 extends Element>(
-      ElementSelector<O, O2> filter) {
-    return FilteringElementSelector<E, O, O2>(this, filter);
-  }
-
-  ArchTest should(ArchRule<O> rule) {
-    return ArchTest<O>(
-      selector: this,
-      rule: rule,
-    );
+  ElementSelector<E, O> that(ElementPredicate<O> filter) {
+    return FilteringElementSelector<E, O>(this, filter);
   }
 }
 
@@ -60,10 +52,10 @@ class ResideInDirectorySelector<E extends Element>
   }
 }
 
-class FilteringElementSelector<E extends Element, O extends Element,
-    O2 extends Element> extends ElementSelector<E, O2> {
+class FilteringElementSelector<E extends Element, O extends Element>
+    extends ElementSelector<E, O> {
   final ElementSelector<E, O> source;
-  final ElementSelector<O, O2> filter;
+  final ElementPredicate<O> filter;
 
   FilteringElementSelector(this.source, this.filter);
 
@@ -73,7 +65,7 @@ class FilteringElementSelector<E extends Element, O extends Element,
   }
 
   @override
-  List<O2> select(List<E> elements) {
-    return filter.select(source.select(elements));
+  List<O> select(List<E> elements) {
+    return source.select(elements).where(filter.satisfies).toList();
   }
 }
