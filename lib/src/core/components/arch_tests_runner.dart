@@ -35,7 +35,14 @@ class ArchTestsRunner {
   ) {
     final elements = test.selector.select(packageElements);
     for (final element in elements) {
-      test.rule.check(element, violationsCollector);
+      test.rule.check(
+        element,
+        (severity, [message]) => violationsCollector.add(
+          element,
+          severity,
+          message ?? test.describe(),
+        ),
+      );
     }
   }
 }

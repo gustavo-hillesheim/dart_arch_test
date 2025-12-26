@@ -38,12 +38,9 @@ class ElementPredicateToArchRuleAdapter<E extends Element> extends ArchRule<E> {
   }
 
   @override
-  void check(E element, ArchRuleViolationsCollector collector) {
+  void check(E element, ReportViolation reportViolation) {
     if (!predicate.satisfies(element)) {
-      collector.error(
-        element,
-        'Element does not satisfy the predicate: ${predicate.describe()}',
-      );
+      reportViolation(ViolationSeverity.error);
     }
   }
 }
