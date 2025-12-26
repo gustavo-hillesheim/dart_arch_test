@@ -3,11 +3,6 @@ import 'package:arch_test/arch_test.dart';
 
 const classes = TypeElementSelector<ClassElement>(description: 'classes');
 
-ResideInDirectorySelector<E> resideInDirectory<E extends Element>(
-    String directory) {
-  return ResideInDirectorySelector<E>(directory);
-}
-
 extension ElementSelectorExtension<E extends Element, O extends Element>
     on ElementSelector<E, O> {
   ElementSelector<E, O> that(ElementPredicate<O> filter) {
@@ -29,26 +24,6 @@ class TypeElementSelector<E extends Element>
   @override
   List<E> select(List<Element> elements) {
     return elements.whereType<E>().toList();
-  }
-}
-
-class ResideInDirectorySelector<E extends Element>
-    extends ElementSelector<E, E> {
-  final String directory;
-
-  ResideInDirectorySelector(this.directory);
-
-  @override
-  String describe() {
-    return 'reside in directory "$directory"';
-  }
-
-  @override
-  List<E> select(List<E> elements) {
-    return elements.where((element) {
-      final fileUri = element.firstFragment.libraryFragment?.source.uri;
-      return fileUri?.path.contains(directory) ?? false;
-    }).toList();
   }
 }
 
