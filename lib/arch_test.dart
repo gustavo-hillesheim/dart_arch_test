@@ -33,10 +33,21 @@ Future<void> runArchTests() async {
   if (ruleViolations.isEmpty) {
     print('No architecture violations found. 🎉');
   } else {
-    print('Architecture violations found:');
+    print('${ruleViolations.length} architecture violations found:');
     for (final violation in ruleViolations) {
+      final element = violation.element;
+      final fragment = element.firstFragment;
+      final library = element.library;
+
+      final lineInfo = fragment.libraryFragment?.lineInfo;
+      final location = lineInfo?.getLocation(fragment.offset);
+      final fullLocation = library != null && location != null
+          ? '${library.uri.path}:${location.lineNumber}:${location.columnNumber}'
+          : 'unknown location';
+
       print(
-          '- [${violation.severity}] ${violation.message} (Element: ${violation.element.name})');
+        '- [${violation.severity.name.toUpperCase()}] ${violation.message} (violated by ${violation.element.name} ($fullLocation))',
+      );
     }
   }
 }
