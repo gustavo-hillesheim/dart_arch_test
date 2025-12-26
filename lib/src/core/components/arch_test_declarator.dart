@@ -1,7 +1,11 @@
 import 'package:arch_test/src/core/models/arch_test.dart';
+import 'package:meta/meta.dart';
 
 class ArchTestDeclarator {
   ArchTestDeclarator._();
+
+  @visibleForTesting
+  ArchTestDeclarator.forTests();
 
   static final ArchTestDeclarator instance = ArchTestDeclarator._();
 
