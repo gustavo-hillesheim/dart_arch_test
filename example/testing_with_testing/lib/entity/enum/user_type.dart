@@ -1,1 +1,0 @@
-enum UserType { USER, ADMINISTRATOR }

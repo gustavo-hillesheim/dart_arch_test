@@ -1,1 +1,0 @@
-enum LibraryDependencyKind { IMPORT, EXPORT }
