@@ -10,7 +10,7 @@ void main() {
       final runner = ArchTestsRunner(
         tests: [
           classes
-              .that(resideInDirectory('entities'))
+              .that(resideIn('entities'))
               .should(haveNameEndingWith('Entity')),
         ],
         packageLibraries: mockLibraries,
@@ -23,7 +23,7 @@ void main() {
 
     test('SHOULD return violation for test with violations', () {
       final test = classes
-          .that(resideInDirectory('service'))
+          .that(resideIn('service'))
           .should(haveNameEndingWith('Entity'));
 
       final runner = ArchTestsRunner(

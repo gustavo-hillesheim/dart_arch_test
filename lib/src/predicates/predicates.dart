@@ -7,9 +7,8 @@ HaveNameEndingWithPredicate<E> haveNameEndingWith<E extends Element>(
   return HaveNameEndingWithPredicate<E>(suffix);
 }
 
-ResideInDirectoryPredicate<E> resideInDirectory<E extends Element>(
-    String directory) {
-  return ResideInDirectoryPredicate<E>(directory);
+ResideInPredicate<E> resideIn<E extends Element>(String directory) {
+  return ResideInPredicate<E>(directory);
 }
 
 class HaveNameEndingWithPredicate<E extends Element>
@@ -30,15 +29,14 @@ class HaveNameEndingWithPredicate<E extends Element>
   }
 }
 
-class ResideInDirectoryPredicate<E extends Element>
-    extends ElementPredicate<E> {
+class ResideInPredicate<E extends Element> extends ElementPredicate<E> {
   final String directory;
 
-  ResideInDirectoryPredicate(this.directory);
+  ResideInPredicate(this.directory);
 
   @override
   String describe() {
-    return 'reside in directory "$directory"';
+    return 'reside in "$directory"';
   }
 
   @override

@@ -1,5 +1,5 @@
 import '../entities/entities.dart';
 
-abstract interface class GetUsersUsecase {
+abstract interface class GetUsersUseCase {
   Future<List<UserEntity>> call();
 }
