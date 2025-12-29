@@ -12,5 +12,12 @@ void main() {
   archTest(datasourcesImpls.should(resideIn('src/data/datasources/impl')));
   archTest(controllers.should(resideIn('src/presentation/controllers')));
 
+  archTest(
+    repositories
+        .and(usecases)
+        .and(datasources)
+        .should(beAbstract.and(beInterface)),
+  );
+
   runArchTests();
 }
