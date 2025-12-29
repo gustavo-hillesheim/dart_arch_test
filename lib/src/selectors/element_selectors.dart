@@ -14,6 +14,24 @@ extension ElementSelectorExtension<E extends Element, O extends Element>
   }
 }
 
+class NamedElementSelector<E extends Element, O extends Element>
+    extends ElementSelector<E, O> {
+  final ElementSelector<E, O> source;
+  final String name;
+
+  NamedElementSelector(this.source, this.name);
+
+  @override
+  String describe() {
+    return name;
+  }
+
+  @override
+  List<O> select(List<E> elements) {
+    return source.select(elements);
+  }
+}
+
 class TypeElementSelector<E extends Element>
     extends ElementSelector<Element, E> {
   const TypeElementSelector({this.description});
