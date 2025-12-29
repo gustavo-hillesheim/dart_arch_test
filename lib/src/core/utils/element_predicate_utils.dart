@@ -15,6 +15,74 @@ extension ElementPredicateExtension<E extends Element> on ElementPredicate<E> {
       rule: rule,
     );
   }
+
+  ElementPredicate<F> or<F extends Element>(ElementPredicate<F> other) {
+    return OrElementPredicate<F>(
+      first: cast(),
+      second: other,
+    );
+  }
+
+  ElementPredicate<F> and<F extends Element>(ElementPredicate<F> other) {
+    return AndElementPredicate<F>(
+      first: cast(),
+      second: other,
+    );
+  }
+
+  ElementPredicate<F> cast<F extends Element>() {
+    return CastingElementPredicate<F>(this);
+  }
+}
+
+class OrElementPredicate<E extends Element> extends ElementPredicate<E> {
+  final ElementPredicate<E> first;
+  final ElementPredicate<E> second;
+
+  OrElementPredicate({required this.first, required this.second});
+
+  @override
+  String describe() {
+    return '${first.describe()} OR ${second.describe()}';
+  }
+
+  @override
+  bool satisfies(E element) {
+    return first.satisfies(element) || second.satisfies(element);
+  }
+}
+
+class AndElementPredicate<E extends Element> extends ElementPredicate<E> {
+  final ElementPredicate<E> first;
+  final ElementPredicate<E> second;
+
+  AndElementPredicate({required this.first, required this.second});
+
+  @override
+  String describe() {
+    return '${first.describe()} AND ${second.describe()}';
+  }
+
+  @override
+  bool satisfies(E element) {
+    return first.satisfies(element) && second.satisfies(element);
+  }
+}
+
+class CastingElementPredicate<E extends Element> extends ElementPredicate<E> {
+  final ElementPredicate predicate;
+
+  CastingElementPredicate(this.predicate);
+
+  @override
+  String describe() {
+    return predicate.describe();
+  }
+
+  @override
+  bool satisfies(E element) {
+    return predicate.satisfies(element);
+  }
 }
 
 class ElementPredicateToSelectorAdapter<E extends Element>
