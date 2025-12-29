@@ -43,7 +43,7 @@ class OrElementPredicate<E extends Element> extends ElementPredicate<E> {
 
   @override
   String describe() {
-    return '${first.describe()} OR ${second.describe()}';
+    return '${first.describe()} or ${second.describe()}';
   }
 
   @override
@@ -60,7 +60,7 @@ class AndElementPredicate<E extends Element> extends ElementPredicate<E> {
 
   @override
   String describe() {
-    return '${first.describe()} AND ${second.describe()}';
+    return '${first.describe()} and ${second.describe()}';
   }
 
   @override
