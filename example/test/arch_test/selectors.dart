@@ -1,34 +1,35 @@
 import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/predicate_builders.dart';
 
 final entities = NamedElementSelector(
-  classes.that(haveNameEndingWith('Entity')),
+  classes.that(have(name(), endingWith('Entity'))),
   'entities',
 );
 final repositories = NamedElementSelector(
-  classes.that(haveNameEndingWith('Repository')),
+  classes.that(have(name(), endingWith('Repository'))),
   'repositories',
 );
 final repositoryImpls = NamedElementSelector(
-  classes.that(haveNameEndingWith('RepositoryImpl')),
+  classes.that(have(name(), endingWith('RepositoryImpl'))),
   'repository implementations',
 );
 final usecases = NamedElementSelector(
-  classes.that(haveNameEndingWith('UseCase')),
+  classes.that(have(name(), endingWith('UseCase'))),
   'usecases',
 );
 final usecasesImpls = NamedElementSelector(
-  classes.that(haveNameEndingWith('UseCaseImpl')),
+  classes.that(have(name(), endingWith('UseCaseImpl'))),
   'usecases implementations',
 );
 final datasources = NamedElementSelector(
-  classes.that(haveNameEndingWith('DataSource')),
+  classes.that(have(name(), endingWith('DataSource'))),
   'datasources',
 );
 final datasourcesImpls = NamedElementSelector(
-  classes.that(haveNameEndingWith('DataSourceImpl')),
+  classes.that(have(name(), endingWith('DataSourceImpl'))),
   'datasources implementations',
 );
 final controllers = NamedElementSelector(
-  classes.that(haveNameEndingWith('Controller')),
+  classes.that(have(name(), endingWith('Controller'))),
   'controllers',
 );
