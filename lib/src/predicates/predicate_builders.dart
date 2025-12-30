@@ -8,6 +8,11 @@ ElementPredicate<E> have<E extends Element, P>(
   return HaveElementPredicate(accessor, matcher);
 }
 
+ElementPredicate<E> be<E extends Element>(
+    ElementPropertyAcessor<E, bool> accessor) {
+  return BeElementPredicate(accessor);
+}
+
 ElementPropertyAcessor<E, String?> name<E extends Element>() {
   return FunctionalPropertyAccessor<E, String?>(
     description: 'name',
@@ -19,6 +24,20 @@ ElementPropertyAcessor<E, String?> libraryPath<E extends Element>() {
   return FunctionalPropertyAccessor<E, String?>(
     description: 'library path',
     getter: (element) => element.firstFragment.libraryFragment?.source.uri.path,
+  );
+}
+
+ElementPropertyAcessor<E, bool> abstract<E extends ClassElement>() {
+  return FunctionalPropertyAccessor<E, bool>(
+    description: 'abstract',
+    getter: (element) => element.isAbstract,
+  );
+}
+
+ElementPropertyAcessor<E, bool> interface<E extends ClassElement>() {
+  return FunctionalPropertyAccessor<E, bool>(
+    description: 'interface',
+    getter: (element) => element.isInterface,
   );
 }
 
@@ -51,6 +70,22 @@ class HaveElementPredicate<E extends Element, P> extends ElementPredicate<E> {
   bool satisfies(E element) {
     final value = accessor.getValue(element);
     return matcher.matches(value);
+  }
+}
+
+class BeElementPredicate<E extends Element> extends ElementPredicate<E> {
+  final ElementPropertyAcessor<E, bool> accessor;
+
+  BeElementPredicate(this.accessor);
+
+  @override
+  String describe() {
+    return 'be ${accessor.describe()}';
+  }
+
+  @override
+  bool satisfies(E element) {
+    return accessor.getValue(element);
   }
 }
 

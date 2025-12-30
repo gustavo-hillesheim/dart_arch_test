@@ -43,7 +43,7 @@ void main() {
     repositories
         .and(usecases)
         .and(datasources)
-        .should(beAbstract.and(beInterface)),
+        .should(be(abstract()).and(be(interface()))),
   );
 
   runArchTests();

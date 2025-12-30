@@ -6,7 +6,6 @@ import 'src/core/core.dart';
 
 export 'src/core/core.dart'
     hide PackageLoader, ArchTestsRunner, ArchTestDeclarator;
-export 'src/predicates/predicates.dart';
 export 'src/selectors/selectors.dart';
 
 void archTest(ArchTest test) {
