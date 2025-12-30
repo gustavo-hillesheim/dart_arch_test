@@ -15,10 +15,24 @@ ElementPropertyAcessor<E, String?> name<E extends Element>() {
   );
 }
 
+ElementPropertyAcessor<E, String?> libraryPath<E extends Element>() {
+  return FunctionalPropertyAccessor<E, String?>(
+    description: 'library path',
+    getter: (element) => element.firstFragment.libraryFragment?.source.uri.path,
+  );
+}
+
 ValueMatcher<String?> endingWith(String suffix) {
   return FunctionalValueMatcher<String?>(
     description: 'ending with "$suffix"',
     matcher: (value) => value != null && value.endsWith(suffix),
+  );
+}
+
+ValueMatcher<String?> containing(String substring) {
+  return FunctionalValueMatcher<String?>(
+    description: 'containing "$substring"',
+    matcher: (value) => value != null && value.contains(substring),
   );
 }
 
