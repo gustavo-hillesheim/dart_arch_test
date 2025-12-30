@@ -1,4 +1,5 @@
 import 'package:arch_test/arch_test.dart';
+import 'package:arch_test/predicate_builders.dart';
 import 'package:arch_test/src/core/core.dart';
 import 'package:test/test.dart';
 
@@ -10,8 +11,8 @@ void main() {
       final runner = ArchTestsRunner(
         tests: [
           classes
-              .that(resideIn('entities'))
-              .should(haveNameEndingWith('Entity')),
+              .that(have(libraryPath(), containing('entities')))
+              .should(have(name(), endingWith('Entity'))),
         ],
         packageLibraries: mockLibraries,
       );
@@ -23,8 +24,8 @@ void main() {
 
     test('SHOULD return violation for test with violations', () {
       final test = classes
-          .that(resideIn('service'))
-          .should(haveNameEndingWith('Entity'));
+          .that(have(libraryPath(), containing('service')))
+          .should(have(name(), endingWith('Entity')));
 
       final runner = ArchTestsRunner(
         tests: [test],
