@@ -1,11 +1,14 @@
 import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/predicate_builders.dart';
 
+import 'arch_test/rules.dart';
 import 'arch_test/selectors.dart';
 
 void main() {
   archTest(
-    entities.should(have(libraryPath(), containing('src/domain/entities'))),
+    entities.should(
+      have(libraryPath(), containing('src/domain/entities')),
+    ),
   );
   archTest(
     repositories.should(
@@ -18,7 +21,9 @@ void main() {
     ),
   );
   archTest(
-    usecases.should(have(libraryPath(), containing('src/domain/usecases'))),
+    usecases.should(
+      have(libraryPath(), containing('src/domain/usecases')),
+    ),
   );
   archTest(
     usecasesImpls.should(
@@ -26,7 +31,9 @@ void main() {
     ),
   );
   archTest(
-    datasources.should(have(libraryPath(), containing('src/data/datasources'))),
+    datasources.should(
+      have(libraryPath(), containing('src/data/datasources')),
+    ),
   );
   archTest(
     datasourcesImpls.should(
@@ -44,6 +51,13 @@ void main() {
         .and(usecases)
         .and(datasources)
         .should(be(abstract()).and(be(interface()))),
+  );
+
+  archTest(
+    repositoryImpls
+        .and(usecasesImpls)
+        .and(datasourcesImpls)
+        .should(implementCorrespondingInterface),
   );
 
   runArchTests();

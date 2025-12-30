@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:arch_test/arch_test.dart';
 
 ElementPredicate<E> have<E extends Element, P>(
@@ -38,6 +39,14 @@ ElementPropertyAcessor<E, bool> interface<E extends ClassElement>() {
   return FunctionalPropertyAccessor<E, bool>(
     description: 'interface',
     getter: (element) => element.isInterface,
+  );
+}
+
+ElementPropertyAcessor<E, List<InterfaceType>>
+    interfaces<E extends ClassElement>() {
+  return FunctionalPropertyAccessor<E, List<InterfaceType>>(
+    description: 'interfaces',
+    getter: (element) => element.interfaces,
   );
 }
 
