@@ -3,6 +3,27 @@ import 'package:arch_test/arch_test.dart';
 
 const classes = TypeElementSelector<ClassElement>(description: 'classes');
 
+const libraries = TypeElementSelector<LibraryElement>(description: 'libraries');
+
+const enums = TypeElementSelector<EnumElement>(description: 'enums');
+
+const extensions =
+    TypeElementSelector<ExtensionElement>(description: 'extensions');
+
+const mixins = TypeElementSelector<MixinElement>(description: 'mixins');
+
+const topLevelFunctions = TypeElementSelector<TopLevelFunctionElement>(
+    description: 'top-level functions');
+
+const topLevelVariables = TypeElementSelector<TopLevelVariableElement>(
+    description: 'top-level variables');
+
+const topLevelGetters =
+    TypeElementSelector<GetterElement>(description: 'top-level getters');
+
+const topLevelSetters =
+    TypeElementSelector<SetterElement>(description: 'top-level setters');
+
 extension ElementSelectorExtension<E extends Element, O extends Element>
     on ElementSelector<E, O> {
   ElementSelector<E, O> that(ElementPredicate<O> filter) {
