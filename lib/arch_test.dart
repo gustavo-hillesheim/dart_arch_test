@@ -13,21 +13,14 @@ void archTest(ArchTest test) {
 }
 
 Future<void> runArchTests() async {
-  print('Loading package libraries...');
-
   final packageLoader = PackageLoader();
   final packageLibraries = await packageLoader.loadLibraries(Directory.current);
-
-  print('Package libraries loaded!');
-  print('Running architecture tests...');
 
   final testsRunner = ArchTestsRunner(
     tests: ArchTestDeclarator.instance.declaredTests,
     packageLibraries: packageLibraries,
   );
   final ruleViolations = testsRunner.runTests();
-
-  print('Architecture tests run!');
 
   if (ruleViolations.isEmpty) {
     print('No architecture violations found. 🎉');

@@ -1,3 +1,9 @@
+## 1.0.0
+
+- Complete package rewrite using dart's analyzer package
+- Introduced new API composed mainly by `ArchTest`, `ElementSelector` and `ArchRule`
+- Implemented Predicate building API
+
 ## 0.1.0
 
 - Initial version.
