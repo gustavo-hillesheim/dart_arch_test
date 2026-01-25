@@ -2,6 +2,12 @@
 
 Package to write architectural tests, ensuring that your team's definitions are being followed.
 
+## Table of Contents
+- [How to use](#how-to-use)
+- [Writing a test](#writing-a-test)
+- [Predicates](#predicates)
+- [Predicate building API](#predicate-building-api)
+
 ## How to use
 
 1. Create a `arch_test.dart` file inside your `test` folder
@@ -16,12 +22,12 @@ import 'package:arch_test/arch_test.dart';
 import 'package:arch_test/predicate_builders.dart';
 
 void main() {
-    archTest(
-        classes
-            .that(have(name(), endingWith('Entity')))
-            .should(have(libraryPath(), containing('src/domain/entities'))),
-    );
-    runArchTests();
+  archTest(
+    classes
+        .that(have(name(), endingWith('Entity')))
+        .should(have(libraryPath(), containing('src/domain/entities'))),
+  );
+  runArchTests();
 }
 ```
 
@@ -45,8 +51,7 @@ final entities = NamedElementSelector(
 
 // OR
 
-class EntityElementSelector
-    extends ElementSelector<Element, ClassElement> {
+class EntityElementSelector extends ElementSelector<Element, ClassElement> {
   const EntityElementSelector();
 
   @override
@@ -62,6 +67,7 @@ class EntityElementSelector
         .toList();
   }
 }
+
 ```
 
 And then a custom `ArchRule`:
@@ -119,47 +125,48 @@ An implementation for these predicates could be as follows:
 import 'package:analyzer/dart/element/element.dart';
 import 'package:arch_test/arch_test.dart';
 
-ElementPredicate<E> haveNameEndingWith<E extends Element>(String suffix) => 
+ElementPredicate<E> haveNameEndingWith<E extends Element>(String suffix) =>
     HaveNameEndingWithPredicate<E>(suffix);
 
-ElementPredicate<E> areInsideFolder<E extends Element>(String folder) => 
+ElementPredicate<E> areInsideFolder<E extends Element>(String folder) =>
     InsideFolderPredicate<E>(folder, description: 'are inside folder');
 
 ElementPredicate<E> beInsideFolder<E extends Element>(String folder) =>
     InsideFolderPredicate<E>(folder, description: 'be inside folder');
 
-class HaveNameEndingWithPredicate<E extends Element> implements ElementPredicate<E> {
-    const HaveNameEndingWithPredicate(this.suffix);
+class HaveNameEndingWithPredicate<E extends Element>
+    implements ElementPredicate<E> {
+  const HaveNameEndingWithPredicate(this.suffix);
 
-    final String suffix;
+  final String suffix;
 
-    @override
-    String describe() {
-        return 'have name ending with "$suffix"';
-    }
+  @override
+  String describe() {
+    return 'have name ending with "$suffix"';
+  }
 
-    @override
-    bool satisfies(E element) {
-        return element.name?.endsWith(suffix) ?? false;
-    }
+  @override
+  bool satisfies(E element) {
+    return element.name?.endsWith(suffix) ?? false;
+  }
 }
 
 class InsideFolderPredicate<E extends Element> implements ElementPredicate<E> {
-    const InsideFolderPredicate(this.folder, {required this.description});
+  const InsideFolderPredicate(this.folder, {required this.description});
 
-    final String folder;
-    final String description;
+  final String folder;
+  final String description;
 
-    @override
-    String describe() {
-        return description;
-    }
+  @override
+  String describe() {
+    return description;
+  }
 
-    @override
-    bool satisfies(E element) {
-        final libraryPath = element.firstFragment.libraryFragment?.source.uri.path;
-        return libraryPath != null && libraryPath.contains(folder);
-    }
+  @override
+  bool satisfies(E element) {
+    final libraryPath = element.firstFragment.libraryFragment?.source.uri.path;
+    return libraryPath != null && libraryPath.contains(folder);
+  }
 }
 ```
 
